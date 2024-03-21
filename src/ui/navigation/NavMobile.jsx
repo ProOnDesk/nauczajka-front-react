@@ -44,7 +44,7 @@ function NavMobile({ appLayoutRef }) {
 	}
 
 	useEffect(() => {
-		setNavOpened((navOpened) => !navOpened);
+		setNavOpened(false);
 	}, [location]);
 
 	return (
