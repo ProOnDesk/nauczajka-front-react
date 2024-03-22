@@ -4,6 +4,7 @@ import AppLayout from './ui/AppLayout';
 import HomePage from './pages/HomePage';
 import InstructorsPage from './pages/InstructorsPage';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
 			{ path: '', element: <HomePage /> },
 			{ path: 'instructors', element: <InstructorsPage /> },
 			{ path: 'login', element: <LoginPage /> },
+			{ path: 'register', element: <RegisterPage /> },
 		],
 	},
 ]);

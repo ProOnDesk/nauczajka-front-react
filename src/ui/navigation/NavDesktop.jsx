@@ -1,4 +1,4 @@
-import NavLinkBtn from './NavLinkBtn';
+import NavLinkBtn from '../Inputs/NavLinkBtn';
 
 function NavDesktop() {
 	return (

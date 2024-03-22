@@ -15,7 +15,10 @@ export default {
 				whiteHover: '#eee',
 				shadowBlack: '#ddd',
 				gray: '#495057',
-				lighGray: '#e9ecef'
+				lighGray: '#e9ecef',
+			},
+			backgroundImage: {
+				'background-pattern': "url('/patterns.png')",
 			},
 		},
 	},
