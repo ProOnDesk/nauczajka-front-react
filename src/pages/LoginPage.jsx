@@ -1,9 +1,10 @@
 import { useForm } from 'react-hook-form';
-import BackgroundContainer from '../features/login/BackgroundContainer';
+import BackgroundContainer from '../ui/BackgroundContainer';
 import { useUserWidth } from '../hooks/useUserWidth';
 import NavLinkBtn from '../ui/Inputs/NavLinkBtn';
-import TextInput from '../ui/Inputs/TextInput';
+import TextInput from '../features/Auth/TextInput';
 import Button from '../ui/Inputs/Button';
+import toast from 'react-hot-toast';
 
 function LoginPage() {
 	const width = useUserWidth();
@@ -22,7 +23,7 @@ function LoginPage() {
 			{width > 800 && <BackgroundContainer />}
 			<form
 				onSubmit={handleSubmit(onSubmit)}
-				className='flex justify-center items-center md:py-10 '
+				className='relative flex justify-center items-center md:py-10 '
 			>
 				<div className='sm:w-96 px-5 sm:px-10 pb-10 pt-5 bg-white sm:shadow-lg shadow-shadowBlack rounded-xl gap-8 flex flex-col items-center'>
 					<div className='relative'>
@@ -39,13 +40,25 @@ function LoginPage() {
 						type={'e-mail'}
 					/>
 
-					<TextInput
-						register={register}
-						error={errors?.password?.message}
-						label={'Hasło'}
-						field={'password'}
-						type={'text'}
-					/>
+					<div className='relative w-full'>
+						<TextInput
+							register={register}
+							error={errors?.password?.message}
+							label={'Hasło'}
+							field={'password'}
+							type={'password'}
+						/>
+						<button
+							className={`flex hover:text-mainPurple hover:cursor-pointer absolute text-[12px] text-center right-2 -bottom-6 ${
+								errors.password &&
+								' w-6 left-36 -bottom-10 sm:w-full sm:left-44 sm:-bottom-6'
+							}`}
+							onClick={() => toast('Przypomnij hasło')}
+							type='button'
+						>
+							Zapomniałem hasła
+						</button>
+					</div>
 
 					<div className='mt-5'>
 						<Button type='submit'>Zaloguj się</Button>
@@ -53,6 +66,7 @@ function LoginPage() {
 
 					<NavLinkBtn to='/register'>Zarejestruj się</NavLinkBtn>
 				</div>
+				<div className=''></div>
 			</form>
 		</>
 	);
