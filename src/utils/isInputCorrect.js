@@ -1,7 +1,7 @@
 export function validatePassword(password) {
 	const passwordRegex =
 		/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-	if (!passwordRegex.test(password)) return 'Słabe hasło (8 znaków)';
+	if (!passwordRegex.test(password)) return 'Słabe Hasło';
 	else return true;
 }
 

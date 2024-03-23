@@ -21,7 +21,7 @@ function TextInput({
 							<span className='text-md hover:text-gray hover:cursor-help'>
 								<IoMdInformationCircleOutline />
 							</span>
-							<p className='text-center group-hover:block opacity-0 group-hover:opacity-100 transition-all hidden absolute left-4 top-4 w-40 sm400:w-60 z-10 shadow-myShadow rounded-md p-4 text-[12px] bg-white'>
+							<p className='text-center hidden group-hover:block absolute left-4 top-4 w-40 sm400:w-60 z-10 shadow-myShadow rounded-md p-4 text-[12px] bg-white'>
 								{info}
 							</p>
 						</div>

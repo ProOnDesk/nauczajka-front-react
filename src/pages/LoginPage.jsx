@@ -27,9 +27,9 @@ function LoginPage() {
 				onSubmit={handleSubmit(onSubmit)}
 				className='relative flex justify-center items-center md:py-10 '
 			>
-				<div className='sm:w-[400px] md:w-[500px] w-5/6 sm400:w-2/3 sm:px-10 pb-6 pt-5 bg-white sm:shadow-lg shadow-shadowBlack rounded-xl gap-8 flex flex-col items-center'>
+				<div className='sm:w-[400px] md:w-[500px] w-5/6 sm400:w-2/3 sm:px-10 pb-6 pt-5 bg-white sm:shadow-myShadow shadow-shadowBlack rounded-xl gap-8 flex flex-col items-center'>
 					<div className='relative'>
-						<p className='pb-5 text-2xl'>Logowanie</p>
+						<p className='pb-5 text-2xl mt-4'>Logowanie</p>
 						<div className='absolute bottom-[21px] left-0 w-[28px] h-[2px] bg-mainPurple rounded-full'></div>
 						<div className='absolute bottom-[21px] left-11 w-[86px] h-[2px] bg-mainPurple rounded-full'></div>
 					</div>
