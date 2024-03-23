@@ -20,6 +20,12 @@ export default {
 			backgroundImage: {
 				'background-pattern': "url('/patterns.png')",
 			},
+			screens: {
+				sm400: '400px',
+			},
+			boxShadow: {
+				myShadow: '0 6px 12px 0px rgba(0,0,0,0.3)',
+			},
 		},
 	},
 	plugins: [],
