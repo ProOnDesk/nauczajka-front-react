@@ -5,6 +5,7 @@ import NavLinkBtn from '../ui/Inputs/NavLinkBtn';
 import TextInput from '../features/Auth/TextInput';
 import Button from '../ui/Inputs/Button';
 import toast from 'react-hot-toast';
+import { validateEmail, validatePassword } from '../utils/isInputCorrect';
 
 function LoginPage() {
 	const width = useUserWidth();
@@ -12,6 +13,7 @@ function LoginPage() {
 		register,
 		handleSubmit,
 		formState: { errors },
+		getValues,
 	} = useForm();
 
 	const onSubmit = (data) => {
@@ -37,7 +39,8 @@ function LoginPage() {
 						error={errors?.email?.message}
 						label={'E-mail'}
 						field={'email'}
-						type={'e-mail'}
+						type={'email'}
+						validateFunction={() => validateEmail(getValues().email)}
 					/>
 
 					<div className='relative w-full'>
