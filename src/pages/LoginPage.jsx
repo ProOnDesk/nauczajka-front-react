@@ -6,8 +6,10 @@ import TextInput from '../features/Auth/TextInput';
 import Button from '../ui/Inputs/Button';
 import toast from 'react-hot-toast';
 import { validateEmail } from '../utils/isInputCorrect';
+import { useLoginUser } from '../features/Auth/useLoginUser';
 
 function LoginPage() {
+	const { loginUser, isLoginPending } = useLoginUser();
 	const width = useUserWidth();
 	const {
 		register,
@@ -17,7 +19,7 @@ function LoginPage() {
 	} = useForm();
 
 	const onSubmit = (data) => {
-		console.log(data);
+		loginUser({ email: data.email, password: data.password });
 	};
 
 	return (
@@ -66,7 +68,9 @@ function LoginPage() {
 					</div>
 
 					<div className='mt-6'>
-						<Button type='submit'>Zaloguj się</Button>
+						<Button type='submit' disabled={isLoginPending}>
+							{isLoginPending ? 'Logowanie...' : 'Zaloguj się'}
+						</Button>
 					</div>
 
 					<NavLinkBtn to='/register'>Zarejestruj się</NavLinkBtn>

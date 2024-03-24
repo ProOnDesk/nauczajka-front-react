@@ -42,3 +42,23 @@ export async function verifyUser(verifyToken) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function loginUser({ email, password }) {
+	const response = await fetch(API_KEY + '/api/token/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			email: email,
+			password: password,
+		}),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
