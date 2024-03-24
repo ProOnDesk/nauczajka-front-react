@@ -1,27 +1,21 @@
-// import { useNavigate } from 'react-router';
 import { registerUser as registerUserApi } from '../../services/apiAuth';
 import { useMutation } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router';
 
 export function useRegisterUser() {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 	const { mutate: registerUser, isPending: isRegisterPending } = useMutation({
 		mutationFn: (variables) => {
-			console.log(variables);
 			return registerUserApi(variables);
 		},
-		onSuccess: (data) => {
-			// navigate('/login');
-			console.log('gicik');
+		onSuccess: () => {
 			toast.success('E-mail weryfikacyjny został wysłany.');
+			navigate('/login');
 		},
 		onError: (err) => {
-			console.log('nie gicik');
 			const error = JSON.parse(err.message);
-			console.log(error);
-		},
-		onSettled: () => {
-			console.log('settled');
+			toast.error(error.email[0]);
 		},
 	});
 	return { registerUser, isRegisterPending };

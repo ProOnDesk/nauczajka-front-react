@@ -22,7 +22,6 @@ export async function registerUser({
 	});
 	if (response.ok) {
 		const data = await response.json();
-		console.log(data);
 		return data;
 	} else {
 		const bodyText = await response.text();

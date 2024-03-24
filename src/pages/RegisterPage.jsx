@@ -11,11 +11,13 @@ import {
 import Button from '../ui/Inputs/Button';
 import SelectInput from '../features/Auth/SelectInput';
 import { useState } from 'react';
-import { registerUser } from '../services/apiAuth';
+
+import { useRegisterUser } from '../features/Auth/useRegisterUser';
 
 function RegisterPage() {
 	const width = useUserWidth();
 	const [isTutor, setisTutor] = useState('false');
+	const { registerUser, isRegisterPending } = useRegisterUser();
 
 	const {
 		register,
@@ -128,7 +130,9 @@ function RegisterPage() {
 					/>
 
 					<div className='mt-5'>
-						<Button type='submit'>Zarejestruj się</Button>
+						<Button disabled={isRegisterPending} type='submit'>
+							Zarejestruj się
+						</Button>
 					</div>
 				</div>
 			</form>
