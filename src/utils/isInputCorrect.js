@@ -10,8 +10,12 @@ export function validateRepeatPassword(password, repeatPassword) {
 	else return true;
 }
 
-export function validateEmail(email) {
+export function validateEmail(email, isTutor) {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 	if (!emailRegex.test(email)) return 'Niepoprawny E-mail';
-	else return true;
+	if (isTutor === 'true') {
+		const tutorEmailRegex = /^(.+)@(prz\.edu\.pl|stud\.prz\.edu\.pl)$/;
+		if (!tutorEmailRegex.test(email)) return 'Niepoporawny E-mail';
+	}
+	return true;
 }

@@ -10,15 +10,24 @@ import {
 
 import Button from '../ui/Inputs/Button';
 import SelectInput from '../features/Auth/SelectInput';
+import { useState } from 'react';
 
 function RegisterPage() {
 	const width = useUserWidth();
+	const [isTutor, setisTutor] = useState('false');
+
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
 		getValues,
-	} = useForm();
+	} = useForm({
+		defaultValues: { isTutor: 'false' },
+	});
+
+	function handleRadioInputChange(event) {
+		setisTutor(event.target.value);
+	}
 
 	const onSubmit = (data) => {
 		console.log(data);
@@ -39,7 +48,22 @@ function RegisterPage() {
 						<div className='absolute bottom-[21.5px] left-36 w-[16px] h-[2px] bg-mainPurple rounded-full'></div>
 					</div>
 
-					<SelectInput register={register} />
+					<div className='flex  flex-row mx-auto gap-5 sm400:gap-10'>
+						<SelectInput
+							register={register}
+							field={'isTutor'}
+							label={'Korepetytor'}
+							value={'true'}
+							onChange={handleRadioInputChange}
+						/>
+						<SelectInput
+							register={register}
+							field={'isTutor'}
+							label={'Uczeń'}
+							value={'false'}
+							onChange={handleRadioInputChange}
+						/>
+					</div>
 
 					<TextInput
 						register={register}
@@ -63,7 +87,11 @@ function RegisterPage() {
 						label={'E-mail'}
 						field={'email'}
 						type={'email'}
-						validateFunction={() => validateEmail(getValues().email)}
+						validateFunction={() => validateEmail(getValues().email, isTutor)}
+						info={
+							isTutor === 'true' &&
+							'Korepetytorzy mogą korzystać tylko z domeny @prz.edu.pl lub @stud.prz.edu.pl'
+						}
 					/>
 
 					<TextInput
@@ -74,7 +102,7 @@ function RegisterPage() {
 						type={'password'}
 						validateFunction={() => validatePassword(getValues().password)}
 						info={
-							'Hasło powinno składać sie z conajmniej 8 znaków (mała litery, duża litera, cyfra, znak specjalny)'
+							'Hasło powinno składać sie z conajmniej 8 znaków (mała litera, duża litera, cyfra, znak specjalny)'
 						}
 					/>
 
