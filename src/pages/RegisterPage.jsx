@@ -11,6 +11,7 @@ import {
 import Button from '../ui/Inputs/Button';
 import SelectInput from '../features/Auth/SelectInput';
 import { useState } from 'react';
+import { registerUser } from '../services/apiAuth';
 
 function RegisterPage() {
 	const width = useUserWidth();
@@ -30,7 +31,13 @@ function RegisterPage() {
 	}
 
 	const onSubmit = (data) => {
-		console.log(data);
+		registerUser({
+			email: data.email,
+			firstName: data.firstName,
+			lastName: data.lastName,
+			password: data.password,
+			isTutor: data.isTutor,
+		});
 	};
 
 	return (
