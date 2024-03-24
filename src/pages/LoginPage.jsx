@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import { validateEmail } from '../utils/isInputCorrect';
 import { useLoginUser } from '../features/Auth/useLoginUser';
 
+
 function LoginPage() {
 	const { loginUser, isLoginPending } = useLoginUser();
 	const width = useUserWidth();

@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import ConfirmEmailPage from './pages/ConfirmEmailPage';
 
+
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {

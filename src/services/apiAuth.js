@@ -62,3 +62,20 @@ export async function loginUser({ email, password }) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function refreshToken(refreshToken) {
+	const response = await fetch(API_KEY + '/api/token/refresh/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ refresh: refreshToken }),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
