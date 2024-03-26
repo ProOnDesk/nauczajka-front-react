@@ -9,7 +9,6 @@ export function useLogout() {
 	function logout() {
 		sessionStorage.removeItem('auth_token');
 		cookies.remove('jwt_refresh');
-		console.log('logout');
 		setTimeout(() => {
 			refetch();
 		}, 50);

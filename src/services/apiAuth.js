@@ -106,7 +106,24 @@ export async function resetPassword(email) {
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify({ email: email })
+		body: JSON.stringify({ email: email }),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function resetPasswordConfrim({ password, token }) {
+	const response = await fetch(API_KEY + '/api/user/password_reset/confirm/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ password: password, token: token }),
 	});
 	if (response.ok) {
 		const data = await response.json();
