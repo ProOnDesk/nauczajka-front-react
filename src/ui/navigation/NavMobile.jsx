@@ -95,9 +95,9 @@ function NavMobile({ appLayoutRef }) {
 						<img
 							src='/user.png'
 							alt='User Avatar'
-							className='w-12 border-2 rounded-full border-gray group-[.icon]:group-hover:border-mainPurple'
+							className='w-16 border-2 rounded-full border-white shadow-myShadow group-[.icon]:group-hover:border-mainPurple transition-colors mx-5'
 						/>
-						<p className='text-gray text-xl group-[.icon]:group-hover:text-mainPurple'>
+						<p className='text-gray text-xl group-[.icon]:group-hover:text-mainPurple transition-colors'>
 							{user?.first_name}
 						</p>
 					</NavLink>

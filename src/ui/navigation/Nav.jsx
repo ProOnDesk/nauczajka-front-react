@@ -22,7 +22,7 @@ function Nav({ appLayoutRef }) {
 
 	return (
 		<div className='bg-white'>
-			<nav className=' h-20 max-w-7xl mx-auto w-full flex justify-between items-center px-4 sm:px-10 group bg-white z-10 transition-colors'>
+			<nav className=' h-20 max-w-7xl mx-auto w-full flex justify-between items-center px-4 sm:px-10 group bg-white z-[1000] transition-colors '>
 				<NavLink
 					to=''
 					className='text-mainPurple hover:text-mainPurpleHover hover:cursor-pointer py-2'

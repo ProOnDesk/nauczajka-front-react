@@ -6,7 +6,7 @@ function NavDesktop() {
 	const { data: user } = useUserData();
 
 	return (
-		<div className='flex flex-row items-center gap-12'>
+		<div className='flex flex-row items-center gap-12 z-20'>
 			<div className='flex flex-row justify-betwee gap-6'>
 				<NavLinkBtn to=''>Strona główna</NavLinkBtn>
 				<NavLinkBtn to='instructors'>Korepetytorzy</NavLinkBtn>
