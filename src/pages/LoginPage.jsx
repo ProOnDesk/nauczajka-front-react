@@ -4,10 +4,9 @@ import { useUserWidth } from '../hooks/useUserWidth';
 import NavLinkBtn from '../ui/Inputs/NavLinkBtn';
 import TextInput from '../features/Auth/TextInput';
 import Button from '../ui/Inputs/Button';
-import toast from 'react-hot-toast';
 import { validateEmail } from '../utils/isInputCorrect';
 import { useLoginUser } from '../features/Auth/useLoginUser';
-
+import { NavLink } from 'react-router-dom';
 
 function LoginPage() {
 	const { loginUser, isLoginPending } = useLoginUser();
@@ -54,18 +53,17 @@ function LoginPage() {
 							field={'password'}
 							type={'password'}
 						/>
-						<button
+						<NavLink
 							className={`flex hover:text-mainPurple hover:cursor-pointer absolute text-[12px] text-center  ${
 								!errors.password && ' right-2 -bottom-6 '
 							} ${
 								errors.password &&
 								' w-6 right-16 -bottom-[40px] sm:w-full sm:left-44 sm:-bottom-6'
 							}`}
-							onClick={() => toast('Przypomnij hasło')}
-							type='button'
+							to={'/account/reset'}
 						>
 							Zapomniałem hasła
-						</button>
+						</NavLink>
 					</div>
 
 					<div className='mt-6'>

@@ -1,12 +1,9 @@
-import { useRefreshToken } from '../features/Auth/useRefreshToken';
-import Button from '../ui/Inputs/Button';
+import { useUserData } from '../features/Auth/useUserData';
 
 function InstructorsPage() {
-	const { refreshToken } = useRefreshToken();
 	return (
 		<div>
-			<p>Tutaj beda instruktorzy</p>
-			<Button onClick={refreshToken}>Refresh</Button>
+			<p>uzytkownicy here</p>
 		</div>
 	);
 }

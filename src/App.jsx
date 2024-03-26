@@ -9,6 +9,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { Toaster } from 'react-hot-toast';
 import ConfirmEmailPage from './pages/ConfirmEmailPage';
+import SettingsPage from './pages/SettingsPage';
+import PasswordReset from './pages/PasswordReset';
 
 
 const queryClient = new QueryClient({
@@ -27,7 +29,9 @@ const router = createBrowserRouter([
 			{ path: '', element: <HomePage /> },
 			{ path: 'instructors', element: <InstructorsPage /> },
 			{ path: 'login', element: <LoginPage /> },
+			{ path: 'account/reset', element: <PasswordReset /> },
 			{ path: 'register', element: <RegisterPage /> },
+			{ path: 'settings', element: <SettingsPage /> },
 			{ path: 'account/confirm-email', element: <ConfirmEmailPage /> },
 		],
 	},

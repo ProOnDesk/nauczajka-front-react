@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 function NavLinkBtn({ color, children, to }) {
 	return (
 		<NavLink
-			className={`${
+			className={`transition-colors  ${
 				color === 'purple'
 					? ' bg-mainPurple hover:bg-mainPurpleHover text-white '
 					: color === 'salmon'

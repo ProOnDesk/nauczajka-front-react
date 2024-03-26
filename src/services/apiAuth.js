@@ -64,12 +64,49 @@ export async function loginUser({ email, password }) {
 }
 
 export async function refreshToken(refreshToken) {
+	if (!refreshToken) return null;
 	const response = await fetch(API_KEY + '/api/token/refresh/', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({ refresh: refreshToken }),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function getUserData() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + '/api/user/profile/', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function resetPassword(email) {
+	const response = await fetch(API_KEY + '/api/user/password_reset/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ email: email })
 	});
 	if (response.ok) {
 		const data = await response.json();
