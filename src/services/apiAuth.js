@@ -1,3 +1,5 @@
+import toast from 'react-hot-toast';
+
 const API_KEY = 'http://localhost:8000';
 
 export async function registerUser({
@@ -135,11 +137,11 @@ export async function resetPasswordConfrim({ password, token }) {
 }
 
 export async function checkPassword(password) {
-	const token = localStorage.getItem('auth_token');
+	const token = sessionStorage.getItem('auth_token');
 	if (!token) {
 		return null;
 	}
-	const response = await fetch(API_KEY + '/api/user/me/check-password/', {
+	const response = await fetch(API_KEY + '/api/user/check_password/', {
 		method: 'POST',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -159,14 +161,16 @@ export async function checkPassword(password) {
 	}
 }
 
-export async function updateUser({ fieldToUpdate, valueToUpdate }) {
-	// if (fieldToUpdate === 'password' && password) {
-	// 	const data = await checkPassword(password);
-	// 	if (!data.password_maches) {
-	// 		throw new Error('Invalid password');
-	// 	}
-	// }
-	const token = localStorage.getItem('auth_token');
+export async function updateUser({ fieldToUpdate, valueToUpdate, password }) {
+	if (fieldToUpdate === 'password') {
+		const data = await checkPassword(password);
+		if (!data.password_matches) {
+			toast.error('Invalid Password');
+			throw new Error('Invalid password');
+		}
+	}
+
+	const token = sessionStorage.getItem('auth_token');
 	if (!token) {
 		return null;
 	}
@@ -174,12 +178,61 @@ export async function updateUser({ fieldToUpdate, valueToUpdate }) {
 	const response = await fetch(API_KEY + '/api/user/profile/', {
 		method: 'PATCH',
 		headers: {
-			Authorization: `Token ${token}`,
+			Authorization: `Bearer ${token}`,
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
 			[fieldToUpdate]: valueToUpdate,
 		}),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function deleteUser(password) {
+	const data = await checkPassword(password);
+	if (!data.password_matches) {
+		throw new Error('Złe Hasło');
+	}
+
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/delete/', {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	if (response.ok) {
+		return null;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function updateAvatar(image) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const formData = new FormData();
+	formData.append('profile_image', image);
+
+	const response = await fetch(API_KEY + '/api/user/profile_image/', {
+		method: 'PATCH',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+		body: formData,
 	});
 	if (response.ok) {
 		const data = await response.json();

@@ -16,9 +16,9 @@ function UserInfo({ user }) {
 				<div className='flex flex-col justify-center items-center gap-5'>
 					<div className='relative' onClick={() => handleModal('image')}>
 						<img
-							src='/user.png'
+							src={user?.profile_image}
 							alt='User Avatar'
-							className='min-w-20 w-20 border-2 border-white bg-white shadow-myShadow rounded-full'
+							className='min-w-20 w-20 h-20 border-2 border-white bg-white shadow-myShadow rounded-full'
 						/>
 						<div className='absolute opacity-0 top-0 left-0 rounded-full h-full w-full hover:opacity-100 transition-all hover:bg-gray/60 hover:cursor-pointer flex justify-center items-center'>
 							<span className='text-white text-4xl'>
@@ -35,7 +35,7 @@ function UserInfo({ user }) {
 				</div>
 			</div>
 			<div className='flex flex-col gap-6 p-2 text-sm '>
-				<SettingsElement label={'E-mail'} onClick={() => handleModal('email')}>
+				<SettingsElement hoverDisabled={true} label={'E-mail'}>
 					{user?.email}
 				</SettingsElement>
 				<SettingsElement

@@ -93,9 +93,9 @@ function NavMobile({ appLayoutRef }) {
 						className='mb-10 overflow-hidden flex flex-col justify-center items-center gap-2 hover:cursor-pointer group icon'
 					>
 						<img
-							src='/user.png'
+							src={user?.profile_image}
 							alt='User Avatar'
-							className='w-16 border-2 rounded-full border-white shadow-myShadow group-[.icon]:group-hover:border-mainPurple transition-colors mx-5'
+							className='w-16 h-16 border-2 rounded-full border-white shadow-myShadow group-[.icon]:group-hover:border-mainPurple transition-colors mx-5'
 						/>
 						<p className='text-gray text-xl group-[.icon]:group-hover:text-mainPurple transition-colors'>
 							{user?.first_name}

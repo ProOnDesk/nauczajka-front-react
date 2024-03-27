@@ -6,19 +6,20 @@ export function useUpdateUser() {
 	const {
 		mutate: updateUser,
 		isPending: isUpdatePending,
-		data,
+		isSuccess: isUserUpdated,
 	} = useMutation({
-		mutationFn: ({ fieldToUpdate, valueToUpdate }) => {
-			return updateUserApi({ fieldToUpdate, valueToUpdate });
+		mutationFn: (variables) => {
+			return updateUserApi(variables);
 		},
 		onSuccess: () => {
-			toast.success('Upadated successfully');
+			toast.success('Zaktualizowano Dane');
 		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
+			console.log(err);
 			toast.error('' + Object?.values(error)[0]);
 		},
 	});
 
-	return { data, updateUser, isUpdatePending };
+	return { isUserUpdated, updateUser, isUpdatePending };
 }

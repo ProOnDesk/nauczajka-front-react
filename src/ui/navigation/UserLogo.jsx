@@ -18,9 +18,9 @@ function UserLogo() {
 		>
 			<div className='h-20 flex justify-center flex-col items-center'>
 				<img
-					src='/user.png'
+					src={user?.profile_image}
 					alt='User Avatar'
-					className={`w-8 border-2  ${
+					className={`w-8 h-8 border-2  ${
 						userInfoShow ? ' border-mainPurple ' : ' border-white '
 					} rounded-full shadow-myShadow shadow-shadowBlack hover:cursor-pointer transition-colors`}
 				/>
