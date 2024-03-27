@@ -15,7 +15,16 @@ export default {
 				whiteHover: '#eee',
 				shadowBlack: '#ddd',
 				gray: '#495057',
-				lighGray: '#e9ecef'
+				lighGray: '#e9ecef',
+			},
+			backgroundImage: {
+				'background-pattern': "url('/patterns.png')",
+			},
+			screens: {
+				sm400: '400px',
+			},
+			boxShadow: {
+				myShadow: '0 6px 12px 0px rgba(0,0,0,0.3)',
 			},
 		},
 	},

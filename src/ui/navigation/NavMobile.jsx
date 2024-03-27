@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import NavMobileElement from './NavMobileElement';
 import { useLocation } from 'react-router';
+import { useUserData } from '../../features/Auth/useUserData';
+import { useLogout } from '../../features/Auth/useLogout';
+import { CiHome, CiLogin, CiLogout, CiUser } from 'react-icons/ci';
+import { NavLink } from 'react-router-dom';
 
 const navVariants = {
 	visible: { x: 0 },
@@ -34,6 +38,8 @@ const burgerThirdVariants = {
 };
 
 function NavMobile({ appLayoutRef }) {
+	const { data: user } = useUserData();
+	const { logout } = useLogout();
 	const [navOpened, setNavOpened] = useState(false);
 	const location = useLocation();
 
@@ -79,11 +85,40 @@ function NavMobile({ appLayoutRef }) {
 				variants={navVariants}
 				animate={navOpened ? 'visible' : 'hidden'}
 				transition={{ duration: 0.3, type: 'just' }}
-				className='absolute top-0 left-0 bottom-0 right-0 mt-20 bg-white border-l-2 border-mainPurple z-20 flex flex-col items-center gap-10 py-20'
+				className='absolute top-0 left-0 bottom-0 right-0 mt-20 bg-white border-l-2 border-mainPurple z-20 flex flex-col items-center py-10'
 			>
-				<NavMobileElement to=''>Strona Główna</NavMobileElement>
-				<NavMobileElement to='instructors'>Korepetytorzy</NavMobileElement>
-				<NavMobileElement to='login'>Logowanie</NavMobileElement>
+				{user !== null && (
+					<NavLink
+						to='settings'
+						className='mb-10 overflow-hidden flex flex-col justify-center items-center gap-2 hover:cursor-pointer group icon'
+					>
+						<img
+							src={user?.profile_image}
+							alt='User Avatar'
+							className='w-16 h-16 border-2 rounded-full border-white shadow-myShadow group-[.icon]:group-hover:border-mainPurple transition-colors mx-5'
+						/>
+						<p className='text-gray text-xl group-[.icon]:group-hover:text-mainPurple transition-colors'>
+							{user?.first_name}
+						</p>
+					</NavLink>
+				)}
+				<div className='flex flex-col gap-10'>
+					<NavMobileElement to='/' icon={<CiHome />}>
+						Strona Główna
+					</NavMobileElement>
+					<NavMobileElement to='instructors' icon={<CiUser />}>
+						Korepetytorzy
+					</NavMobileElement>
+					{user === null ? (
+						<NavMobileElement to={'login'} icon={<CiLogin />}>
+							Zaloguj się
+						</NavMobileElement>
+					) : (
+						<NavMobileElement onClick={logout} icon={<CiLogout />}>
+							Wyloguj się
+						</NavMobileElement>
+					)}
+				</div>
 			</motion.div>
 		</div>
 	);

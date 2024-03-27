@@ -1,7 +1,9 @@
+import { useUserData } from '../features/Auth/useUserData';
+
 function InstructorsPage() {
 	return (
 		<div>
-			<p>Tutaj beda instruktorzy</p>
+			<p>uzytkownicy here</p>
 		</div>
 	);
 }
