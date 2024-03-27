@@ -1,16 +1,20 @@
 import { CiImageOn } from 'react-icons/ci';
 import SettingsElement from './SettingsElement';
 import UserInfoBtn from './UserInfoBtn';
+import Modal from '../../ui/Modal';
+import EditForm from './EditForm';
+import { useState } from 'react';
 
 function UserInfo({ user }) {
-	function handleEditImage() {
-		console.log('zmien obrazek kox');
+	const [showModal, setShowModal] = useState(null);
+	function handleModal(type) {
+		setShowModal(type);
 	}
 	return (
 		<div className='mx-auto w-full flex flex-col justify-center '>
 			<div className='flex flex-col flex-wrap items-center justify-center pb-6 px-10 text-2xl text-gray'>
 				<div className='flex flex-col justify-center items-center gap-5'>
-					<div className='relative' onClick={handleEditImage}>
+					<div className='relative' onClick={() => handleModal('image')}>
 						<img
 							src='/user.png'
 							alt='User Avatar'
@@ -31,10 +35,27 @@ function UserInfo({ user }) {
 				</div>
 			</div>
 			<div className='flex flex-col gap-6 p-2 text-sm '>
-				<SettingsElement label={'E-mail'}>{user?.email}</SettingsElement>
-				<SettingsElement label={'Hasło'}>********</SettingsElement>
-				<UserInfoBtn type={'dangerous'}>Usuń Konto</UserInfoBtn>
+				<SettingsElement label={'E-mail'} onClick={() => handleModal('email')}>
+					{user?.email}
+				</SettingsElement>
+				<SettingsElement
+					label={'Hasło'}
+					onClick={() => handleModal('password')}
+				>
+					********
+				</SettingsElement>
+				<UserInfoBtn
+					type={'dangerous'}
+					onClick={() => handleModal('deleteAccount')}
+				>
+					Usuń Konto
+				</UserInfoBtn>
 			</div>
+			{showModal && (
+				<Modal>
+					<EditForm setShowModal={setShowModal} showModal={showModal} />
+				</Modal>
+			)}
 		</div>
 	);
 }

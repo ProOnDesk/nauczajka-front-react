@@ -3,6 +3,7 @@ import { CiSettings } from 'react-icons/ci';
 import { CiLogout } from 'react-icons/ci';
 import { useLogout } from '../../features/Auth/useLogout';
 import { useUserData } from '../../features/Auth/useUserData';
+import { NavLink } from 'react-router-dom';
 
 function UserLogo() {
 	const { data: user } = useUserData();
@@ -28,18 +29,24 @@ function UserLogo() {
 
 			{userInfoShow && (
 				<div className='absolute right-0 w-48 top-18 flex flex-col justify-start shadow-myShadow shadow-shadowBlack rounded-md overflow-hidden bg-white '>
-					<div className='flex flex-row items-center px-6 py-4 gap-2 hover:bg-whiteHover hover:cursor-pointer'>
+					<NavLink
+						to='settings'
+						className='flex flex-row items-center px-6 py-4 gap-2 hover:bg-whiteHover hover:cursor-pointer'
+					>
 						<span className='text-xl'>
 							<CiSettings />
 						</span>
 						<button className='flex'>Ustawienia</button>
-					</div>
-					<div className='flex flex-row items-center px-6 py-4 gap-2 hover:bg-whiteHover hover:cursor-pointer'>
+					</NavLink>
+					<button
+						onClick={logout}
+						className='flex flex-row items-center px-6 py-4 gap-2 hover:bg-whiteHover hover:cursor-pointer'
+					>
 						<span className='text-xl'>
 							<CiLogout />
 						</span>
-						<button onClick={logout}>Wyloguj się</button>
-					</div>
+						<p>Wyloguj się</p>
+					</button>
 				</div>
 			)}
 		</div>

@@ -133,3 +133,59 @@ export async function resetPasswordConfrim({ password, token }) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function checkPassword(password) {
+	const token = localStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/me/check-password/', {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			password: password,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function updateUser({ fieldToUpdate, valueToUpdate }) {
+	// if (fieldToUpdate === 'password' && password) {
+	// 	const data = await checkPassword(password);
+	// 	if (!data.password_maches) {
+	// 		throw new Error('Invalid password');
+	// 	}
+	// }
+	const token = localStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+
+	const response = await fetch(API_KEY + '/api/user/profile/', {
+		method: 'PATCH',
+		headers: {
+			Authorization: `Token ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			[fieldToUpdate]: valueToUpdate,
+		}),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
