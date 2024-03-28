@@ -36,7 +36,6 @@ function EditForm({ setShowModal, showModal }) {
 	const onSubmit = (data) => {
 		if (showModal === 'image') {
 			if (file !== null) {
-				console.log(file);
 				updateAvatar(file);
 			} else {
 				toast.error('Wybierz zdjęcie.');

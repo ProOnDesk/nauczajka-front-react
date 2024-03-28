@@ -10,8 +10,9 @@ function UserInfo({ user }) {
 	function handleModal(type) {
 		setShowModal(type);
 	}
+
 	return (
-		<div className='mx-auto w-full flex flex-col justify-center '>
+		<div className='mx-auto w-full flex flex-col justify-center md:px-5'>
 			<div className='flex flex-col flex-wrap items-center justify-center pb-6 px-10 text-2xl text-gray'>
 				<div className='flex flex-col justify-center items-center gap-5'>
 					<div className='relative' onClick={() => handleModal('image')}>
