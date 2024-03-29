@@ -3,6 +3,7 @@ import SettingsElement from './SettingsElement';
 import { useGetDescription } from './useGetDescription';
 import Modal from '../../ui/Modal';
 import EditFormTutor from './EditFormTutor';
+import SkillsContainer from './SkillsContainer';
 
 function TutorInfo() {
 	const { data } = useGetDescription();
@@ -18,6 +19,7 @@ function TutorInfo() {
 			>
 				{data?.description ? data?.description : 'Brak'}
 			</SettingsElement>
+			<SkillsContainer />
 
 			{showModal && (
 				<Modal>

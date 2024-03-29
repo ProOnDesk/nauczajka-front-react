@@ -1,9 +1,10 @@
-import { CiImageOn } from 'react-icons/ci';
+import { CiImageOn, CiMail, CiRead } from 'react-icons/ci';
 import SettingsElement from './SettingsElement';
 import UserInfoBtn from './UserInfoBtn';
 import Modal from '../../ui/Modal';
 import EditForm from './EditForm';
 import { useState } from 'react';
+import { IoTrashBinOutline } from 'react-icons/io5';
 
 function UserInfo({ user }) {
 	const [showModal, setShowModal] = useState(null);
@@ -21,7 +22,7 @@ function UserInfo({ user }) {
 							alt='User Avatar'
 							className='min-w-20 w-20 h-20 border-2 border-white bg-white shadow-myShadow rounded-full'
 						/>
-						<div className='absolute opacity-0 top-0 left-0 rounded-full h-full w-full hover:opacity-100 transition-all hover:bg-gray/60 hover:cursor-pointer flex justify-center items-center'>
+						<div className='absolute opacity-0 top-0 left-0 rounded-full h-full w-full hover:opacity-100 transition-all hover:bg-mainBlue/90 hover:cursor-pointer flex justify-center items-center'>
 							<span className='text-white text-4xl'>
 								<CiImageOn />
 							</span>
@@ -36,11 +37,16 @@ function UserInfo({ user }) {
 				</div>
 			</div>
 			<div className='flex flex-col gap-6 p-2 text-sm '>
-				<SettingsElement hoverDisabled={true} label={'E-mail'}>
+				<SettingsElement
+					hoverDisabled={true}
+					labelIcon={<CiMail />}
+					label={'E-mail'}
+				>
 					{user?.email}
 				</SettingsElement>
 				<SettingsElement
 					label={'Hasło'}
+					labelIcon={<CiRead />}
 					onClick={() => handleModal('password')}
 				>
 					********
@@ -49,6 +55,9 @@ function UserInfo({ user }) {
 					type={'dangerous'}
 					onClick={() => handleModal('deleteAccount')}
 				>
+					<span className='text-xl'>
+						<IoTrashBinOutline />
+					</span>
 					Usuń Konto
 				</UserInfoBtn>
 			</div>

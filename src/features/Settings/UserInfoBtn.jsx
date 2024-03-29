@@ -2,7 +2,7 @@ function UserInfoBtn({ type, children, onClick }) {
 	return (
 		<button
 			onClick={onClick}
-			className={`p-4 flex flex-row justify-center transition-colors shadow-md shadow-shadowBlack rounded-md ${
+			className={`p-4 flex flex-row gap-1 items-center justify-center transition-colors shadow-md shadow-shadowBlack rounded-md ${
 				type === 'primary' &&
 				' bg-mainPurple hover:bg-mainPurpleHover text-white '
 			} ${

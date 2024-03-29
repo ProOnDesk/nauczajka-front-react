@@ -15,7 +15,6 @@ function EditFormTutor({ setShowModal, showModal }) {
 		updateDescription,
 		isUpdateDescriptionPending,
 	} = useUpdateDescription();
-	const ispending = true;
 
 	const onSubmit = (data) => {
 		if (showModal === 'description') {
