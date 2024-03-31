@@ -353,3 +353,29 @@ export async function addTutorSkills(skills) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function addShedule({ startTime, endTime }) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/schedule/me/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify({
+			start_time: startTime,
+			end_time: endTime,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}

@@ -2,14 +2,11 @@ import EditFormBtn from './EditFormBtn';
 import { useState } from 'react';
 import DateShow from '../../ui/DateShow';
 import { useForm } from 'react-hook-form';
+import { useAddShedule } from './useAddShedule';
 
 function TutorDateSettings({ setChoosenDate, choosenDate }) {
-	const {
-		register,
-		handleSubmit,
-		watch,
-		formState: { errors },
-	} = useForm();
+	const { addShedule } = useAddShedule();
+	const { register, handleSubmit } = useForm();
 
 	const [startTime, setStartTime] = useState('08:00');
 	const [endTime, setEndTime] = useState('09:00');
@@ -27,7 +24,17 @@ function TutorDateSettings({ setChoosenDate, choosenDate }) {
 		setEndTime(time);
 	}
 
-	const onSubmit = (data) => console.log(data);
+	const onSubmit = (data) => {
+		const [startHour, startMinute] = data.startTime.split(':');
+		const [endtHour, endMinute] = data.endTime.split(':');
+		const startDate = new Date(choosenDate);
+		startDate.setHours(startHour);
+		startDate.setMinutes(startMinute);
+		const endDate = new Date(choosenDate);
+		endDate.setHours(endtHour);
+		endDate.setMinutes(endMinute);
+		addShedule({ startTime: startDate, endTime: endDate });
+	};
 
 	return (
 		<form
@@ -37,8 +44,8 @@ function TutorDateSettings({ setChoosenDate, choosenDate }) {
 			<div className='flex flex-col items-center justify-around gap-8 '>
 				<DateShow date={choosenDate} />
 				<div className='flex flex-col gap-2 mb-6'>
-					<label className='flex items-center gap-2'>
-						Czas rozpoczęcia:
+					<label className='flex items-center justify-between gap-2'>
+						Czas rozpoczęcia
 						<input
 							{...register('startTime')}
 							type='time'
@@ -46,7 +53,7 @@ function TutorDateSettings({ setChoosenDate, choosenDate }) {
 							onChange={(e) => setStartTimeHandler(e.target.value)}
 						/>
 					</label>
-					<label className='flex items-center gap-2'>
+					<label className='flex items-center justify-between gap-2'>
 						Czas zakończenia
 						<input
 							{...register('endTime')}
