@@ -7,7 +7,7 @@ import { useTutorSkills } from './useTuttorSkills';
 
 function SkillsContainer() {
 	const [modalVisible, setModalVisible] = useState(false);
-	const { tutorSkills } = useTutorSkills();
+	const { tutorSkills, refetchTutorSkills } = useTutorSkills();
 
 	return (
 		<div className='flex flex-row flex-wrap gap-2 mt-6'>
@@ -19,6 +19,7 @@ function SkillsContainer() {
 					<AddSkillsContainer
 						tutorSkills={tutorSkills?.skills}
 						setModalVisible={setModalVisible}
+						refetchTutorSkills={refetchTutorSkills}
 					/>
 				</Modal>
 			)}

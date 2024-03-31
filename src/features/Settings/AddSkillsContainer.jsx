@@ -2,9 +2,20 @@ import AvailableSkillElement from './AvailableSkillElement';
 import { useAllAvailableSkills } from './useAllAvailableSkills';
 import EditFormBtn from './EditFormBtn';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
+import { useAddTutorSkills } from './useAddTutorSkills';
+import { useEffect } from 'react';
+import Loader from '../../ui/Loader';
 
-function AddSkillsContainer({ tutorSkills, setModalVisible }) {
+function AddSkillsContainer({
+	tutorSkills,
+	setModalVisible,
+	refetchTutorSkills,
+}) {
 	const { availableSkills } = useAllAvailableSkills();
+
+	const { addSkills, addingSkillsSuccess, isAddingSkillsPending } =
+		useAddTutorSkills();
 	const skillsToAdd = availableSkills?.filter(
 		(newSkill) => !tutorSkills?.includes(newSkill.skill)
 	);
@@ -16,10 +27,22 @@ function AddSkillsContainer({ tutorSkills, setModalVisible }) {
 		for (const [key, value] of Object.entries(data)) {
 			if (value === true) choosenSkills.push(key);
 		}
-		console.log(choosenSkills.concat(tutorSkills));
+		if (choosenSkills.length === 0) {
+			toast.error('Wybierz przynajmniej jeden przedmiot');
+			return;
+		}
+		addSkills(choosenSkills.concat(tutorSkills));
+		refetchTutorSkills();
 	}
 
-	return (
+	useEffect(() => {
+		console.log(addingSkillsSuccess);
+		if (addingSkillsSuccess === true) {
+			setModalVisible(false);
+		}
+	}, [addingSkillsSuccess, setModalVisible]);
+
+	return !isAddingSkillsPending ? (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
 			className='flex justify-center flex-col gap-10'
@@ -41,6 +64,8 @@ function AddSkillsContainer({ tutorSkills, setModalVisible }) {
 				<EditFormBtn type={'submit'}>Zatwierdź</EditFormBtn>
 			</div>
 		</form>
+	) : (
+		<Loader />
 	);
 }
 

@@ -248,7 +248,7 @@ export async function updateDescription(description) {
 	if (!token) {
 		return null;
 	}
-	const response = await fetch(API_KEY + '/api/user/tutor/description/me', {
+	const response = await fetch(API_KEY + '/api/user/tutor/description/me/', {
 		method: 'PATCH',
 		headers: {
 			'Content-Type': 'application/json',
@@ -273,7 +273,7 @@ export async function getDescription() {
 	if (!token) {
 		return null;
 	}
-	const response = await fetch(API_KEY + '/api/user/tutor/description/me', {
+	const response = await fetch(API_KEY + '/api/user/tutor/description/me/', {
 		method: 'GET',
 		headers: {
 			Authorization: `Bearer ${token}`,
@@ -312,12 +312,37 @@ export async function getTutorSkills() {
 	if (!token) {
 		return null;
 	}
-	const response = await fetch(API_KEY + '/api/user/tutor/skills/me', {
+	const response = await fetch(API_KEY + '/api/user/tutor/skills/me/', {
 		method: 'GET',
 		headers: {
 			'Content-Type': 'application/json',
 			Authorization: `Bearer ${token}`,
 		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function addTutorSkills(skills) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/skills/me/', {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify({
+			skills: skills,
+		}),
 	});
 
 	if (response.ok) {
