@@ -1,4 +1,4 @@
-import { IoTrashBinOutline } from "react-icons/io5";
+import { IoTrashBinOutline } from 'react-icons/io5';
 
 function HoursInterval({ start, end, onClick }) {
 	return (

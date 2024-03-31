@@ -6,9 +6,10 @@ import {
 } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '../../ui/Modal';
 import TutorDateSettings from './TutorDateSettings';
+import { useShowShedule } from './useShowShedule';
 
 const ServerDay = (props) => {
 	const {
@@ -46,21 +47,34 @@ const ServerDay = (props) => {
 };
 
 function CalendarContainer() {
+	const { tutorShedule } = useShowShedule();
 	const [highlightedDays, setHighlightedDays] = useState();
 	const [choosenDate, setChoosenDate] = useState(null);
+	const [month, setMonth] = useState(new Date().getMonth());
+
+	useEffect(() => {
+		if (!tutorShedule) return;
+
+		const daysInThisMonth = tutorShedule.filter(
+			(el) => new Date(el.start_time).getMonth() === month
+		);
+
+		const days = daysInThisMonth.map((day) =>
+			new Date(day.start_time).getDate()
+		);
+		setHighlightedDays(days);
+	}, [tutorShedule, month]);
 
 	return (
 		<LocalizationProvider dateAdapter={AdapterDayjs}>
-			<div className='w-full'>
+			<div>
 				<DateCalendar
-					// defaultValue={initialValue}
-					// loading={isLoading}
-
-					// onMonthChange={handleMonthChange}
+					sx={{ width: '100%' }}
+					onMonthChange={(newDate) => setMonth(new Date(newDate.$d).getMonth())}
 					onChange={(newDate) => {
 						setChoosenDate(newDate.$d);
 					}}
-					renderLoading={() => <DayCalendarSkeleton />}
+					renderLoading={() => <DayCalendarSkeleton sx={{ width: 500 }} />}
 					slots={{
 						day: ServerDay,
 					}}

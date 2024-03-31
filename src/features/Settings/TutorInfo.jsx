@@ -4,8 +4,9 @@ import { useGetDescription } from './useGetDescription';
 import Modal from '../../ui/Modal';
 import EditFormTutor from './EditFormTutor';
 import SkillsContainer from './SkillsContainer';
-import { CiCircleInfo, CiMedal } from 'react-icons/ci';
+import { CiAlarmOn, CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
 import TutorInfoHeader from './TutorInfoHeader';
+import CalendarContainer from './CalendarContainer';
 
 function TutorInfo() {
 	const { data } = useGetDescription();
@@ -21,9 +22,13 @@ function TutorInfo() {
 					{data?.description ? data?.description : 'Brak'}
 				</SettingsElement>
 			</div>
-			<div>
+			<div className='mb-10'>
 				<TutorInfoHeader icon={<CiMedal />} label={'Umiejętności'} />
 				<SkillsContainer />
+			</div>
+			<div>
+				<TutorInfoHeader icon={<CiCalendar />} label={'Terminy'} />
+				<CalendarContainer />
 			</div>
 
 			{showModal && (
