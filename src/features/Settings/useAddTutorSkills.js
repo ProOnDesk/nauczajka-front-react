@@ -6,7 +6,7 @@ export function useAddTutorSkills() {
 	const {
 		mutate: addSkills,
 		isPending: isAddingSkillsPending,
-		onSuccess: addingSkillsSuccess,
+		isSuccess: addingSkillsSuccess,
 	} = useMutation({
 		mutationFn: addTutorSkillsApi,
 		onSuccess: () => {

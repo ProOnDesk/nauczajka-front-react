@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useAddTutorSkills } from './useAddTutorSkills';
 import { useEffect } from 'react';
 import Loader from '../../ui/Loader';
+import { CiFileOff } from 'react-icons/ci';
 
 function AddSkillsContainer({
 	tutorSkills,
@@ -32,15 +33,14 @@ function AddSkillsContainer({
 			return;
 		}
 		addSkills(choosenSkills.concat(tutorSkills));
-		refetchTutorSkills();
 	}
 
 	useEffect(() => {
-		console.log(addingSkillsSuccess);
 		if (addingSkillsSuccess === true) {
 			setModalVisible(false);
+			refetchTutorSkills();
 		}
-	}, [addingSkillsSuccess, setModalVisible]);
+	}, [addingSkillsSuccess, setModalVisible, refetchTutorSkills]);
 
 	return !isAddingSkillsPending ? (
 		<form
@@ -49,13 +49,24 @@ function AddSkillsContainer({
 		>
 			<p className='text-2xl text-center'>Dodaj swoje przedmioty</p>
 			<div className='flex flex-wrap gap-2 md:mx-10'>
-				{skillsToAdd?.map((skill) => (
-					<AvailableSkillElement
-						register={register}
-						key={skill.skill}
-						label={skill.skill}
-					/>
-				))}
+				{skillsToAdd?.length > 0 ? (
+					skillsToAdd?.map((skill) => (
+						<AvailableSkillElement
+							register={register}
+							key={skill.skill}
+							label={skill.skill}
+						/>
+					))
+				) : (
+					<div className='flex w-full flex-col gap-2 justify-center items-center'>
+						<span className='text-2xl'>
+							<CiFileOff />
+						</span>
+						<p className='text-center'>
+							Brak przedmiotów.
+						</p>
+					</div>
+				)}
 			</div>
 			<div className='mt-6 flex flex-row flex-wrap-reverse gap-5 justify-center w-full'>
 				<EditFormBtn onClick={() => setModalVisible(false)} type={'button'}>
