@@ -10,7 +10,7 @@ export function useAddShedule() {
 	} = useMutation({
 		mutationFn: addSheduleApi,
 		onSuccess: () => {
-			toast.success('Dodano dostępne godziny.');
+			toast.success('Dodano termin.');
 		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
