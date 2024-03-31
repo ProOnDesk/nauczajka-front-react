@@ -37,6 +37,7 @@ function AddSkillsContainer({
 
 	useEffect(() => {
 		if (addingSkillsSuccess === true) {
+			toast.success('Dodano przedmiot.');
 			setModalVisible(false);
 			refetchTutorSkills();
 		}
@@ -55,6 +56,7 @@ function AddSkillsContainer({
 							register={register}
 							key={skill.skill}
 							label={skill.skill}
+							tutorSkills={tutorSkills}
 						/>
 					))
 				) : (
@@ -62,9 +64,7 @@ function AddSkillsContainer({
 						<span className='text-2xl'>
 							<CiFileOff />
 						</span>
-						<p className='text-center'>
-							Brak przedmiotów.
-						</p>
+						<p className='text-center'>Brak przedmiotów.</p>
 					</div>
 				)}
 			</div>

@@ -9,9 +9,6 @@ export function useAddTutorSkills() {
 		isSuccess: addingSkillsSuccess,
 	} = useMutation({
 		mutationFn: addTutorSkillsApi,
-		onSuccess: () => {
-			toast.success('Dodano przedmioty.');
-		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
 			toast.error(error.email[0]);

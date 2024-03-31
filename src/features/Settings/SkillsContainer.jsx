@@ -12,7 +12,7 @@ function SkillsContainer() {
 	return (
 		<div className='flex flex-row flex-wrap gap-2 mt-6'>
 			{tutorSkills?.skills?.map((skill) => (
-				<SkillElement key={skill} skill={skill} tutorSkills={tutorSkills} />
+				<SkillElement key={skill} skill={skill} tutorSkills={tutorSkills.skills} refetchTutorSkills={refetchTutorSkills}/>
 			))}
 			{modalVisible && (
 				<Modal>
