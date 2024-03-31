@@ -1,18 +1,29 @@
 import EditFormBtn from './EditFormBtn';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DateShow from '../../ui/DateShow';
 import { useForm } from 'react-hook-form';
 import { useAddShedule } from './useAddShedule';
+import { useShowShedule } from './useShowShedule';
+import HoursInterval from '../../ui/HoursInterval';
+import { useDeleteShedule } from './useDeleteShedule';
 
 function TutorDateSettings({ setChoosenDate, choosenDate }) {
-	const { addShedule } = useAddShedule();
+	const { addShedule, addingSheduleSuccess } = useAddShedule();
+	const { tutorShedule, refetchShedule } = useShowShedule();
+	const { deleteShedule, isSheduleDeleted } = useDeleteShedule();
 	const { register, handleSubmit } = useForm();
-
 	const [startTime, setStartTime] = useState('08:00');
 	const [endTime, setEndTime] = useState('09:00');
-	const day = choosenDate.getDate();
-	const month = choosenDate.getMonth() + 1;
-	const year = choosenDate.getFullYear();
+	const currShedule = tutorShedule?.filter((curr) => {
+		const today = new Date(choosenDate);
+		const start = new Date(curr.start_time);
+		return (
+			today.getFullYear() === start.getFullYear() &&
+			today.getMonth() === start.getMonth() &&
+			today.getDate() === start.getDate()
+		);
+	});
+	currShedule?.sort((a, b) => new Date(a.start_time) - new Date(b.start_time));
 
 	function setStartTimeHandler(time) {
 		if (time > endTime) return;
@@ -35,6 +46,13 @@ function TutorDateSettings({ setChoosenDate, choosenDate }) {
 		endDate.setMinutes(endMinute);
 		addShedule({ startTime: startDate, endTime: endDate });
 	};
+
+	useEffect(() => {
+		if (addingSheduleSuccess === true) refetchShedule();
+	}, [addingSheduleSuccess, refetchShedule]);
+	useEffect(() => {
+		if (isSheduleDeleted === true) refetchShedule();
+	}, [isSheduleDeleted, refetchShedule]);
 
 	return (
 		<form
@@ -69,6 +87,33 @@ function TutorDateSettings({ setChoosenDate, choosenDate }) {
 					Anuluj
 				</EditFormBtn>
 				<EditFormBtn type={'submit'}>Zatwierdź</EditFormBtn>
+			</div>
+			<div className='mt-8'>
+				<p className='text-center'>
+					{currShedule?.length > 0
+						? 'Ustalone terminy.'
+						: 'Brak ustalonych terminów.'}
+				</p>
+				<div className='flex flex-wrap justify-center gap-2 mx-auto mt-2'>
+					{currShedule?.map((item) => {
+						const start = new Date(item.start_time);
+						const end = new Date(item.end_time);
+						const formatTime = (time) => String(time).padStart(2, '0');
+
+						return (
+							<HoursInterval
+								onClick={() => deleteShedule(item.id)}
+								key={item.id}
+								start={`${formatTime(start.getHours())}:${formatTime(
+									start.getMinutes()
+								)}`}
+								end={`${formatTime(end.getHours())}:${formatTime(
+									end.getMinutes()
+								)}`}
+							/>
+						);
+					})}
+				</div>
 			</div>
 		</form>
 	);

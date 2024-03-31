@@ -379,3 +379,46 @@ export async function addShedule({ startTime, endTime }) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function showShedules() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/schedule/me/', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function deleteShedule(id) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + `/api/user/tutor/schedule/me/${id}/`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
