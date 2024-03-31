@@ -14,7 +14,7 @@ function TutorInfo() {
 		setShowModal(type);
 	}
 	return (
-		<div className='px-2 md:py-0  sm400:w-4/5 md:w-full md:px-5 mx-auto py-4'>
+		<div className='px-2 md:py-0 sm400:w-4/5 md:w-full md:px-5 mx-auto py-4'>
 			<div className='mb-10'>
 				<TutorInfoHeader icon={<CiCircleInfo />} label={'Opis'} />
 				<SettingsElement onClick={() => handleModal('description')}>
