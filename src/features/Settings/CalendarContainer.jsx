@@ -10,6 +10,8 @@ import { useEffect, useState } from 'react';
 import Modal from '../../ui/Modal';
 import TutorDateSettings from './TutorDateSettings';
 import { useShowShedule } from './useShowShedule';
+import 'dayjs/locale/pl';
+import pl from 'dayjs/locale/pl';
 
 const formatTime = (time) => String(time).padStart(2, '0');
 
@@ -65,17 +67,33 @@ const ServerDay = (props) => {
 		!props.outsideCurrentMonth &&
 		highlightedDays?.indexOf(props.day.date()) >= 0;
 	return (
-		<Tooltip title={dayInfo} placement='top' className='opacity-100 w-full'>
+		<Tooltip
+			title={dayInfo}
+			placement='top'
+			className='opacity-100 w-full text-center'
+		>
 			<div>
 				<Badge
 					key={props.day.toString()}
 					overlap='circular'
 					badgeContent={isSelected ? '🎯' : undefined}
+					className='hover:bg-whiteHover rounded-full focus:bg-orange-300 ring-0'
 				>
 					<PickersDay
 						{...other}
 						outsideCurrentMonth={outsideCurrentMonth}
 						day={day}
+						sx={{
+							'&.Mui-selected': {
+								'&:hover': {
+									backgroundColor: '#6b56ee',
+								},
+								backgroundColor: '#7c67ff',
+							},
+							'&.MuiPickersDay-today': {
+								border: '2px solid #7c67ff', // Kolor obramowania dla aktualnego dnia
+							},
+						}}
 					/>
 				</Badge>
 			</div>
@@ -103,10 +121,20 @@ function CalendarContainer() {
 	}, [tutorShedule, month]);
 
 	return (
-		<LocalizationProvider dateAdapter={AdapterDayjs}>
+		<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale={pl}>
 			<div>
 				<DateCalendar
-					sx={{ width: '100%' }}
+					sx={{
+						width: '100%',
+						'.MuiDayCalendar-header': {
+							width: 'full',
+							display: 'flex',
+							justifyContent: 'space-around',
+						},
+						'.MuiTypography-root': {
+							// color: '#7c67ff',
+						},
+					}}
 					onMonthChange={(newDate) => setMonth(new Date(newDate.$d).getMonth())}
 					onChange={(newDate) => {
 						setChoosenDate(newDate.$d);
