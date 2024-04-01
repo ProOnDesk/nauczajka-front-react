@@ -4,15 +4,21 @@ import toast from 'react-hot-toast';
 
 export function useGetAllTutors() {
 	const {
+		data: allTutors,
 		mutate: showTutors,
 		isPending: isShowingTutors,
 		isSuccess: isTutorsShowed,
 	} = useMutation({
-		mutationFn: getAllTutorsApi,
+		mutationFn: (variables) => {
+			return getAllTutorsApi(variables);
+		},
+		onSuccess: (data) => {
+			console.log(data);
+		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
 			toast.error(error.email[0]);
 		},
 	});
-	return { showTutors, isShowingTutors, isTutorsShowed };
+	return { allTutors, showTutors, isShowingTutors, isTutorsShowed };
 }
