@@ -1,6 +1,6 @@
 import toast from 'react-hot-toast';
 
-const API_KEY = 'http://localhost:8000';
+export const API_KEY = 'http://localhost:8000';
 
 export async function registerUser({
 	email,
