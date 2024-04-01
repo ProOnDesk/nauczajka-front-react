@@ -23,5 +23,5 @@ export function useUpdateAvatar() {
 		},
 	});
 
-	return { data, updateAvatar, isUpdatePending, isAvatarUpdated};
+	return { data, updateAvatar, isUpdatePending, isAvatarUpdated };
 }

@@ -242,3 +242,183 @@ export async function updateAvatar(image) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function updateDescription(description) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/description/me/', {
+		method: 'PATCH',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify({
+			description: description,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function getDescription() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/description/me/', {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function getAllAvailableSkills() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/skills/', {
+		method: 'GET',
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function getTutorSkills() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/skills/me/', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function addTutorSkills(skills) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/skills/me/', {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify({
+			skills: skills,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function addShedule({ startTime, endTime }) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/schedule/me/', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+		body: JSON.stringify({
+			start_time: startTime,
+			end_time: endTime,
+		}),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function showShedules() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + '/api/user/tutor/schedule/me/', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function deleteShedule(id) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) {
+		return null;
+	}
+	const response = await fetch(API_KEY + `/api/user/tutor/schedule/me/${id}/`, {
+		method: 'DELETE',
+		headers: {
+			Authorization: `Bearer ${token}`,
+		},
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
