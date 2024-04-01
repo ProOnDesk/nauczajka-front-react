@@ -4,7 +4,7 @@ import { useGetDescription } from './useGetDescription';
 import Modal from '../../ui/Modal';
 import EditFormTutor from './EditFormTutor';
 import SkillsContainer from './SkillsContainer';
-import { CiAlarmOn, CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
+import { CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
 import TutorInfoHeader from './TutorInfoHeader';
 import CalendarContainer from './CalendarContainer';
 
@@ -27,7 +27,7 @@ function TutorInfo() {
 				<SkillsContainer />
 			</div>
 			<div>
-				<TutorInfoHeader icon={<CiCalendar />} label={'Terminy'} />
+				<TutorInfoHeader icon={<CiCalendar />} label={'Wolne terminy'} />
 				<CalendarContainer />
 			</div>
 

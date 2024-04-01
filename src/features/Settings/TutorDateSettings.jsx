@@ -3,13 +3,17 @@ import { useEffect, useState } from 'react';
 import DateShow from '../../ui/DateShow';
 import { useForm } from 'react-hook-form';
 import { useAddShedule } from './useAddShedule';
-import { useShowShedule } from './useShowShedule';
 import HoursInterval from '../../ui/HoursInterval';
 import { useDeleteShedule } from './useDeleteShedule';
 
-function TutorDateSettings({ setChoosenDate, choosenDate }) {
+function TutorDateSettings({
+	setChoosenDate,
+	choosenDate,
+	tutorShedule,
+	refetchShedule,
+}) {
 	const { addShedule, addingSheduleSuccess } = useAddShedule();
-	const { tutorShedule, refetchShedule } = useShowShedule();
+
 	const { deleteShedule, isSheduleDeleted } = useDeleteShedule();
 	const { register, handleSubmit } = useForm();
 	const [startTime, setStartTime] = useState('08:00');

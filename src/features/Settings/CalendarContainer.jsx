@@ -11,26 +11,63 @@ import Modal from '../../ui/Modal';
 import TutorDateSettings from './TutorDateSettings';
 import { useShowShedule } from './useShowShedule';
 
+const formatTime = (time) => String(time).padStart(2, '0');
+
 const ServerDay = (props) => {
+	const [dayInfo, setDayInfo] = useState(
+		<p className='p-1 text-[0.9rem]'>Brak terminów w tym dniu.</p>
+	);
 	const {
 		highlightedDays = [new Date().getDate()],
 		day,
 		outsideCurrentMonth,
-
+		tutorShedule,
 		...other
 	} = props;
+
+	useEffect(() => {
+		if (!tutorShedule) return;
+
+		const currShedule = tutorShedule?.filter((curr) => {
+			const today = new Date(day.$d);
+			const start = new Date(curr.start_time);
+			return (
+				today.getFullYear() === start.getFullYear() &&
+				today.getMonth() === start.getMonth() &&
+				today.getDate() === start.getDate()
+			);
+		});
+		currShedule?.sort(
+			(a, b) => new Date(a.start_time) - new Date(b.start_time)
+		);
+		if (currShedule.length > 0) {
+			setDayInfo(
+				<div className='p-1 text-[0.9rem]'>
+					{currShedule.map((el) => {
+						const startHour = new Date(el.start_time).getHours();
+						const startMinutes = new Date(el.start_time).getMinutes();
+						const endHour = new Date(el.end_time).getHours();
+						const endMinutes = new Date(el.end_time).getMinutes();
+
+						return (
+							<p key={el.id}>
+								{formatTime(startHour)}:{formatTime(startMinutes)} -{' '}
+								{formatTime(endHour)}:{formatTime(endMinutes)}
+							</p>
+						);
+					})}
+				</div>
+			);
+		}
+	}, [tutorShedule, day.$d]);
 
 	const isSelected =
 		!props.outsideCurrentMonth &&
 		highlightedDays?.indexOf(props.day.date()) >= 0;
 	return (
-		<Tooltip
-			title={`${isSelected ? 'TU SIE WYSWIETLA INFO' : ''}`}
-			placement='top'
-		>
+		<Tooltip title={dayInfo} placement='top' className='opacity-100 w-full'>
 			<div>
 				<Badge
-					onSelect={() => console.log('pawle')}
 					key={props.day.toString()}
 					overlap='circular'
 					badgeContent={isSelected ? '🎯' : undefined}
@@ -47,7 +84,7 @@ const ServerDay = (props) => {
 };
 
 function CalendarContainer() {
-	const { tutorShedule } = useShowShedule();
+	const { tutorShedule, refetchShedule } = useShowShedule();
 	const [highlightedDays, setHighlightedDays] = useState();
 	const [choosenDate, setChoosenDate] = useState(null);
 	const [month, setMonth] = useState(new Date().getMonth());
@@ -74,13 +111,14 @@ function CalendarContainer() {
 					onChange={(newDate) => {
 						setChoosenDate(newDate.$d);
 					}}
-					renderLoading={() => <DayCalendarSkeleton sx={{ width: 500 }} />}
+					renderLoading={() => <DayCalendarSkeleton className='w-full' />}
 					slots={{
 						day: ServerDay,
 					}}
 					slotProps={{
 						day: {
 							highlightedDays,
+							tutorShedule,
 						},
 					}}
 					disablePast={true}
@@ -91,6 +129,8 @@ function CalendarContainer() {
 						<TutorDateSettings
 							setChoosenDate={setChoosenDate}
 							choosenDate={choosenDate}
+							refetchShedule={refetchShedule}
+							tutorShedule={tutorShedule}
 						/>
 					</Modal>
 				)}
