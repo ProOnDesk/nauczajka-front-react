@@ -1,10 +1,10 @@
-import { CiCircleChevRight, CiPaperplane, CiSignpostR1 } from 'react-icons/ci';
+import { CiCircleChevRight } from 'react-icons/ci';
 import { API_KEY } from '../../services/apiAuth';
 
 function TutorElement({ tutorInfo }) {
 	const pricePerHour = 215;
 	return (
-		<div className='flex flex-col md:flex-row justify-center md:justify-between border-whiteHover border-2 rounded-md p-2 gap-3 md:px-8 sm400:w-3/4 mx-auto md:w-4/5 hover:bg-whiteHover group/tutorEl hover:cursor-pointer transition-colors'>
+		<div className='flex flex-col md:flex-row justify-center md:justify-between border-whiteHover border-2 rounded-md p-2 gap-3 md:px-8 sm400:w-3/4 w-full mx-auto md:w-4/5 hover:bg-whiteHover group/tutorEl hover:cursor-pointer transition-colors'>
 			<div className='h-full flex flex-col md:flex-row justify-center items-center gap-2 md:gap-5'>
 				<img
 					src={`${API_KEY}${tutorInfo.profile_image}`}
@@ -16,7 +16,7 @@ function TutorElement({ tutorInfo }) {
 						<p className='text-2xl'>{tutorInfo.first_name}</p>
 						<p className='text-2xl'>{tutorInfo.last_name}</p>
 					</div>
-					<div className='flex flex-row flex-wrap justify-center gap-1 text-gray'>
+					<div className='flex flex-row flex-wrap justify-center md:justify-start gap-1 text-gray'>
 						{tutorInfo.skills.map((skill, index) => (
 							<p key={skill} className='text-[0.75rem]'>
 								{skill}

@@ -13,7 +13,7 @@ function SearchInput({ placeholder, value, onChange, onClick }) {
 			<button
 				type='button'
 				onClick={onClick}
-				className='absolute right-0 h-full flex items-center px-2 text-2xl'
+				className='absolute right-0 h-full flex items-center px-2 text-2xl hover:text-mainPurpleHover transition-colors'
 			>
 				<span>
 					<CiSearch />

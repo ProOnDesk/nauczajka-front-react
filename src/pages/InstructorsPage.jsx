@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import SearchContainer from '../features/TutorSearch/SearchContainer';
 import ShowTutorsContainer from '../features/TutorSearch/ShowTutorsContainer';
 import { useGetAllTutors } from '../features/TutorSearch/useGetAllTutors';
@@ -6,25 +6,21 @@ import { useGetAllTutors } from '../features/TutorSearch/useGetAllTutors';
 function InstructorsPage() {
 	const { showTutors, allTutors: tutorList } = useGetAllTutors();
 	const [search, setSearch] = useState('');
+	const [skillsFilter, setSkillsFilter] = useState([]);
 
-	useEffect(() => {
-		showTutors({
-			searchByFullName: '',
-			avgRatingGt: '',
-			avgRatingLt: '',
-			skills: [],
-		});
-	}, [showTutors]);
-
-	function searchTutors() {
+	const searchTutors = useCallback(() => {
 		showTutors({
 			searchByFullName: search,
 			avgRatingGt: '',
 			avgRatingLt: '',
-			skills: [],
+			skills: skillsFilter,
 		});
 		return () => showTutors();
-	}
+	}, [showTutors, search, skillsFilter]);
+
+	useEffect(() => {
+		searchTutors();
+	}, [searchTutors]);
 
 	return (
 		<div className='mx-auto md:pt-10 max-w-7xl w-full'>
@@ -32,6 +28,9 @@ function InstructorsPage() {
 				search={search}
 				onSearch={setSearch}
 				onClick={searchTutors}
+				setSkillsFilter={setSkillsFilter}
+				skillsFilter={skillsFilter}
+				searchTutors={searchTutors}
 			/>
 			<ShowTutorsContainer tutorList={tutorList} />
 		</div>
