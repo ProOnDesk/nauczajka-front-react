@@ -4,7 +4,7 @@ import ShowTutorsContainer from '../features/TutorSearch/ShowTutorsContainer';
 import { useGetAllTutors } from '../features/TutorSearch/useGetAllTutors';
 
 function InstructorsPage() {
-	const { showTutors, allTutors } = useGetAllTutors();
+	const { showTutors, allTutors: tutorList } = useGetAllTutors();
 	const [search, setSearch] = useState('');
 
 	useEffect(() => {
@@ -18,7 +18,7 @@ function InstructorsPage() {
 
 	function searchTutors() {
 		showTutors({
-			searchByFullName: '',
+			searchByFullName: search,
 			avgRatingGt: '',
 			avgRatingLt: '',
 			skills: [],
@@ -27,13 +27,13 @@ function InstructorsPage() {
 	}
 
 	return (
-		<div className='mx-auto max-w-7xl w-full'>
+		<div className='mx-auto md:pt-10 max-w-7xl w-full'>
 			<SearchContainer
 				search={search}
 				onSearch={setSearch}
 				onClick={searchTutors}
 			/>
-			<ShowTutorsContainer />
+			<ShowTutorsContainer tutorList={tutorList} />
 		</div>
 	);
 }
