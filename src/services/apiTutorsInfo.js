@@ -34,3 +34,23 @@ export async function getAllTutors({
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function getTutorInfo({ tutorId }) {
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/details/${tutorId}/`,
+		{
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		console.log(data);
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
