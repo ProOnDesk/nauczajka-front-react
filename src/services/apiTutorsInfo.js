@@ -5,6 +5,7 @@ export async function getAllTutors({
 	avgRatingLt,
 	searchByFullName,
 	skills,
+	signal,
 }) {
 	let skillsList = '';
 	if (skills.length > 0) {
@@ -21,6 +22,7 @@ export async function getAllTutors({
 			headers: {
 				'Content-Type': 'application/json',
 			},
+			signal: signal,
 		}
 	);
 

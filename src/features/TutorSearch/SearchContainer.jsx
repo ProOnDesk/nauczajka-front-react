@@ -1,5 +1,4 @@
-import { CiFilter, CiStar } from 'react-icons/ci';
-import { FaStar } from 'react-icons/fa6';
+import { CiFilter } from 'react-icons/ci';
 import SearchInput from './SearchInput';
 import { useEffect, useState } from 'react';
 import SearchButton from './SearchButton';

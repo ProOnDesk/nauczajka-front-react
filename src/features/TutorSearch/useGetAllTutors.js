@@ -9,14 +9,12 @@ export function useGetAllTutors() {
 		isPending: isShowingTutors,
 		isSuccess: isTutorsShowed,
 	} = useMutation({
-		mutationFn: (variables) => {
-			return getAllTutorsApi(variables);
-		},
-
+		mutationFn: getAllTutorsApi,
 		onError: (err) => {
 			const error = JSON.parse(err.message);
 			toast.error(error.email[0]);
 		},
 	});
+
 	return { allTutors, showTutors, isShowingTutors, isTutorsShowed };
 }

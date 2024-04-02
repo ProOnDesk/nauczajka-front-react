@@ -8,18 +8,25 @@ function InstructorsPage() {
 	const [search, setSearch] = useState('');
 	const [skillsFilter, setSkillsFilter] = useState([]);
 
-	const searchTutors = useCallback(() => {
-		showTutors({
-			searchByFullName: search,
-			avgRatingGt: '',
-			avgRatingLt: '',
-			skills: skillsFilter,
-		});
-		return () => showTutors();
-	}, [showTutors, search, skillsFilter]);
+	const searchTutors = useCallback(
+		(signal) => {
+			console.log(signal);
+			showTutors({
+				searchByFullName: search,
+				avgRatingGt: '',
+				avgRatingLt: '',
+				skills: skillsFilter,
+				signal: signal,
+			});
+			return () => showTutors();
+		},
+		[showTutors, search, skillsFilter]
+	);
 
 	useEffect(() => {
-		searchTutors();
+		const controller = new AbortController();
+		searchTutors(controller.signal);
+		return () => controller.abort();
 	}, [searchTutors]);
 
 	return (
