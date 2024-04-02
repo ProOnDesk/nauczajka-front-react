@@ -14,7 +14,6 @@ function InstructorsPage() {
 
 	const searchTutors = useCallback(
 		(signal) => {
-			console.log(signal);
 			showTutors({
 				searchByFullName: search,
 				avgRatingGt: '',

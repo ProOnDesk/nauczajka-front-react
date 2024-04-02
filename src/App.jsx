@@ -12,6 +12,7 @@ import ConfirmEmailPage from './pages/ConfirmEmailPage';
 import SettingsPage from './pages/SettingsPage';
 import PasswordReset from './pages/PasswordResetPage';
 import PasswordResetConfirmPage from './pages/PasswordResetConfirmPage';
+import TutorInfoPage from './pages/TutorInfoPage';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
 		children: [
 			{ path: '', element: <HomePage /> },
 			{ path: 'instructors', element: <InstructorsPage /> },
+			{ path: 'instructors/:id', element: <TutorInfoPage /> },
 			{ path: 'login', element: <LoginPage /> },
 			{ path: 'register', element: <RegisterPage /> },
 			{ path: 'settings', element: <SettingsPage /> },

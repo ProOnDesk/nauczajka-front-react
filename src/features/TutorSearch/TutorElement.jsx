@@ -1,10 +1,15 @@
 import { CiCircleChevRight } from 'react-icons/ci';
 import { API_KEY } from '../../services/apiAuth';
+import { NavLink } from 'react-router-dom';
 
 function TutorElement({ tutorInfo }) {
 	const pricePerHour = 215;
+
 	return (
-		<div className='flex flex-col md:flex-row justify-center md:justify-between border-whiteHover border-2 rounded-md p-2 gap-3 md:px-8 sm400:w-3/4 w-full mx-auto md:w-4/5 hover:bg-whiteHover group/tutorEl hover:cursor-pointer transition-colors'>
+		<NavLink
+			to={`${tutorInfo.id}`}
+			className='flex flex-col md:flex-row justify-center md:justify-between border-whiteHover border-2 rounded-md p-2 gap-3 md:px-8 sm400:w-3/4 w-full mx-auto md:w-4/5 hover:bg-whiteHover group/tutorEl hover:cursor-pointer transition-colors'
+		>
 			<div className='h-full flex flex-col md:flex-row justify-center items-center gap-2 md:gap-5'>
 				<img
 					src={`${API_KEY}${tutorInfo.profile_image}`}
@@ -37,7 +42,7 @@ function TutorElement({ tutorInfo }) {
 					</span>
 				</div>
 			</div>
-		</div>
+		</NavLink>
 	);
 }
 
