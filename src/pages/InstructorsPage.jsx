@@ -4,7 +4,11 @@ import ShowTutorsContainer from '../features/TutorSearch/ShowTutorsContainer';
 import { useGetAllTutors } from '../features/TutorSearch/useGetAllTutors';
 
 function InstructorsPage() {
-	const { showTutors, allTutors: tutorList } = useGetAllTutors();
+	const {
+		showTutors,
+		allTutors: tutorList,
+		isShowingTutors,
+	} = useGetAllTutors();
 	const [search, setSearch] = useState('');
 	const [skillsFilter, setSkillsFilter] = useState([]);
 
@@ -39,7 +43,10 @@ function InstructorsPage() {
 				skillsFilter={skillsFilter}
 				searchTutors={searchTutors}
 			/>
-			<ShowTutorsContainer tutorList={tutorList} />
+			<ShowTutorsContainer
+				tutorList={tutorList}
+				isShowingTutors={isShowingTutors}
+			/>
 		</div>
 	);
 }
