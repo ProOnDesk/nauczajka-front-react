@@ -12,9 +12,7 @@ export function useGetAllTutors() {
 		mutationFn: (variables) => {
 			return getAllTutorsApi(variables);
 		},
-		onSuccess: (data) => {
-			console.log(data);
-		},
+
 		onError: (err) => {
 			const error = JSON.parse(err.message);
 			toast.error(error.email[0]);
