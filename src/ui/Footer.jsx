@@ -1,7 +1,7 @@
 function Footer() {
 	const currentYear = new Date().getFullYear();
 	return (
-		<footer className='py-4 flex justify-center text-gray '>
+		<footer className=" flex justify-end items-center flex-col py-4 text-white inset-x-0 bottom-0 bg-mainPurple">
 			<p>{currentYear} &copy; Nauczajka</p>
 		</footer>
 	);

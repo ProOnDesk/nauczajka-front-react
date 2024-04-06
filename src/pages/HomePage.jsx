@@ -1,7 +1,17 @@
+import HeaderButtonJoinNow from "../ui/homepage/HeaderButtonJoinNow";
+import HeaderImg from "../ui/homepage/HeaderImg";
+import HeaderText from "../ui/homepage/HeaderText";
+import HeaderIcon from "../ui/homepage/HeaderIcon";
+import HeaderFooter from "../ui/homepage/HeaderFooter";
+
 function HomePage() {
 	return (
-		<div className='flex-col flex justify-center items-center h-full '>
-			<p>Tutaj jest miejsce na Homepage</p>
+		<div className="flex flex-col ">
+			<HeaderText />
+			<HeaderButtonJoinNow />
+			<HeaderIcon />
+			<HeaderImg />
+			<HeaderFooter />
 		</div>
 	);
 }
