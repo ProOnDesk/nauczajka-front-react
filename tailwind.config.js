@@ -10,7 +10,7 @@ export default {
 				lightPurple: "#e5e1ff",
 				mainSalmon: "#fe7474",
 				mainSalmonHover: "#ed6363",
-				mainBlueC: "#1b356b",
+				mainBlue: "#1b356b",
 				mainBlueHover: "#1a245a",
 				white: "#fff",
 				whiteHover: "#eee",

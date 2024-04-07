@@ -7,7 +7,7 @@ function HeaderButtonIcon() {
 	return (
 		<>
 			<div className="flex flex-col justify-center items-center  p-6 gap-y-6">
-				<Button className="flex flex-col justify-center items-center w-full h-20 m-1  shadow-mainBlueC ">
+				<Button className="flex flex-col justify-center items-center w-full h-20 m-1  shadow-mainBlue ">
 					<div className="rounded-full bg-white flex justify-center items-center border border-mainPurple mb-2 h-8 w-8 ">
 						<div className="text-mainPurple text-xl">
 							<PiNotebookLight />
@@ -16,7 +16,7 @@ function HeaderButtonIcon() {
 					<p className="text-center text-xs">Wybierz przedmiot</p>
 				</Button>
 
-				<Button className="flex flex-col justify-center items-center w-full h-20 m-1   shadow-mainBlueC ">
+				<Button className="flex flex-col justify-center items-center w-full h-20 m-1   shadow-mainBlue ">
 					<div className="rounded-full bg-white flex justify-center items-center border border-mainPurple mb-2 h-8 w-8">
 						<div className="text-mainPurple text-xl">
 							<CiUser />
@@ -25,7 +25,7 @@ function HeaderButtonIcon() {
 					<p className="text-center text-xs">Wybierz korepetytora</p>
 				</Button>
 
-				<Button className="flex flex-col justify-center items-center w-full h-20 mb-20   shadow-mainBlueC">
+				<Button className="flex flex-col justify-center items-center w-full h-20 mb-20   shadow-mainBlue">
 					<div className="rounded-full bg-white flex justify-center items-center border border-mainPurple mb-2 h-8 w-8">
 						<div className="text-mainPurple text-xl">
 							<SlEarphonesAlt />
