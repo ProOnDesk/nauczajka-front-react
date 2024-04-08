@@ -6,7 +6,7 @@ import HeaderFooter from "../ui/homepage/HeaderFooter";
 
 function HomePage() {
 	return (
-		<div className="flex flex-col ">
+		<div className="flex flex-col relative ">
 			<HeaderText />
 			<HeaderButtonJoinNow />
 			<HeaderIcon />

@@ -3,7 +3,7 @@ import HeaderButtonIcon from "./HeaderButtonIcon";
 function HeaderFooter() {
 	return (
 		<>
-			<div className="flex justify-center items-center flex-col h-full w-full mt-20 bg-mainPurple min-[375px]:mt-36 md:mt-44 md:rounded-tl-lg">
+			<div className="flex justify-center items-center flex-col h-full w-full mt-20 bg-mainPurple min-[375px]:mt-36 md:mt-44 md:rounded-tl-lg min-[535px]:mt-52">
 				<div className="flex flex-col md:flex-row justify-center items-center">
 					<div className="md:w-5/12">
 						<h2 className="font-bold text-center leading-relaxed mt-12 text-2xl text-white min-[375px]:text-3xl md:text-3xl md:text-left md:p-5 ">
