@@ -8,12 +8,11 @@ import SettingsElement from '../features/Settings/SettingsElement';
 import TutorInfoPageHeader from '../features/TutorInfo/TutorInfoPageHeader';
 import CalendarContainer from '../features/Settings/CalendarContainer';
 import StarRating from '../ui/StarRating';
+import TutorRatings from '../features/TutorInfo/TutorRatings';
 
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
 	const { id: tutorId } = useParams();
-
-	console.log(tutorInfo);
 
 	useEffect(() => {
 		getTutorInfo({ tutorId: tutorId });
@@ -25,7 +24,7 @@ function TutorInfoPage() {
 				<TutorInfoPageHeader tutorInfo={tutorInfo} />
 			</div>
 			<div className='max-w-4xl mx-auto px-2 flex flex-col gap-16'>
-				<div>
+				<div className='flex flex-col gap-2'>
 					<TutorInfoHeader icon={<CiCircleInfo />} label={'Opis'} />
 					<SettingsElement onlyRead={true} hoverDisabled={true}>
 						{tutorInfo?.description ? tutorInfo?.description : 'Brak'}
@@ -41,33 +40,17 @@ function TutorInfoPage() {
 				<div>
 					<div className='flex flex-wrap gap-4 items-center justify-between'>
 						<TutorInfoHeader icon={<CiStar />} label={'Opinie'} />
-						<div className=''>
-							<StarRating currRating={tutorInfo?.avg_rating} readOnly={true} />
+						<div className='flex flex-row items-center gap-2 text-lg'>
+							<p>{tutorInfo?.avg_rating}</p>
+							<StarRating
+								size='xl'
+								currRating={tutorInfo?.avg_rating}
+								readOnly={true}
+							/>
 						</div>
 					</div>
 					<div>
-						{tutorInfo?.tutor_ratings.map((rate, id) => {
-							const ratingDate = new Date(rate.created_at);
-							return (
-								<div
-									className='border-whiteHover border-2 rounded-md p-2 text-sm my-5'
-									key={id}
-								>
-									<div className='flex sm400:flex-row flex-col gap-2 sm400:justify-between sm400:items-center mb-5'>
-										<p className='text-lg font-bold'>
-											{rate.student_first_name} {rate.student_last_name}
-										</p>
-										<StarRating currRating={rate.rating} readOnly={true} />
-									</div>
-									<p className='my-2'>{rate.review}</p>
-									<p className='font-bold'>
-										{ratingDate.getDate()}{' '}
-										{ratingDate.toLocaleString('default', { month: 'long' })}{' '}
-										{ratingDate.getFullYear()}
-									</p>
-								</div>
-							);
-						})}
+						<TutorRatings tutorInfo={tutorInfo} />
 					</div>
 				</div>
 			</div>

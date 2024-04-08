@@ -104,7 +104,7 @@ function TutorDateSettings({
 						: 'Brak ustalonych terminów.'}
 				</p>
 				<div className='flex flex-wrap justify-center gap-2 mx-auto mt-2'>
-					{currShedule?.map((item) => {
+					{currShedule?.map((item, index) => {
 						const start = new Date(item.start_time);
 						const end = new Date(item.end_time);
 						const formatTime = (time) => String(time).padStart(2, '0');
@@ -113,7 +113,7 @@ function TutorDateSettings({
 							<HoursInterval
 								readOnly={readOnly}
 								onClick={() => deleteShedule(item.id)}
-								key={item.id}
+								key={index}
 								start={`${formatTime(start.getHours())}:${formatTime(
 									start.getMinutes()
 								)}`}

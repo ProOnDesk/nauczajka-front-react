@@ -1,11 +1,17 @@
 import { useState } from 'react';
 import Star from './Star';
 
-function StarRating({ maxRating = 5, currRating, setCurrRating, readOnly }) {
+function StarRating({
+	maxRating = 5,
+	currRating,
+	setCurrRating,
+	readOnly,
+	size = 'md',
+}) {
 	const [tempRating, setTempRating] = useState(null);
 
 	return (
-		<div className='flex items-center gap-2 text-md'>
+		<div className={`flex items-center gap-2 `}>
 			<div className='flex'>
 				{Array.from({ length: maxRating }, (_, i) =>
 					!readOnly ? (
@@ -17,7 +23,12 @@ function StarRating({ maxRating = 5, currRating, setCurrRating, readOnly }) {
 							onClick={() => setCurrRating(i + 1)}
 						/>
 					) : (
-						<Star key={i} fill={i < Math.floor(currRating)} readOnly={true} />
+						<Star
+							key={i}
+							fill={i < Math.floor(currRating)}
+							readOnly={true}
+							size={size}
+						/>
 					)
 				)}
 			</div>

@@ -1,10 +1,12 @@
 import { CiStar } from 'react-icons/ci';
 
-function Star({ fill, onHoverIn, onHoverOut, onClick, readOnly }) {
+function Star({ fill, onHoverIn, onHoverOut, onClick, readOnly, size }) {
 	return (
 		<span
-			className={`text-xl ${fill && ' text-mainSalmon '} ${
+			className={` ${fill && ' text-mainSalmon '} ${
 				!readOnly && ' hover:cursor-pointer '
+			} ${
+				size === 'md' ? ' text-lg ' : size === 'xl' ? ' text-2xl ' : null
 			} transition-colors`}
 			onMouseEnter={onHoverIn}
 			onMouseLeave={onHoverOut}
