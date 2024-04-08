@@ -44,9 +44,13 @@ function NavMobile({ appLayoutRef }) {
 	const location = useLocation();
 
 	function openNavHandler() {
-		setNavOpened((navOpened) => !navOpened);
 		const div = appLayoutRef.current;
-		div.classList.toggle('bodyOverflowHidden');
+		setNavOpened((navOpened) => !navOpened);
+		if (navOpened) {
+			div.classList.remove('bodyOverflowHidden');
+		} else {
+			div.classList.add('bodyOverflowHidden');
+		}
 	}
 
 	useEffect(() => {
@@ -91,6 +95,10 @@ function NavMobile({ appLayoutRef }) {
 					<NavLink
 						to='settings'
 						className='mb-10 overflow-hidden flex flex-col justify-center items-center gap-2 hover:cursor-pointer group icon'
+						onClick={() => {
+							const div = appLayoutRef.current;
+							div.classList.remove('bodyOverflowHidden');
+						}}
 					>
 						<img
 							src={user?.profile_image}
@@ -103,18 +111,34 @@ function NavMobile({ appLayoutRef }) {
 					</NavLink>
 				)}
 				<div className='flex flex-col gap-10'>
-					<NavMobileElement to='/' icon={<CiHome />}>
+					<NavMobileElement
+						to='/'
+						icon={<CiHome />}
+						appLayoutRef={appLayoutRef}
+					>
 						Strona Główna
 					</NavMobileElement>
-					<NavMobileElement to='instructors' icon={<CiUser />}>
+					<NavMobileElement
+						to='instructors'
+						icon={<CiUser />}
+						appLayoutRef={appLayoutRef}
+					>
 						Korepetytorzy
 					</NavMobileElement>
 					{user === null ? (
-						<NavMobileElement to={'login'} icon={<CiLogin />}>
+						<NavMobileElement
+							to={'login'}
+							icon={<CiLogin />}
+							appLayoutRef={appLayoutRef}
+						>
 							Zaloguj się
 						</NavMobileElement>
 					) : (
-						<NavMobileElement onClick={logout} icon={<CiLogout />}>
+						<NavMobileElement
+							onClick={logout}
+							icon={<CiLogout />}
+							appLayoutRef={appLayoutRef}
+						>
 							Wyloguj się
 						</NavMobileElement>
 					)}

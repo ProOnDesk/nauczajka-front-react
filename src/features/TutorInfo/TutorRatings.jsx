@@ -5,7 +5,7 @@ function TutorRatings({ tutorInfo }) {
 		<div>
 			{tutorInfo?.tutor_ratings.map((rate, id) => {
 				const ratingDate = new Date(rate.created_at);
-				const lastName = 'pawe';
+				
 				return (
 					<div
 						className='border-whiteHover border-2 rounded-md p-2 text-sm my-5'
