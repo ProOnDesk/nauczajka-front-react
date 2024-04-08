@@ -21,6 +21,7 @@ function StarRating({
 							onHoverIn={() => setTempRating(i + 1)}
 							onHoverOut={() => setTempRating(null)}
 							onClick={() => setCurrRating(i + 1)}
+							size={size}
 						/>
 					) : (
 						<Star

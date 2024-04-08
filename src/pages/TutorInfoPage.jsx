@@ -9,6 +9,7 @@ import TutorInfoPageHeader from '../features/TutorInfo/TutorInfoPageHeader';
 import CalendarContainer from '../features/Settings/CalendarContainer';
 import StarRating from '../ui/StarRating';
 import TutorRatings from '../features/TutorInfo/TutorRatings';
+import MakeTutorOpionion from '../features/TutorInfo/MakeTutorOpionion';
 
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
@@ -49,9 +50,8 @@ function TutorInfoPage() {
 							/>
 						</div>
 					</div>
-					<div>
-						<TutorRatings tutorInfo={tutorInfo} />
-					</div>
+					<MakeTutorOpionion />
+					<TutorRatings tutorInfo={tutorInfo} />
 				</div>
 			</div>
 		</div>

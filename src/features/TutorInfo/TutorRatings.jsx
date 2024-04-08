@@ -2,15 +2,12 @@ import StarRating from '../../ui/StarRating';
 
 function TutorRatings({ tutorInfo }) {
 	return (
-		<div>
+		<div className='divide-y-[1px] divide-mainPurple'>
 			{tutorInfo?.tutor_ratings.map((rate, id) => {
 				const ratingDate = new Date(rate.created_at);
-				
+
 				return (
-					<div
-						className='border-whiteHover border-2 rounded-md p-2 text-sm my-5'
-						key={id}
-					>
+					<div className='p-2 text-sm my-5' key={id}>
 						<div className='flex sm400:flex-row flex-col gap-2 sm400:justify-between sm400:items-center mb-5'>
 							{rate.student_first_name || rate.student_last_name ? (
 								<p className='text-lg font-bold'>
