@@ -5,15 +5,18 @@ import { PiVideoCameraThin } from "react-icons/pi";
 function HeaderIcon() {
 	return (
 		<>
-			<div className="flex flex-row absolute w-full ml-60 mt-72 space-x-2 text-base text-mainPurple">
-				<div className="rounded z-10  bg-lightPurple ">
-					<PiPhoneCallThin />
-				</div>
-				<div className="rounded z-10 bg-lightPurple">
-					<PiChatsThin />
-				</div>
-				<div className="rounded z-10 bg-lightPurple">
-					<PiVideoCameraThin />
+			<div className="container absolute">
+				{" "}
+				<div className="flex justify-end flex-row w-full p-1 mt-72  space-x-2 text-base  min-[380px]:text-lg min-[430px]:text-xl text-mainPurple md:text-2xl md:justify-center md:ml-20 md:mt-64">
+					<div className="rounded z-10  bg-lightPurple flex justify-center items-center mb-2 h-6 w-6">
+						<PiPhoneCallThin />
+					</div>
+					<div className="rounded z-10 bg-lightPurple flex justify-center items-center mb-2 h-6 w-6">
+						<PiChatsThin />
+					</div>
+					<div className="rounded z-10 bg-lightPurple flex justify-center items-center mb-2 h-6 w-6">
+						<PiVideoCameraThin />
+					</div>
 				</div>
 			</div>
 		</>

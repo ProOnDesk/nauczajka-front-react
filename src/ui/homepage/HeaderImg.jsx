@@ -1,7 +1,7 @@
 function HeaderImg() {
 	return (
 		<>
-			<div className="container absolute opacity-90 mx-20 mt-72 size-3/4 ">
+			<div className="absolute md:mt-44 ml-80 w-2/4">
 				<img
 					src="./girl.png "
 					alt="dziewczyna siedzi na pufie i trzyma na kolanach laptop"
@@ -12,3 +12,5 @@ function HeaderImg() {
 }
 
 export default HeaderImg;
+
+// ml-5 p-4 md:
