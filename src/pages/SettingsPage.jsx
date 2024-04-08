@@ -1,9 +1,18 @@
 import { useUserData } from '../features/Auth/useUserData';
 import TutorInfo from '../features/Settings/TutorInfo';
 import UserInfo from '../features/Settings/UserInfo';
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router';
 
 function SettingsPage() {
 	const { data: user } = useUserData();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (user === null) {
+			navigate('/');
+		}
+	}, [navigate, user]);
 
 	return (
 		<div className='max-w-7xl mx-auto w-full'>

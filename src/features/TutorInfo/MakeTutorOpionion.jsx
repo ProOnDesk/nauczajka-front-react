@@ -2,8 +2,12 @@ import { useForm } from 'react-hook-form';
 import StarRating from '../../ui/StarRating';
 import EditFormBtn from '../Settings/EditFormBtn';
 import { useState } from 'react';
+import { useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
 
 function MakeTutorOpionion() {
+	const query = useQueryClient();
+
 	const [rating, setRating] = useState(null);
 	const [review, setReview] = useState('');
 	const {
@@ -13,7 +17,11 @@ function MakeTutorOpionion() {
 	} = useForm();
 
 	function onSubmit(data) {
-		console.log(data.review, rating);
+		if (query.getQueryData(['user']) === null)
+			toast.error('Zaloguj się, aby dodać opinię.');
+		else {
+			console.log(data);
+		}
 	}
 
 	return (
