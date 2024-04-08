@@ -9,15 +9,17 @@ function SettingsElement({
 }) {
 	return (
 		<button
-			className='relative p-4 flex flex-row flex-wrap gap-2 justify-between bg-white shadow-md shadow-shadowBlack rounded-md overflow-hidden hover:cursor-default'
+			className={`relative p-4 flex flex-row flex-wrap gap-2 justify-between bg-white shadow-md shadow-shadowBlack rounded-md overflow-hidden cursor-default `}
 			onClick={onClick}
 		>
-			<div>
-				<div className='flex items-center gap-1'>
-					<p className='text-xl'>{labelIcon}</p>
-					<p>{label}</p>
+			{(label || labelIcon) && (
+				<div>
+					<div className='flex items-center gap-1'>
+						<p className='text-xl'>{labelIcon}</p>
+						<p>{label}</p>
+					</div>
 				</div>
-			</div>
+			)}
 			<div>
 				<p className='text-left text-sm'>{children}</p>
 			</div>

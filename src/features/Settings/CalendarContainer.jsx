@@ -9,7 +9,6 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { useEffect, useState } from 'react';
 import Modal from '../../ui/Modal';
 import TutorDateSettings from './TutorDateSettings';
-import { useShowShedule } from './useShowShedule';
 import 'dayjs/locale/pl';
 import pl from 'dayjs/locale/pl';
 
@@ -20,7 +19,7 @@ const ServerDay = (props) => {
 		<p className='p-1 text-[0.9rem]'>Brak terminów w tym dniu.</p>
 	);
 	const {
-		highlightedDays = [new Date().getDate()],
+		highlightedDays = [],
 		day,
 		outsideCurrentMonth,
 		tutorShedule,
@@ -45,14 +44,13 @@ const ServerDay = (props) => {
 		if (currShedule.length > 0) {
 			setDayInfo(
 				<div className='p-1 text-[0.9rem]'>
-					{currShedule.map((el) => {
+					{currShedule.map((el, id) => {
 						const startHour = new Date(el.start_time).getHours();
 						const startMinutes = new Date(el.start_time).getMinutes();
 						const endHour = new Date(el.end_time).getHours();
 						const endMinutes = new Date(el.end_time).getMinutes();
-
 						return (
-							<p key={el.id}>
+							<p key={id}>
 								{formatTime(startHour)}:{formatTime(startMinutes)} -{' '}
 								{formatTime(endHour)}:{formatTime(endMinutes)}
 							</p>
@@ -101,8 +99,7 @@ const ServerDay = (props) => {
 	);
 };
 
-function CalendarContainer() {
-	const { tutorShedule, refetchShedule } = useShowShedule();
+function CalendarContainer({ tutorShedule, refetchShedule, readOnly }) {
 	const [highlightedDays, setHighlightedDays] = useState();
 	const [choosenDate, setChoosenDate] = useState(null);
 	const [month, setMonth] = useState(new Date().getMonth());
@@ -159,6 +156,7 @@ function CalendarContainer() {
 							choosenDate={choosenDate}
 							refetchShedule={refetchShedule}
 							tutorShedule={tutorShedule}
+							readOnly={readOnly}
 						/>
 					</Modal>
 				)}

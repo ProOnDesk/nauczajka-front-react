@@ -11,6 +11,7 @@ function TutorDateSettings({
 	choosenDate,
 	tutorShedule,
 	refetchShedule,
+	readOnly,
 }) {
 	const { addShedule, addingSheduleSuccess } = useAddShedule();
 
@@ -65,37 +66,41 @@ function TutorDateSettings({
 		>
 			<div className='flex flex-col items-center justify-around gap-8 '>
 				<DateShow date={choosenDate} />
-				<div className='flex flex-col gap-2 mb-6'>
-					<label className='flex items-center justify-between gap-2'>
-						Czas rozpoczęcia
-						<input
-							{...register('startTime')}
-							type='time'
-							value={startTime}
-							onChange={(e) => setStartTimeHandler(e.target.value)}
-						/>
-					</label>
-					<label className='flex items-center justify-between gap-2'>
-						Czas zakończenia
-						<input
-							{...register('endTime')}
-							type='time'
-							value={endTime}
-							onChange={(e) => setEndTimeHandler(e.target.value)}
-						/>
-					</label>
-				</div>
+				{!readOnly && (
+					<div className='flex flex-col gap-2 mb-6'>
+						<label className='flex items-center justify-between gap-2'>
+							Czas rozpoczęcia
+							<input
+								{...register('startTime')}
+								type='time'
+								value={startTime}
+								onChange={(e) => setStartTimeHandler(e.target.value)}
+							/>
+						</label>
+						<label className='flex items-center justify-between gap-2'>
+							Czas zakończenia
+							<input
+								{...register('endTime')}
+								type='time'
+								value={endTime}
+								onChange={(e) => setEndTimeHandler(e.target.value)}
+							/>
+						</label>
+					</div>
+				)}
 			</div>
+
 			<div className='mt-6 flex flex-row flex-wrap-reverse gap-5 justify-center w-full'>
 				<EditFormBtn onClick={() => setChoosenDate(null)} type={'button'}>
 					Anuluj
 				</EditFormBtn>
-				<EditFormBtn type={'submit'}>Zatwierdź</EditFormBtn>
+				{!readOnly && <EditFormBtn type={'submit'}>Zatwierdź</EditFormBtn>}
 			</div>
+
 			<div className='mt-8'>
 				<p className='text-center'>
 					{currShedule?.length > 0
-						? 'Ustalone terminy.'
+						? 'Ustalone terminy'
 						: 'Brak ustalonych terminów.'}
 				</p>
 				<div className='flex flex-wrap justify-center gap-2 mx-auto mt-2'>
@@ -106,6 +111,7 @@ function TutorDateSettings({
 
 						return (
 							<HoursInterval
+								readOnly={readOnly}
 								onClick={() => deleteShedule(item.id)}
 								key={item.id}
 								start={`${formatTime(start.getHours())}:${formatTime(

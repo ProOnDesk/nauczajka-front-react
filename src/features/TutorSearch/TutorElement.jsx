@@ -1,5 +1,4 @@
 import { FaStar } from 'react-icons/fa6';
-import { API_KEY } from '../../services/apiAuth';
 import { NavLink } from 'react-router-dom';
 import TutorHeader from '../../ui/TutorHeader';
 
