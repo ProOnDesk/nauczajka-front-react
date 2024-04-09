@@ -4,7 +4,7 @@ import EditFormBtn from './EditFormBtn';
 import { useEffect } from 'react';
 import { useUpdateDescription } from './useUpdateDescription';
 
-function EditFormTutor({ setShowModal, showModal }) {
+function EditFormTutor({ setShowModal, showModal, description }) {
 	const {
 		register,
 		handleSubmit,
@@ -40,8 +40,10 @@ function EditFormTutor({ setShowModal, showModal }) {
 									{...register('description', {
 										required: 'Wprowadź Opis',
 									})}
-									className='w-full p-2 border-2 border-gray/20 rounded-md min-h-32 focus:border-mainPurple active::border-mainPurple ring-0 outline-none'
-								/>
+									className='w-full p-2 border-2 border-gray/20 rounded-md min-h-48 focus:border-mainPurple active::border-mainPurple ring-0 outline-none'
+								>
+									{description}
+								</textarea>
 								<p className='text-red-400'>{errors?.description?.message}</p>
 							</>
 						)}

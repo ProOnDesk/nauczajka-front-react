@@ -7,9 +7,11 @@ import SkillsContainer from './SkillsContainer';
 import { CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
 import TutorInfoHeader from './TutorInfoHeader';
 import CalendarContainer from './CalendarContainer';
+import { useShowShedule } from './useShowShedule';
 
 function TutorInfo() {
 	const { data } = useGetDescription();
+	const { tutorShedule, refetchShedule } = useShowShedule();
 	const [showModal, setShowModal] = useState(null);
 	function handleModal(type) {
 		setShowModal(type);
@@ -28,12 +30,19 @@ function TutorInfo() {
 			</div>
 			<div>
 				<TutorInfoHeader icon={<CiCalendar />} label={'Wolne terminy'} />
-				<CalendarContainer />
+				<CalendarContainer
+					refetchShedule={refetchShedule}
+					tutorShedule={tutorShedule}
+				/>
 			</div>
 
 			{showModal && (
 				<Modal>
-					<EditFormTutor showModal={showModal} setShowModal={setShowModal} />
+					<EditFormTutor
+						showModal={showModal}
+						setShowModal={setShowModal}
+						description={data?.description}
+					/>
 				</Modal>
 			)}
 		</div>
