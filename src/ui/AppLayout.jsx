@@ -9,7 +9,7 @@ function AppLayout() {
 		<div
 			ref={appLayoutRef}
 			id="appLayout"
-			className="grid grid-rows-[auto_1fr_auto] h-full overflow-x-hidden font-roboto-mono">
+			className="grid grid-rows-[auto_1fr_auto] h-screen overflow-x-hidden font-roboto-mono">
 			<Nav appLayoutRef={appLayoutRef} />
 			<Outlet />
 			<Footer />

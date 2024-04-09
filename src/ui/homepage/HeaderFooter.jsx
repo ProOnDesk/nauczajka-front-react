@@ -3,8 +3,8 @@ import HeaderButtonIcon from "./HeaderButtonIcon";
 function HeaderFooter() {
 	return (
 		<>
-			<div className="flex justify-center items-center flex-col h-full w-full mt-20  bg-mainPurple min-[375px]:mt-36 min-[535px]:mt-52 sm:mt-36 md:mt-24 md:rounded-tl-lg min-[910px]:mt-36 ">
-				<div className="flex flex-col md:flex-row justify-center items-center">
+			<div className="flex justify-center items-center flex-col h-full w-full mt-20   min-[375px]:mt-36 min-[535px]:mt-52 sm:mt-36 md:mt-24 md:rounded-tl-lg min-[910px]:mt-36 min-[1070px]:mt-56 bg-mainPurple ">
+				<div className="flex flex-col md:flex-row justify-center items-center max-w-7xl mx-auto">
 					<div className="md:w-8/12	">
 						<h2 className="font-bold text-center leading-relaxed mt-12 text-2xl opacity-95 text-white min-[375px]:text-3xl min-[510px]:text-4xl min-[535px]:py-2 min-[610px]:text-5xl sm:text-5xl sm:p-10 md:text-3xl md:text-left md:p-5 lg:text-4xl ">
 							Prosty sposób na rozpoczęcie nauki

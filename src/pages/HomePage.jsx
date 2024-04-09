@@ -6,11 +6,13 @@ import HeaderFooter from "../ui/homepage/HeaderFooter";
 
 function HomePage() {
 	return (
-		<div className="flex flex-col relative ">
-			<HeaderText />
-			<HeaderButtonJoinNow />
-			<HeaderIcon />
-			<HeaderImg />
+		<div className="flex flex-col ">
+			<div className="max-w-7xl mx-auto relative">
+				<HeaderText />
+				<HeaderButtonJoinNow />
+				<HeaderIcon />
+				<HeaderImg />
+			</div>
 			<HeaderFooter />
 		</div>
 	);
