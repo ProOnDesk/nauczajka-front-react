@@ -4,10 +4,10 @@ import EditFormBtn from '../Settings/EditFormBtn';
 import { useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { useRateTutor } from './useRateTutor';
 
-function MakeTutorOpionion() {
+function MakeTutorOpionion({ tutorId, rateTutor, isTutorRating }) {
 	const query = useQueryClient();
-
 	const [rating, setRating] = useState(null);
 	const [review, setReview] = useState('');
 	const {
@@ -20,8 +20,10 @@ function MakeTutorOpionion() {
 		if (query.getQueryData(['user']) === null)
 			toast.error('Zaloguj się, aby dodać opinię.');
 		else {
-			console.log(data);
+			rateTutor({ id: tutorId, rating: rating, review: data.review });
 		}
+		setRating(null);
+		setReview('');
 	}
 
 	return (
@@ -47,7 +49,12 @@ function MakeTutorOpionion() {
 				{Object.values(errors)[0]?.message}
 			</p>
 			<div className='flex justify-end'>
-				<EditFormBtn disabled={!rating || review == ''}>Opublikuj</EditFormBtn>
+				<EditFormBtn
+					type={'submit'}
+					disabled={!rating || review == '' || isTutorRating}
+				>
+					Opublikuj
+				</EditFormBtn>
 			</div>
 		</form>
 	);

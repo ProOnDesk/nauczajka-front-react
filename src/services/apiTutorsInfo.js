@@ -53,3 +53,24 @@ export async function getTutorInfo({ tutorId }) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function rateTutor({ rating, review, id }) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + `/api/user/rate_tutor/${id}/`, {
+		method: 'POST',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({ rating: rating, review: review }),
+	});
+
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
