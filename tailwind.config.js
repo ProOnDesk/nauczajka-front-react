@@ -8,6 +8,7 @@ export default {
 				mainPurple: "#7c67ff",
 				mainPurpleHover: "#6b56ee",
 				lightPurple: "#e5e1ff",
+
 				mainSalmon: "#fe7474",
 				mainSalmonHover: "#ed6363",
 				mainBlue: "#1b356b",
