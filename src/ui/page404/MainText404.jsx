@@ -1,6 +1,6 @@
 function MainText404() {
 	return (
-		<div className="flex flex-col items-center w-full ">
+		<div className="flex flex-col items-center w-full px-4">
 			<h1 className="text-7xl tracking-widest text-mainBlue pt-8 font-semibold  ">
 				404
 			</h1>
