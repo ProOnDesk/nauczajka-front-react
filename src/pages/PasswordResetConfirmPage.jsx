@@ -11,11 +11,18 @@ import Loader from '../ui/Loader';
 
 import { useLocation } from 'react-router';
 import { useResetPasswordConfirm } from '../features/Auth/useResetPasswordConfirm';
+import { FooterContext } from '../context/FooterContext';
+import { useContext, useEffect } from 'react';
 
 function PasswordResetConfrimPage() {
 	const width = useUserWidth();
 	const queryParams = new URLSearchParams(useLocation().search);
 	const resetToken = queryParams.get('reset_token');
+	const { changeColor } = useContext(FooterContext);
+
+	useEffect(() => {
+		changeColor('text-gray');
+	}, [changeColor]);
 
 	const { resetPasswordConfirm, isResetPasswordConfirmPending } =
 		useResetPasswordConfirm();

@@ -7,6 +7,8 @@ import Button from '../ui/Inputs/Button';
 import { useResetPassword } from '../features/Auth/useResetPasword';
 import Loader from '../ui/Loader';
 import { GiConfirmed } from 'react-icons/gi';
+import { useContext, useEffect } from 'react';
+import { FooterContext } from '../context/FooterContext';
 
 function PasswordReset() {
 	const width = useUserWidth();
@@ -24,6 +26,12 @@ function PasswordReset() {
 		resetPassword(data.email);
 		resetField('email');
 	};
+	const { changeColor } = useContext(FooterContext);
+
+	useEffect(() => {
+		changeColor('text-gray');
+	}, [changeColor]);
+
 	return (
 		<>
 			{width >= 640 && <BackgroundContainer />}
