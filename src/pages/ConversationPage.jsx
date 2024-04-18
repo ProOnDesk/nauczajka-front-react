@@ -34,7 +34,7 @@ function ConversationPage() {
 
   const token = sessionStorage.getItem("auth_token");
   const [myUser, setMyUser] = useState(null);
-  const conversation_id = "c79a60e1-7da4-4933-9ae9-c03f8a061e47"; // MATI musisz tu ogarnac dynamicznie pobierac konwersacje z ENDPOINTA /api/chat/conversations/
+  const conversation_id = "64ab3b03-cee5-4aed-bbf0-7766f3dc2832"; // MATI musisz tu ogarnac dynamicznie pobierac konwersacje z ENDPOINTA /api/chat/conversations/
 
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
@@ -85,10 +85,10 @@ function ConversationPage() {
       typeof lastJsonMessage === "object" &&
       "username" in lastJsonMessage &&
       "body" in lastJsonMessage &&
-      "created_by" in lastJsonMessage
+      "created_by" in lastJsonMessage 
     ) {
       const message = {
-        id: "",
+        id: lastJsonMessage.message_id,
         body: lastJsonMessage.body,
         conversation_id: conversation_id,
         username: lastJsonMessage.username,
@@ -97,6 +97,7 @@ function ConversationPage() {
       console.log("Received message", message);
 
       setRealtimeMessages((realtimeMessages) => [...realtimeMessages, message]);
+      console.log("BYDGOSZCZ: " + lastJsonMessage.message_id)
     }
   }, [lastJsonMessage]);
 
@@ -140,7 +141,7 @@ function ConversationPage() {
 
         {realtimeMessages.map((message, index) => (
           <div
-            key={index}
+            key={message?.id}
             className={`w-[80%]py-4 px-6 rounded-xl ${
               message.created_by == myUser.id
                 ? "ml-[20%] bg-blue-200"
@@ -160,10 +161,12 @@ function ConversationPage() {
           className="w-full p-2 bg-gray-200 rounded-xl"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              sendMessage();
+            }
+          }}
         />
-        {
-          // co tu sie odpierdala nie wiem ale nie dziala mi to enterem
-        }
         <CustomButton onClick={sendMessage} className="w-[100px]">
           <p>Send</p>
         </CustomButton>
