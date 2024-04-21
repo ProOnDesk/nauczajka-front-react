@@ -8,6 +8,8 @@ import { FooterContext } from "../context/FooterContext";
 import AboutUsText from "../ui/homepage/AboutUsText";
 import AboutUsImg from "../ui/homepage/AboutUsImg";
 import AboutUsButton from "../ui/homepage/AboutUsButton";
+import OfferImg from "../ui/homepage/OfferImg";
+import OfferText from "../ui/homepage/OfferText";
 
 function HomePage() {
 	const { changeColor } = useContext(FooterContext);
@@ -27,6 +29,8 @@ function HomePage() {
 				<AboutUsImg />
 				<AboutUsText />
 				<AboutUsButton />
+				<OfferImg />
+				<OfferText />
 			</div>
 		</div>
 	);
