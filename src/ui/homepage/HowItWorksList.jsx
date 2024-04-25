@@ -68,7 +68,7 @@ function HowItWorksList() {
 				</div>
 			</div>
 			<div className="p-6  text-sm text-center leading-relaxed text-mainBlue md960:p-10 ">
-				<p className="w-full text-center min-[440px]:text-base min-[535px]:text-lg  min-[600px]:leading-loose sm:px-8 min-[600px]:px-8  min-[680px]:px-11  min-[840px]:px-20 md:px-20 md:text-xl md:leading-loose md:mt-10 md960:text-lg md960:leading-relaxed md960:px-40">
+				<p className="w-full text-center min-[440px]:text-base min-[535px]:text-lg  min-[600px]:leading-loose sm:px-8 min-[600px]:px-8  min-[680px]:px-11  min-[840px]:px-20 md:px-20 md:text-xl md:leading-loose md:mt-10 md960:text-lg md960:leading-relaxed md960:px-40 lg1150:px-36">
 					Dążymy do tego, aby{" "}
 					<span className="text-mainSalmon font-semibold">każdy uczeń</span>{" "}
 					miał możliwość osiągnięcia swoich celów edukacyjnych.
@@ -80,7 +80,7 @@ function HowItWorksList() {
 					<PiSmileyWinkThin />
 				</div>
 
-				<p className=" mt-8  w-full text-center min-[440px]:text-base min-[535px]:text-lg min-[600px]:leading-loose min-[600px]:px-8  sm:px-8  min-[680px]:px-11  min-[840px]:px-20 md:px-20 md:text-xl md:leading-loose md960:text-lg md960:leading-relaxed md960:px-40 ">
+				<p className=" mt-8  w-full text-center min-[440px]:text-base min-[535px]:text-lg min-[600px]:leading-loose min-[600px]:px-8  sm:px-8  min-[680px]:px-11  min-[840px]:px-20 md:px-20 md:text-xl md:leading-loose md960:text-lg md960:leading-relaxed md960:px-40 lg1150:px-36">
 					Poprzez indywidualne podejście, wysokiej jakości nauczanie i wygodne
 					narzędzia komunikacyjne{" "}
 					<span className="text-mainSalmon font-semibold">
