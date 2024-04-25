@@ -24,9 +24,11 @@ export default {
 			},
 			screens: {
 				sm400: "400px",
+				md960: "960px",
 			},
 			boxShadow: {
 				myShadow: "0 6px 12px 0px rgba(0,0,0,0.3)",
+				headerButtonFooter: "3px 7px 13px 1px rgba(0, 0, 0, .3)",
 			},
 		},
 	},

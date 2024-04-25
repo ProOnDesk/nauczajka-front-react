@@ -1,9 +1,9 @@
 function OfferImg() {
 	return (
 		<>
-			<div className="flex flex-col justify-center items-center m-10  ">
+			<div className="flex flex-col justify-center items-center my-10  md960:flex-row md960:justify-end  md960:pl-36 ">
 				<img
-					className="w-[250px] h-[300px] rounded-md bg-center	bg-cover shadow-xl min-[600px]:w-[280px] min-[600px]:h-[350px]  
+					className="w-[250px] h-[300px] rounded-md bg-center	bg-cover shadow-xl min-[600px]:w-[280px] min-[600px]:h-[350px]  md960:shadow-headerButtonFooter md960:h-[300px] md960:w-[240px]
 
 					"
 					src="./oferta.png"

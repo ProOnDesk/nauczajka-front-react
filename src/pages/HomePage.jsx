@@ -10,6 +10,7 @@ import AboutUsImg from "../ui/homepage/AboutUsImg";
 import AboutUsButton from "../ui/homepage/AboutUsButton";
 import OfferImg from "../ui/homepage/OfferImg";
 import OfferText from "../ui/homepage/OfferText";
+import HowItWorksList from "../ui/homepage/HowItWorksList";
 
 function HomePage() {
 	const { changeColor } = useContext(FooterContext);
@@ -26,11 +27,16 @@ function HomePage() {
 				<HeaderIcon />
 				<HeaderImg />
 				<HeaderFooter />
-				<AboutUsImg />
-				<AboutUsText />
+				<div className="md960:flex md960:flex-row gap-10">
+					<AboutUsImg />
+					<AboutUsText />
+				</div>
+				<HowItWorksList />
 				<AboutUsButton />
-				<OfferImg />
-				<OfferText />
+				<div className="md960:flex md960:flex-row gap-10 ">
+					<OfferImg />
+					<OfferText />
+				</div>
 			</div>
 		</div>
 	);
