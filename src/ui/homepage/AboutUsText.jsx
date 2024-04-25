@@ -9,7 +9,7 @@ function AboutUsText() {
 				<h2 className="flex flex-col justify-center items-center uppercase md960:flex md960:justify-center md960:items-center   text-mainBlue font-semibold mt-4 text-2xl min-[535px]:text-3xl  min-[600px]:mt-8  md960:text-lg ">
 					O nas
 				</h2>
-				<hr className=" h-[2px] w-2/3 m-12  bg-mainPurple border-0 rounded min-[600px]:mb-16 md960:w-[330px]	md960:m-4 md960:mx-auto md960:h-[1px]" />
+				<hr className=" h-[2px] mx-auto w-4/5 m-6  bg-mainPurple border-0 rounded min-[600px]:mb-16 md960:w-[330px]	md960:m-4 md960:mx-auto md960:h-[1px]" />
 				<div className="px-6 mt-4 text-sm text-center leading-relaxed text-mainBlue min-[440px]:text-base min-[535px]:text-lg  min-[600px]:leading-loose min-[600px]:px-8 ">
 					<p className="w-full min-[535px]:px-5 min-[680px]:px-12 md:px-20 md:text-xl md:leading-loose md960:text-xs md960:leading-relaxed">
 						Jesteśmy zespołem doświadczonych korepetytorów, {""}
@@ -25,7 +25,7 @@ function AboutUsText() {
 						<WiStars />
 					</div>
 
-					<p className=" mt-10 w-full text-center min-[535px]:px-5 min-[600px]:px-8  sm:px-8  min-[680px]:px-11 min-[840px]:px-20 md:px-20 md:text-xl md:leading-loose md960:text-xs md960:leading-relaxed md960:mt-4 md960:mb-20">
+					<p className=" mt-10 mb-16 w-full text-center min-[535px]:px-5 min-[600px]:px-8  sm:px-8  min-[680px]:px-11 min-[840px]:px-20 md:px-20 md:text-xl md:leading-loose md960:text-xs md960:leading-relaxed md960:mt-4 md960:mb-20">
 						Nasi korepetytorzy posiadają{" "}
 						<span className="text-mainSalmon font-semibold">
 							bogate doświadczenie w nauczaniu

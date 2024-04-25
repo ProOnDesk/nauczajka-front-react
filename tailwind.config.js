@@ -24,6 +24,9 @@ export default {
 			},
 			screens: {
 				sm400: "400px",
+				sm500: "500px",
+				sm700: "700px",
+				sm840: "840px",
 				md960: "960px",
 			},
 			boxShadow: {
