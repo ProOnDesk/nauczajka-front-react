@@ -44,8 +44,8 @@ function NavMobile({ appLayoutRef }) {
 	const location = useLocation();
 
 	function openNavHandler() {
-		const div = appLayoutRef.current;
 		setNavOpened((navOpened) => !navOpened);
+		const div = appLayoutRef.current;
 		if (navOpened) {
 			div.classList.remove('bodyOverflowHidden');
 		} else {

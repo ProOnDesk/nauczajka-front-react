@@ -4,10 +4,12 @@ import Cookies from 'universal-cookie';
 import toast from 'react-hot-toast';
 import { useUserData } from './useUserData';
 
+
 export function useRefreshToken() {
 	const cookies = new Cookies();
 	const jwt_refresh = cookies.get('jwt_refresh');
 	const { refetch } = useUserData();
+
 
 	const { mutate: refreshToken, isPending: isRefreshPending } = useMutation({
 		mutationFn: () => {
@@ -18,6 +20,7 @@ export function useRefreshToken() {
 			refetch();
 		},
 		onError: (err) => {
+		
 			const error = JSON.parse(err.message);
 			toast.error(error.email[0]);
 		},
