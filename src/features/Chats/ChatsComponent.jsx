@@ -27,9 +27,9 @@ function ChatsComponent() {
 			animate={isChatOpen ? 'open' : 'closed'}
 			variants={variants}
 			transition={{ ease: 'easeIn' }}
-			className='absolute w-full h-screen md:w-3/5 xl:w-2/5 md:max-w-[500px] right-0 top-0 bottom-0 bg-white shadow-myShadow border-l-2 border-mainPurple z-50 '
+			className='absolute w-full h-screen md:w-3/5 xl:w-2/5 md:max-w-[500px] right-0 top-0 bg-white shadow-myShadow border-l-2 border-mainPurple z-50 '
 		>
-			<div className='relative h-full flex flex-col'>
+			<div className='h-full'>
 				{choosenUser ? (
 					<ChatsContent
 						header={
@@ -41,8 +41,8 @@ function ChatsComponent() {
 										</span>
 									</button>
 									<p className='text-xl sm400:text-2xl'>
-										{choosenUser?.users[1].first_name}{' '}
-										{choosenUser?.users[1].last_name}
+										{choosenUser?.users[1]?.first_name}{' '}
+										{choosenUser?.users[1]?.last_name}
 									</p>
 								</div>
 							</ConversationsListHeader>

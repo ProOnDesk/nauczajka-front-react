@@ -9,9 +9,6 @@ export function useGetMessagesHistory() {
 		isPending: isMessagesHistoryPending,
 	} = useMutation({
 		mutationFn: getMessagesHistoryApi,
-		onSuccess: (data) => {
-			
-		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
 			toast.error(error);

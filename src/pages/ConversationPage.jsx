@@ -1,15 +1,12 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import CustomButton from '../ui/Inputs/Button';
 import useWebSocket from 'react-use-websocket';
-import { API_KEY, getUserData } from '../services/apiAuth';
+
 // powodzonka w rozszyfrowywaniu tego kodu,  niezly rozpierdol tu zrobilem ale dziala
 
 // nie bij ze wsadzilem tu wszystko do jednego, chcialem zebys nie mial rozwalonego mojego kodu w innych plikach
 
-
 function ConversationPage() {
-	const messagesDiv = useRef(null);
-
 	const token = sessionStorage.getItem('auth_token');
 	const [myUser, setMyUser] = useState(null);
 	const conversation_id = '365b863a-9752-4c0d-a357-675d467044eb'; // MATI musisz tu ogarnac dynamicznie pobierac konwersacje z ENDPOINTA /api/chat/conversations/
@@ -17,31 +14,6 @@ function ConversationPage() {
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState('');
 	const [realtimeMessages, setRealtimeMessages] = useState([]);
-
-	// to scrolluje na dol jak sie dodaje nowa wiadomosc wkurwialo mnie jak tak sie nie robilo to tak zrobilem rob co chcesz
-	const scrollToBottom = () => {
-		if (messagesDiv.current) {
-			messagesDiv.current.scrollTop = messagesDiv.current.scrollHeight;
-		}
-	};
-
-	useEffect(() => {
-		getUserData().then((userData) => {
-			setMyUser(userData);
-		});
-	}, []);
-	// this is downloading messages from the server
-	useEffect(() => {
-		async function fetchMessages() {
-			try {
-				const fetchedMessages = await getMessages(token, conversation_id);
-				setMessages(fetchedMessages);
-			} catch (error) {
-				console.error('Error fetching messages:', error);
-			}
-		}
-		fetchMessages();
-	}, [token, conversation_id]);
 
 	const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
 		`ws://localhost:8000/ws/chat/${conversation_id}/?token=${token}`,
@@ -52,10 +24,12 @@ function ConversationPage() {
 			},
 		}
 	);
+	console.log(messages);
 
 	useEffect(() => {
-		console.log('Connection state changed', readyState);
-	}, [readyState]);
+		console.log('Connection state changed', lastJsonMessage);
+	}, [lastJsonMessage]);
+
 	// this is handling messages from the websocket
 	useEffect(() => {
 		if (
@@ -79,11 +53,6 @@ function ConversationPage() {
 		}
 	}, [lastJsonMessage]);
 
-	// this is scrolling to the bottom of the messages
-	useEffect(() => {
-		scrollToBottom();
-	}, [realtimeMessages]);
-
 	// this is sending a message
 	const sendMessage = () => {
 		sendJsonMessage({
@@ -97,12 +66,10 @@ function ConversationPage() {
 		});
 		setNewMessage('');
 	};
+
 	return (
 		<>
-			<div
-				ref={messagesDiv}
-				className='max-h-[400px] overflow-auto flex flex-col space-y-4'
-			>
+			<div className='max-h-[400px] overflow-auto flex flex-col space-y-4'>
 				{messages.map((message, index) => (
 					<div
 						key={index}
@@ -145,7 +112,7 @@ function ConversationPage() {
 						}
 					}}
 				/>
-				<CustomButton	tton onClick={sendMessage} className='w-[100px]'>
+				<CustomButton tton onClick={sendMessage} className='w-[100px]'>
 					<p>Send</p>
 				</CustomButton>
 			</div>

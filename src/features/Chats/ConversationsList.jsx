@@ -17,7 +17,7 @@ function ConversationsList() {
 		</div>
 	) : (
 		<>
-			<div className='px-2 md:px-10 w-full overflow-y-scroll py-10'>
+			<div className='px-2 md:px-10 w-full h-full overflow-y-scroll py-10'>
 				{conversationsList?.length === 0 ? (
 					<div className='flex flex-col gap-2 justify-center text-xl mx-auto text-center '>
 						<span className='mx-auto text-3xl'>
