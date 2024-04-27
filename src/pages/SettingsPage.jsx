@@ -26,7 +26,7 @@ function SettingsPage() {
 					</div>
 				</div>
 			) : (
-				<div className='w-full sm400:w-2/3 md:w-96'>
+				<div className='w-full mx-auto pt-20 sm400:w-2/3 md:w-96'>
 					<UserInfo user={user} />
 				</div>
 			)}
