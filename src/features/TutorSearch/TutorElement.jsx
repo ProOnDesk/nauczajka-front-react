@@ -19,8 +19,12 @@ function TutorElement({ tutorInfo }) {
 					</span>
 				</p>
 				<div className='text-center'>
-					<p className='text-2xl'>{pricePerHour}</p>
-					<p className='text-sm text-gray'>zł/godz</p>
+					<p className='text-2xl'>
+						{tutorInfo?.price === 0 ? 'brak' : tutorInfo?.price}
+					</p>
+					<p className='text-sm text-gray'>
+						{tutorInfo?.price === 0 ? '' : 'zł/godz'}
+					</p>
 				</div>
 			</div>
 		</NavLink>
