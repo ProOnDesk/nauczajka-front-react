@@ -145,7 +145,7 @@ function ConversationPage() {
 						}
 					}}
 				/>
-				<CustomButton onClick={sendMessage} className='w-[100px]'>
+				<CustomButton	tton onClick={sendMessage} className='w-[100px]'>
 					<p>Send</p>
 				</CustomButton>
 			</div>

@@ -1,6 +1,6 @@
 import { API_KEY } from './apiAuth';
 
-export async function getCurrentMessages(id) {
+export async function getMessagesHistory(id) {
 	const token = sessionStorage.getItem('auth_token');
 	if (!token) return null;
 

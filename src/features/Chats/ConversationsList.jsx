@@ -1,13 +1,18 @@
 import { CiFileOff } from 'react-icons/ci';
 import Loader from '../../ui/Loader';
+import { useContext } from 'react';
+import { ChatsContext } from '../../context/ChatsContext';
+import { useAllConversations } from './useAllConversations';
 
-function ConversationsList({
-	conversationsList,
-	isConversationsLoading,
-	setChoosenUser,
-}) {
+function ConversationsList() {
+	const { setChoosenUser } = useContext(ChatsContext);
+	const { conversationsList, isConversationsLoading, refetchAllConversations } =
+		useAllConversations();
+
+	refetchAllConversations();
+
 	return isConversationsLoading ? (
-		<div className='absolute top-0  w-full flex justify-center items-center -z-10'>
+		<div className='absolute top-0 h-screen w-full flex justify-center items-center -z-10'>
 			<Loader />
 		</div>
 	) : (
@@ -23,11 +28,11 @@ function ConversationsList({
 				) : (
 					conversationsList?.map((conversation) => {
 						const user = conversation?.users[1];
-						console.log(conversation);
+
 						return (
 							<button
 								onClick={() => {
-									setChoosenUser(user);
+									setChoosenUser(conversation);
 								}}
 								className='flex flex-col md:flex-row mb-2 justify-center md:justify-between border-whiteHover border-2 rounded-md p-2 gap-3 px-4 w-full mx-auto hover:bg-whiteHover group/tutorEl hover:cursor-pointer transition-colors'
 								key={conversation.id}

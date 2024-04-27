@@ -1,14 +1,14 @@
 import { createPortal } from 'react-dom';
 import { CiChat1 } from 'react-icons/ci';
 import { useUserData } from '../Auth/useUserData';
-import { useAllConversations } from './useAllConversations';
 import ConversationsList from './ConversationsList';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import ChatsContent from './ChatsContent';
 import ConversationsListHeader from './ConversationsListHeader';
 import { IoArrowBack } from 'react-icons/io5';
 import { ChatsContext } from '../../context/ChatsContext';
+import ChatComponent from './ChatComponent';
 
 const variants = {
 	open: { x: 0 },
@@ -19,7 +19,6 @@ function ChatsComponent() {
 	const { choosenUser, isChatOpen, setChoosenUser, setIsChatOpen } =
 		useContext(ChatsContext);
 	const { data: userData } = useUserData();
-	const { conversationsList, isConversationsLoading } = useAllConversations();
 	if (userData === null) return null;
 
 	return createPortal(
@@ -28,7 +27,7 @@ function ChatsComponent() {
 			animate={isChatOpen ? 'open' : 'closed'}
 			variants={variants}
 			transition={{ ease: 'easeIn' }}
-			className='absolute w-full h-screen md:w-3/5 xl:w-2/5 md:max-w-[500px] right-0 top-0 bg-white shadow-myShadow border-l-2 border-mainPurple z-50 '
+			className='absolute w-full h-screen md:w-3/5 xl:w-2/5 md:max-w-[500px] right-0 top-0 bottom-0 bg-white shadow-myShadow border-l-2 border-mainPurple z-50 '
 		>
 			<div className='relative h-full flex flex-col'>
 				{choosenUser ? (
@@ -37,16 +36,19 @@ function ChatsComponent() {
 							<ConversationsListHeader setIsChatOpen={setIsChatOpen}>
 								<div className='flex flex-row items-center gap-2'>
 									<button onClick={() => setChoosenUser(null)}>
-										<span className='text-2xl'>
+										<span className='text-xl sm400:text-2xl'>
 											<IoArrowBack />
 										</span>
 									</button>
-									<p>Użytkownik</p>
+									<p className='text-xl sm400:text-2xl'>
+										{choosenUser?.users[1].first_name}{' '}
+										{choosenUser?.users[1].last_name}
+									</p>
 								</div>
 							</ConversationsListHeader>
 						}
 					>
-						<p>lista</p>
+						<ChatComponent conversationId={choosenUser?.id} />
 					</ChatsContent>
 				) : (
 					<ChatsContent
@@ -56,11 +58,7 @@ function ChatsComponent() {
 							</ConversationsListHeader>
 						}
 					>
-						<ConversationsList
-							conversationsList={conversationsList}
-							isConversationsLoading={isConversationsLoading}
-							setChoosenUser={setChoosenUser}
-						/>
+						<ConversationsList />
 					</ChatsContent>
 				)}
 				<button
