@@ -3,11 +3,12 @@ import { CiChat1 } from 'react-icons/ci';
 import { useUserData } from '../Auth/useUserData';
 import { useAllConversations } from './useAllConversations';
 import ConversationsList from './ConversationsList';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { motion } from 'framer-motion';
 import ChatsContent from './ChatsContent';
 import ConversationsListHeader from './ConversationsListHeader';
 import { IoArrowBack } from 'react-icons/io5';
+import { ChatsContext } from '../../context/ChatsContext';
 
 const variants = {
 	open: { x: 0 },
@@ -15,8 +16,8 @@ const variants = {
 };
 
 function ChatsComponent() {
-	const [isChatOpen, setIsChatOpen] = useState(false);
-	const [choosenUser, setChoosenUser] = useState(null);
+	const { choosenUser, isChatOpen, setChoosenUser, setIsChatOpen } =
+		useContext(ChatsContext);
 	const { data: userData } = useUserData();
 	const { conversationsList, isConversationsLoading } = useAllConversations();
 	if (userData === null) return null;
