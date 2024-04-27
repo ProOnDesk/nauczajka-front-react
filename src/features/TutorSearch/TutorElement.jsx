@@ -1,10 +1,9 @@
 import { FaStar } from 'react-icons/fa6';
 import { NavLink } from 'react-router-dom';
 import TutorHeader from '../../ui/TutorHeader';
+import { CiBag1 } from 'react-icons/ci';
 
 function TutorElement({ tutorInfo }) {
-	const pricePerHour = 215;
-
 	return (
 		<NavLink
 			to={`${tutorInfo.id}`}
@@ -19,12 +18,16 @@ function TutorElement({ tutorInfo }) {
 					</span>
 				</p>
 				<div className='text-center'>
-					<p className='text-2xl'>
-						{tutorInfo?.price === 0 ? 'brak' : tutorInfo?.price}
+					<p className='text-2xl '>
+						{tutorInfo?.price === 0 ? (
+							<span className='flex justify-center'>
+								<CiBag1 />
+							</span>
+						) : (
+							tutorInfo?.price
+						)}
 					</p>
-					<p className='text-sm text-gray'>
-						{tutorInfo?.price === 0 ? '' : 'zł/godz'}
-					</p>
+					<p className='text-sm text-gray'>zł/godz</p>
 				</div>
 			</div>
 		</NavLink>
