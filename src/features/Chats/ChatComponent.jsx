@@ -28,7 +28,7 @@ function ChatComponent({ conversationId }) {
 	}, [getMessagesHistory, conversationId]);
 
 	useEffect(() => {
-		setMessages(messagesHistory);
+		setMessages(messages=>[...messages,messagesHistory]);
 	}, [messagesHistory]);
 
     console.log(messages);

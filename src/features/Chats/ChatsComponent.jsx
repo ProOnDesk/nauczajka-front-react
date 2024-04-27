@@ -63,7 +63,7 @@ function ChatsComponent() {
 				)}
 				<button
 					onClick={() => setIsChatOpen((isOpen) => !isOpen)}
-					className='absolute bottom-10 shadow-myShadow rounded-l-full -left-14 bg-mainPurple p-4 hover:bg-mainPurpleHover hover:cursor-pointer duration-300 '
+					className='absolute bottom-10 shadow-myShadow rounded-l-md -left-14 bg-mainPurple p-4 hover:bg-mainPurpleHover hover:cursor-pointer duration-300 '
 				>
 					<span className='text-2xl text-white'>
 						<CiChat1 />
