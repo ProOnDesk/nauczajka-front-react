@@ -156,3 +156,25 @@ export async function setTutorLocation({ tutorLocation }) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function getTutorIndividualGroup() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/individual_group/me/`,
+		{
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}

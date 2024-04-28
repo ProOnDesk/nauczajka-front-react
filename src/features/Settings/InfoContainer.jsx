@@ -16,15 +16,20 @@ import { useState } from 'react';
 import Modal from '../../ui/Modal';
 import InfoModalContainer from './InfoModalContainer';
 import { useGetTutorLocation } from './useGetTutorLocation';
+import { useGetTutorIndividualGroup } from './useGetTutorIndividualGroup';
 
 function InfoContainer() {
 	const { tutorPrice, isTutorPricePending } = useGetTutorPrice();
 	const { tutorLocation, isTutorLocationPending } = useGetTutorLocation();
+	const { tutorIndividualGroup, isTutorIndividualGroupPending } =
+		useGetTutorIndividualGroup();
 	const [modal, setModal] = useState(null);
 
 	return (
 		<>
-			{!isTutorPricePending && !isTutorLocationPending ? (
+			{!isTutorPricePending &&
+			!isTutorLocationPending &&
+			!isTutorIndividualGroupPending ? (
 				<div className='flex flex-row flex-wrap gap-4 mt-6'>
 					<InfoElement
 						onClick={() => setModal('price')}
@@ -43,12 +48,14 @@ function InfoContainer() {
 					<InfoElement
 						title={<TitleElement title={'Indywidualne'} logo={<CiUser />} />}
 					>
-						{falseElement}
+						{tutorIndividualGroup?.individual_sessions
+							? trueElement
+							: falseElement}
 					</InfoElement>
 					<InfoElement
 						title={<TitleElement title={'Grupowe'} logo={<CiSignpostDuo1 />} />}
 					>
-						{trueElement}
+						{tutorIndividualGroup?.group_sessions ? trueElement : falseElement}
 					</InfoElement>
 					<InfoElement
 						title={<TitleElement title={'Stacjonarne'} logo={<CiPen />} />}
