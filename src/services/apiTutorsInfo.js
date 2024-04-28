@@ -134,3 +134,25 @@ export async function getTutorLocation() {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function setTutorLocation({ tutorLocation }) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + `/api/user/tutor/location/me/`, {
+		method: 'PATCH',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			tutoring_location: tutorLocation,
+		}),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}

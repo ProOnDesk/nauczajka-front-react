@@ -4,10 +4,23 @@ import EditFormBtn from './EditFormBtn';
 import TextInput from '../Auth/TextInput';
 import { useSetTutorPrice } from './useSetTutorPrice';
 import { useEffect } from 'react';
+import { useSetTutorLocation } from './useSetTutorLocation';
 
-function InfoModalContainer({ setModal, modal, tutorCurrentPrice }) {
-	const isLoading = true;
-	const { setTutorPrice, isTutorPriceSetSuccess } = useSetTutorPrice();
+function InfoModalContainer({
+	setModal,
+	modal,
+	tutorCurrentPrice,
+	tutorCurrentLocation,
+}) {
+	const { setTutorPrice, isTutorPriceSetSuccess, isTutorPriceSetPending } =
+		useSetTutorPrice();
+	const {
+		setTutorLocation,
+		isTutorLocationSetSuccess,
+		isTutorLocationSetPending,
+	} = useSetTutorLocation();
+	const isLoading = isTutorPriceSetPending || isTutorLocationSetPending;
+
 	const {
 		register,
 		handleSubmit,
@@ -20,19 +33,19 @@ function InfoModalContainer({ setModal, modal, tutorCurrentPrice }) {
 			setTutorPrice({ price: data.price });
 		}
 		if (modal === 'location') {
-			console.log(data);
+			setTutorLocation({ tutorLocation: data.location });
 		}
 	};
 
 	useEffect(() => {
-		if (isTutorPriceSetSuccess) {
+		if (isTutorPriceSetSuccess || isTutorLocationSetSuccess) {
 			setModal(null);
 		}
-	}, [isTutorPriceSetSuccess, setModal]);
+	}, [isTutorPriceSetSuccess, isTutorLocationSetSuccess, setModal]);
 
 	return (
 		<>
-			{isLoading ? (
+			{!isLoading ? (
 				<form
 					onSubmit={handleSubmit(onSubmit)}
 					className='flex flex-col items-center gap-5'
@@ -50,6 +63,16 @@ function InfoModalContainer({ setModal, modal, tutorCurrentPrice }) {
 									else return true;
 								}}
 								initialValue={tutorCurrentPrice}
+							/>
+						)}
+						{modal === 'location' && (
+							<TextInput
+								register={register}
+								error={errors?.location?.message}
+								label={'Lokalizacja'}
+								field={'location'}
+								type={'text'}
+								initialValue={tutorCurrentLocation}
 							/>
 						)}
 					</div>

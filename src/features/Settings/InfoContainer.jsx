@@ -72,6 +72,7 @@ function InfoContainer() {
 						setModal={setModal}
 						modal={modal}
 						tutorCurrentPrice={tutorPrice?.price}
+						tutorCurrentLocation={tutorLocation?.tutoring_location}
 					/>
 				</Modal>
 			)}
