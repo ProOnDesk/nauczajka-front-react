@@ -17,19 +17,23 @@ import Modal from '../../ui/Modal';
 import InfoModalContainer from './InfoModalContainer';
 import { useGetTutorLocation } from './useGetTutorLocation';
 import { useGetTutorIndividualGroup } from './useGetTutorIndividualGroup';
+import { useGetTutorSessionMethod } from './useGetTutorSessionMethod';
 
 function InfoContainer() {
 	const { tutorPrice, isTutorPricePending } = useGetTutorPrice();
 	const { tutorLocation, isTutorLocationPending } = useGetTutorLocation();
 	const { tutorIndividualGroup, isTutorIndividualGroupPending } =
 		useGetTutorIndividualGroup();
+	const { tutorSessionMethod, isTutorSessionMethodPending } =
+		useGetTutorSessionMethod();
 	const [modal, setModal] = useState(null);
 
 	return (
 		<>
 			{!isTutorPricePending &&
 			!isTutorLocationPending &&
-			!isTutorIndividualGroupPending ? (
+			!isTutorIndividualGroupPending &&
+			!isTutorSessionMethodPending ? (
 				<div className='flex flex-row flex-wrap gap-4 mt-6'>
 					<InfoElement
 						onClick={() => setModal('price')}
@@ -60,12 +64,16 @@ function InfoContainer() {
 					<InfoElement
 						title={<TitleElement title={'Stacjonarne'} logo={<CiPen />} />}
 					>
-						{trueElement}
+						{tutorSessionMethod?.in_person_sessions_available
+							? trueElement
+							: falseElement}
 					</InfoElement>
 					<InfoElement
 						title={<TitleElement title={'Online'} logo={<CiDesktop />} />}
 					>
-						{trueElement}
+						{tutorSessionMethod?.online_sessions_available
+							? trueElement
+							: falseElement}
 					</InfoElement>
 				</div>
 			) : (
