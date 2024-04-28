@@ -28,10 +28,10 @@ function ChatComponent({ conversationId }) {
 	}, [getMessagesHistory, conversationId]);
 
 	useEffect(() => {
-		setMessages(messages=>[...messages,messagesHistory]);
+		setMessages(messagesHistory);
 	}, [messagesHistory]);
 
-    console.log(messages);
+	console.log(messages);
 
 	return isMessagesHistoryPending || isUserDataPending ? (
 		<div className='absolute top-0 h-screen w-full flex justify-center items-center -z-10'>
@@ -62,7 +62,6 @@ function ChatComponent({ conversationId }) {
 				conversationId={conversationId}
 				scrollToBottom={scrollToBottom}
 				setMessages={setMessages}
-				
 				userData={userData}
 			/>
 		</>

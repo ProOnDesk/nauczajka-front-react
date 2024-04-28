@@ -15,34 +15,20 @@ function MessageAreaComponent({ conversationId, userData, setMessages }) {
 			event: 'chat_message',
 			data: {
 				body: message,
-				id: 1,
-				conversation: conversationId,
-				created_at: new Date(),
-				created_by: {
-					first_name: 'pawel',
-					id: userData?.id,
-					last_name: 'ochalek',
-					profile_image: userData?.profile_image,
-				},
+				created_by: userData?.id,
 			},
 		});
 		setMessage('');
 	};
+
 	useEffect(() => {
-		const newMessage = {
-			body: lastJsonMessage?.body,
-			id: lastJsonMessage?.message_id,
-			conversation: lastJsonMessage?.conversation,
-			created_at: lastJsonMessage?.created_at,
-			created_by: {
-				first_name: lastJsonMessage?.created_by.first_name,
-				id: lastJsonMessage?.created_by.id,
-				last_name: lastJsonMessage?.created_by.last_name,
-				profile_image: lastJsonMessage?.created_by.profile_image,
-			},
-		};
-		// setMessages((messages) => [...messages, newMessage]);
-		console.log(newMessage);
+		if (
+			lastJsonMessage &&
+			typeof lastJsonMessage === 'object' &&
+			!Array.isArray(lastJsonMessage)
+		) {
+			setMessages((prevMessages) => [...prevMessages, lastJsonMessage]);
+		}
 	}, [lastJsonMessage, setMessages, conversationId]);
 
 	useEffect(() => {
