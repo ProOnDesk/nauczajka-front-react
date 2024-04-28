@@ -34,7 +34,6 @@ function ConversationsList() {
 						const lastMessageName =
 							conversation?.last_message?.created_by?.first_name;
 						const userId = userData?.id;
-						console.log(conversation?.last_message?.created_by);
 
 						return (
 							<button

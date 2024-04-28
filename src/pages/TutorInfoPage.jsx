@@ -10,20 +10,16 @@ import CalendarContainer from '../features/Settings/CalendarContainer';
 import StarRating from '../ui/StarRating';
 import TutorRatings from '../features/TutorInfo/TutorRatings';
 import MakeTutorOpionion from '../features/TutorInfo/MakeTutorOpionion';
-import { useRateTutor } from '../features/TutorInfo/useRateTutor';
+
 
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
-	const { rateTutor, isTutorRating, isTutorRated } = useRateTutor();
+
 	const { id: tutorId } = useParams();
 
 	useEffect(() => {
 		getTutorInfo({ tutorId: tutorId });
 	}, [getTutorInfo, tutorId]);
-
-	useEffect(() => {
-		if (isTutorRated) getTutorInfo({ tutorId: tutorId });
-	}, [getTutorInfo, isTutorRated, tutorId]);
 
 	return !isTutorInfoPending ? (
 		<div className='py-10 max-w-7xl mx-auto w-full'>
@@ -56,11 +52,7 @@ function TutorInfoPage() {
 							/>
 						</div>
 					</div>
-					<MakeTutorOpionion
-						tutorId={tutorId}
-						rateTutor={rateTutor}
-						isTutorRating={isTutorRating}
-					/>
+					<MakeTutorOpionion tutorId={tutorId} getTutorInfo={getTutorInfo}/>
 					<TutorRatings tutorInfo={tutorInfo} />
 				</div>
 			</div>

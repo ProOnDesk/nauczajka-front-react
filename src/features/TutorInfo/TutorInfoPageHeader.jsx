@@ -3,17 +3,33 @@ import Button from '../../ui/Inputs/Button';
 import TutorHeader from '../../ui/TutorHeader';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
+import { useCreateChat } from '../Chats/useCreateChat';
+import { useContext, useEffect } from 'react';
+import { ChatsContext } from '../../context/ChatsContext';
 
 function TutorInfoPageHeader({ tutorInfo }) {
 	const query = useQueryClient();
+	const { createChat, isChatSuccess } = useCreateChat();
+	const { setIsChatOpen, setChoosenUser } = useContext(ChatsContext);
 
 	function messageHandler() {
 		if (query.getQueryData(['user']) === null) {
 			toast.error('Musisz się zalogować.');
 		} else {
-			console.log('Napisz wiadomosc');
+			if (tutorInfo?.user_id) {
+				createChat(tutorInfo?.user_id);
+			}
+
+			console.log(tutorInfo?.user_id);
 		}
 	}
+
+	useEffect(() => {
+		if (isChatSuccess) {
+			setIsChatOpen(true);
+		}
+	}, [setIsChatOpen, isChatSuccess]);
+
 	return (
 		<div className='flex flex-col items-center justify-center md:flex-row md:justify-between px-5 gap-5 max-w-5xl mx-auto'>
 			<TutorHeader tutorInfo={tutorInfo} />
