@@ -4,10 +4,11 @@ import { useGetDescription } from './useGetDescription';
 import Modal from '../../ui/Modal';
 import EditFormTutor from './EditFormTutor';
 import SkillsContainer from './SkillsContainer';
-import { CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
+import { CiBullhorn, CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
 import TutorInfoHeader from './TutorInfoHeader';
 import CalendarContainer from './CalendarContainer';
 import { useShowShedule } from './useShowShedule';
+import InfoContainer from './InfoContainer';
 
 function TutorInfo() {
 	const { data } = useGetDescription();
@@ -27,6 +28,10 @@ function TutorInfo() {
 			<div className='mb-10'>
 				<TutorInfoHeader icon={<CiMedal />} label={'Umiejętności'} />
 				<SkillsContainer />
+			</div>
+			<div className='mb-10'>
+				<TutorInfoHeader icon={<CiBullhorn />} label={'Informacje'} />
+				<InfoContainer />
 			</div>
 			<div>
 				<TutorInfoHeader icon={<CiCalendar />} label={'Wolne terminy'} />
