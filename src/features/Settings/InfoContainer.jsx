@@ -80,6 +80,7 @@ function InfoContainer() {
 						}
 						disabled={isTutorIndividualGroupSetPending}
 						title={<TitleElement title={'Indywidualne'} logo={<CiUser />} />}
+						currentBoolean={tutorIndividualGroup?.individual_sessions}
 					>
 						{tutorIndividualGroup?.individual_sessions
 							? trueElement
@@ -94,6 +95,7 @@ function InfoContainer() {
 						}
 						disabled={isTutorIndividualGroupSetPending}
 						title={<TitleElement title={'Grupowe'} logo={<CiSignpostDuo1 />} />}
+						currentBoolean={tutorIndividualGroup?.group_sessions}
 					>
 						{tutorIndividualGroup?.group_sessions ? trueElement : falseElement}
 					</InfoElement>
@@ -106,6 +108,7 @@ function InfoContainer() {
 						}
 						disabled={isTutorSessionMethodSetPending}
 						title={<TitleElement title={'Stacjonarne'} logo={<CiPen />} />}
+						currentBoolean={tutorSessionMethod?.in_person_sessions_available}
 					>
 						{tutorSessionMethod?.in_person_sessions_available
 							? trueElement
@@ -120,6 +123,7 @@ function InfoContainer() {
 						}
 						disabled={isTutorSessionMethodSetPending}
 						title={<TitleElement title={'Online'} logo={<CiDesktop />} />}
+						currentBoolean={tutorSessionMethod?.online_sessions_available}
 					>
 						{tutorSessionMethod?.online_sessions_available
 							? trueElement
