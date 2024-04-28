@@ -5,7 +5,7 @@ import TextInput from '../Auth/TextInput';
 import { useSetTutorPrice } from './useSetTutorPrice';
 import { useEffect } from 'react';
 
-function InfoModalContainer({ setModal, modal }) {
+function InfoModalContainer({ setModal, modal, tutorCurrentPrice }) {
 	const isLoading = true;
 	const { setTutorPrice, isTutorPriceSetSuccess } = useSetTutorPrice();
 	const {
@@ -16,7 +16,12 @@ function InfoModalContainer({ setModal, modal }) {
 	} = useForm();
 
 	const onSubmit = (data) => {
-		setTutorPrice({ price: data.price });
+		if (modal === 'price') {
+			setTutorPrice({ price: data.price });
+		}
+		if (modal === 'location') {
+			console.log(data);
+		}
 	};
 
 	useEffect(() => {
@@ -44,6 +49,7 @@ function InfoModalContainer({ setModal, modal }) {
 									if (getValues().price < 0) return 'Wprowadź Dodatnią Wartość';
 									else return true;
 								}}
+								initialValue={tutorCurrentPrice}
 							/>
 						)}
 					</div>

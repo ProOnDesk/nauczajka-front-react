@@ -15,13 +15,16 @@ import Loader from '../../ui/Loader';
 import { useState } from 'react';
 import Modal from '../../ui/Modal';
 import InfoModalContainer from './InfoModalContainer';
+import { useGetTutorLocation } from './useGetTutorLocation';
 
 function InfoContainer() {
 	const { tutorPrice, isTutorPricePending } = useGetTutorPrice();
+	const { tutorLocation, isTutorLocationPending } = useGetTutorLocation();
 	const [modal, setModal] = useState(null);
+
 	return (
 		<>
-			{!isTutorPricePending ? (
+			{!isTutorPricePending && !isTutorLocationPending ? (
 				<div className='flex flex-row flex-wrap gap-4 mt-6'>
 					<InfoElement
 						onClick={() => setModal('price')}
@@ -30,11 +33,12 @@ function InfoContainer() {
 						{tutorPrice?.price} zł/godz
 					</InfoElement>
 					<InfoElement
+						onClick={() => setModal('location')}
 						title={
 							<TitleElement title={'Lokalizacja'} logo={<CiLocationOn />} />
 						}
 					>
-						Piotrków Trybunalski
+						{tutorLocation?.tutoring_location}
 					</InfoElement>
 					<InfoElement
 						title={<TitleElement title={'Indywidualne'} logo={<CiUser />} />}
@@ -64,7 +68,11 @@ function InfoContainer() {
 			)}
 			{modal && (
 				<Modal>
-					<InfoModalContainer setModal={setModal} modal={modal} />
+					<InfoModalContainer
+						setModal={setModal}
+						modal={modal}
+						tutorCurrentPrice={tutorPrice?.price}
+					/>
 				</Modal>
 			)}
 		</>

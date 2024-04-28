@@ -115,3 +115,22 @@ export async function setTutorPrice({ price }) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function getTutorLocation() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + `/api/user/tutor/location/me/`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
