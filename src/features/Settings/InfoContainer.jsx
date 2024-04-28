@@ -18,6 +18,7 @@ import InfoModalContainer from './InfoModalContainer';
 import { useGetTutorLocation } from './useGetTutorLocation';
 import { useGetTutorIndividualGroup } from './useGetTutorIndividualGroup';
 import { useGetTutorSessionMethod } from './useGetTutorSessionMethod';
+import { useSetTutorIndividualGroup } from './useSetTutorIndividualGroup';
 
 function InfoContainer() {
 	const { tutorPrice, isTutorPricePending } = useGetTutorPrice();
@@ -26,7 +27,19 @@ function InfoContainer() {
 		useGetTutorIndividualGroup();
 	const { tutorSessionMethod, isTutorSessionMethodPending } =
 		useGetTutorSessionMethod();
+
+	const { setTutorIndividualGroup, isTutorIndividualGroupSetPending } =
+		useSetTutorIndividualGroup();
 	const [modal, setModal] = useState(null);
+
+	function handleSetIndividualGroup(type, isChecked) {
+		if (type === 'individual') {
+			setTutorIndividualGroup({ individualSession: !isChecked });
+		}
+		if (type === 'group') {
+			setTutorIndividualGroup({ groupSession: !isChecked });
+		}
+	}
 
 	return (
 		<>
@@ -50,6 +63,12 @@ function InfoContainer() {
 						{tutorLocation?.tutoring_location}
 					</InfoElement>
 					<InfoElement
+						onClick={() =>
+							handleSetIndividualGroup(
+								'individual',
+								tutorIndividualGroup?.individual_sessions
+							)
+						}
 						title={<TitleElement title={'Indywidualne'} logo={<CiUser />} />}
 					>
 						{tutorIndividualGroup?.individual_sessions
@@ -57,6 +76,12 @@ function InfoContainer() {
 							: falseElement}
 					</InfoElement>
 					<InfoElement
+						onClick={() =>
+							handleSetIndividualGroup(
+								'group',
+								tutorIndividualGroup?.group_sessions
+							)
+						}
 						title={<TitleElement title={'Grupowe'} logo={<CiSignpostDuo1 />} />}
 					>
 						{tutorIndividualGroup?.group_sessions ? trueElement : falseElement}

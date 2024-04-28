@@ -179,6 +179,35 @@ export async function getTutorIndividualGroup() {
 	}
 }
 
+export async function setTutorIndividualGroup({
+	individualSession,
+	groupSession,
+}) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/individual_group/me/`,
+		{
+			method: 'PATCH',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				individual_sessions_available: individualSession,
+				group_sessions_available: groupSession,
+			}),
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
 export async function getTutorSessionMethod() {
 	const token = sessionStorage.getItem('auth_token');
 	if (!token) return null;
