@@ -9,6 +9,7 @@ import TutorInfoHeader from './TutorInfoHeader';
 import CalendarContainer from './CalendarContainer';
 import { useShowShedule } from './useShowShedule';
 import InfoContainer from './InfoContainer';
+import { useGetTutorPrice } from './useGetTutorPrice';
 
 function TutorInfo() {
 	const { data } = useGetDescription();

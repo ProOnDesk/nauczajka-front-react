@@ -10,6 +10,7 @@ import {
 } from 'react-icons/ci';
 import InfoElement from './InfoElement';
 import TitleElement from './TitleElement';
+import { useGetTutorPrice } from './useGetTutorPrice';
 
 const trueElement = (
 	<span className='text-3xl text-teal-500'>
@@ -24,12 +25,14 @@ const falseElement = (
 );
 
 function InfoContainer() {
+	const { tutorPrice } = useGetTutorPrice();
 	return (
 		<div className='flex flex-row flex-wrap gap-4 mt-6'>
 			<InfoElement
+				onClick={() => console.log('pawl')}
 				title={<TitleElement title={'Cena'} logo={<CiBadgeDollar />} />}
 			>
-				35 zł/godz
+				{tutorPrice?.price} zł/godz
 			</InfoElement>
 			<InfoElement
 				title={<TitleElement title={'Lokalizacja'} logo={<CiLocationOn />} />}
@@ -47,7 +50,7 @@ function InfoContainer() {
 				{trueElement}
 			</InfoElement>
 			<InfoElement
-				title={<TitleElement title={'Stacjonarnie'} logo={<CiPen />} />}
+				title={<TitleElement title={'Stacjonarne'} logo={<CiPen />} />}
 			>
 				{trueElement}
 			</InfoElement>
