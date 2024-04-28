@@ -7,6 +7,7 @@ export function useGetMessagesHistory() {
 		data: messagesHistory,
 		mutate: getMessagesHistory,
 		isPending: isMessagesHistoryPending,
+		isSuccess: isMessagesHistorySuccess,
 	} = useMutation({
 		mutationFn: getMessagesHistoryApi,
 		onError: (err) => {
@@ -14,5 +15,10 @@ export function useGetMessagesHistory() {
 			toast.error(error);
 		},
 	});
-	return { messagesHistory, getMessagesHistory, isMessagesHistoryPending };
+	return {
+		messagesHistory,
+		getMessagesHistory,
+		isMessagesHistoryPending,
+		isMessagesHistorySuccess,
+	};
 }

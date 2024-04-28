@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { CiPaperplane } from 'react-icons/ci';
 import useWebSocket from 'react-use-websocket';
+import { API_LINK } from '../../services/apiAuth';
 
 function MessageAreaComponent({ conversationId, userData, setMessages }) {
 	const [message, setMessage] = useState('');
 	const token = sessionStorage.getItem('auth_token');
-	const { sendJsonMessage, lastJsonMessage, readyState } = useWebSocket(
-		`ws://localhost:8000/ws/chat/${conversationId}/?token=${token}`
+	const { sendJsonMessage, lastJsonMessage } = useWebSocket(
+		`ws://${API_LINK}/ws/chat/${conversationId}/?token=${token}`
 	);
 
 	const sendMessage = () => {
-		console.log('slij');
 		sendJsonMessage({
 			event: 'chat_message',
 			data: {
@@ -31,17 +31,17 @@ function MessageAreaComponent({ conversationId, userData, setMessages }) {
 		}
 	}, [lastJsonMessage, setMessages, conversationId]);
 
-	useEffect(() => {
-		console.log(readyState);
-	}, [readyState]);
-
 	function handleSendMessage(e) {
 		if (e.which === 13 && !e.shiftKey && message !== '') {
 			e.preventDefault();
-			console.log(message);
 			sendMessage();
 			setMessage('');
 		} else return;
+	}
+
+	function handleBtnSendMessage() {
+		sendMessage();
+		setMessage('');
 	}
 
 	return (
@@ -59,7 +59,7 @@ function MessageAreaComponent({ conversationId, userData, setMessages }) {
 			></textarea>
 			<button
 				type='button'
-				onClick={handleSendMessage}
+				onClick={handleBtnSendMessage}
 				className='flex items-center p-2 focus:outline-none focus:ring-0 border-2 border-transparent rounded-md focus:text-mainPurple'
 			>
 				<span className='text-2xl hover:text-mainPurple hover:cursor-pointer'>

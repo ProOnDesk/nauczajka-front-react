@@ -6,22 +6,15 @@ import MessageComponent from './MessageComponent';
 import MessageAreaComponent from './MessageAreaComponent';
 
 function ChatComponent({ conversationId }) {
-	const { getMessagesHistory, isMessagesHistoryPending, messagesHistory } =
-		useGetMessagesHistory();
+	const {
+		getMessagesHistory,
+		isMessagesHistoryPending,
+		messagesHistory,
+		isMessagesHistorySuccess,
+	} = useGetMessagesHistory();
 	const { data: userData, isPending: isUserDataPending } = useUserData();
-
 	const [messages, setMessages] = useState([]);
-
 	const messagesContainer = useRef(null);
-	const scrollToBottom = () => {
-		if (messagesContainer.current) {
-			messagesContainer.current.scrollTop =
-				messagesContainer.current.scrollHeight;
-		}
-	};
-	useEffect(() => {
-		scrollToBottom();
-	}, [messages]);
 
 	useEffect(() => {
 		getMessagesHistory(conversationId);
@@ -31,7 +24,31 @@ function ChatComponent({ conversationId }) {
 		setMessages(messagesHistory);
 	}, [messagesHistory]);
 
-	console.log(messages);
+	const scrollToBottom = () => {
+		if (messagesContainer.current) {
+			messagesContainer.current.scrollTop =
+				messagesContainer.current.scrollHeight;
+		}
+	};
+
+	useEffect(() => {
+		if (messagesContainer.current) {
+			const { scrollTop, scrollHeight, clientHeight } =
+				messagesContainer.current;
+			const isScrolledToBottom = scrollHeight - scrollTop - clientHeight < 100;
+			if (isScrolledToBottom) {
+				scrollToBottom();
+			}
+		}
+	}, [messages]);
+
+	useEffect(() => {
+		const timeout = setTimeout(() => {
+			scrollToBottom();
+		}, 1);
+
+		return () => clearTimeout(timeout);
+	}, [isMessagesHistorySuccess]);
 
 	return isMessagesHistoryPending || isUserDataPending ? (
 		<div className='absolute top-0 h-screen w-full flex justify-center items-center -z-10'>
