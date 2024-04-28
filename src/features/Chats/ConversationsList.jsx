@@ -3,12 +3,13 @@ import Loader from '../../ui/Loader';
 import { useContext } from 'react';
 import { ChatsContext } from '../../context/ChatsContext';
 import { useAllConversations } from './useAllConversations';
+import { useUserData } from '../Auth/useUserData';
 
 function ConversationsList() {
 	const { setChoosenUser } = useContext(ChatsContext);
 	const { conversationsList, isConversationsLoading, refetchAllConversations } =
 		useAllConversations();
-
+	const { data: userData } = useUserData();
 	refetchAllConversations();
 
 	return isConversationsLoading ? (
@@ -28,6 +29,12 @@ function ConversationsList() {
 				) : (
 					conversationsList?.map((conversation) => {
 						const user = conversation?.users[1];
+						const lastMessageBody = conversation?.last_message?.body;
+						const lastMessageId = conversation?.last_message?.created_by?.id;
+						const lastMessageName =
+							conversation?.last_message?.created_by?.first_name;
+						const userId = userData?.id;
+						console.log(conversation?.last_message?.created_by);
 
 						return (
 							<button
@@ -43,9 +50,27 @@ function ConversationsList() {
 										alt='Avatar'
 										className='h-16 w-16 rounded-full border-whiteHover group-hover/tutorEl:border-mainPurpleHover shadow-md shadow-shadowBlack border-2 transition-colors duration-300'
 									/>
-									<p className='text-2xl'>
-										{user?.first_name} {user?.last_name}
-									</p>
+									<div className='flex flex-col text-left'>
+										<p className='text-lg'>
+											{user?.first_name} {user?.last_name}
+										</p>
+										<p className='text-sm text-gray'>
+											{lastMessageId ? (
+												<>
+													<span>
+														{lastMessageId === userId
+															? 'Ty: '
+															: `${lastMessageName}: `}
+													</span>
+													{lastMessageBody}{' '}
+												</>
+											) : (
+												<span className='text-sm text-gray'>
+													Napisz wiadomość
+												</span>
+											)}
+										</p>
+									</div>
 								</div>
 							</button>
 						);

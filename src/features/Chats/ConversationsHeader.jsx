@@ -1,6 +1,6 @@
 import { IoClose } from 'react-icons/io5';
 
-function ConversationsListHeader({ setIsChatOpen, children }) {
+function ConversationsHeader({ setIsChatOpen, children }) {
 	return (
 		<>
 			{children}
@@ -16,4 +16,4 @@ function ConversationsListHeader({ setIsChatOpen, children }) {
 	);
 }
 
-export default ConversationsListHeader;
+export default ConversationsHeader;

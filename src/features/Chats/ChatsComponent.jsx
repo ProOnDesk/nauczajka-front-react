@@ -5,7 +5,7 @@ import ConversationsList from './ConversationsList';
 import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import ChatsContent from './ChatsContent';
-import ConversationsListHeader from './ConversationsListHeader';
+import ConversationsListHeader from './ConversationsHeader';
 import { IoArrowBack } from 'react-icons/io5';
 import { ChatsContext } from '../../context/ChatsContext';
 import ChatComponent from './ChatComponent';

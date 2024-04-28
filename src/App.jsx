@@ -14,7 +14,6 @@ import PasswordReset from './pages/PasswordResetPage';
 import PasswordResetConfirmPage from './pages/PasswordResetConfirmPage';
 import TutorInfoPage from './pages/TutorInfoPage';
 import Page404 from './pages/Page404';
-import ConversationPage from './pages/ConversationPage';
 import ChatsContextProvider from './context/ChatsContext';
 
 const queryClient = new QueryClient({
@@ -67,8 +66,6 @@ function App() {
 							maxWidth: '500px',
 							padding: '16px 20px',
 						},
-						className:
-							'bg-bgWhite dark:bg-bgDark1Hover text-bgDark dark:text-bgWhite',
 					}}
 				/>
 			</ChatsContextProvider>
