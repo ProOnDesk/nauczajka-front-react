@@ -229,3 +229,32 @@ export async function getTutorSessionMethod() {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function setTutorSessionMethod({
+	onlineSession,
+	stationarySession,
+}) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/method_session_availability/me/`,
+		{
+			method: 'PATCH',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				online_sessions_available: onlineSession,
+				in_person_sessions_available: stationarySession,
+			}),
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}

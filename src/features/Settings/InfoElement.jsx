@@ -1,10 +1,11 @@
 import { CiEdit } from 'react-icons/ci';
 
-function InfoElement({ title, children, onClick }) {
+function InfoElement({ title, children, onClick, disabled }) {
 	return (
 		<button
 			onClick={onClick}
 			className={`flex justify-between items-center relative bg-white p-2 shadow-sm shadow-black/25 rounded-md overflow-hidden w-full hover:cursor-default`}
+			disabled={disabled}
 		>
 			<p>{title}</p>
 			<p className='text-end text-gray'>{children}</p>

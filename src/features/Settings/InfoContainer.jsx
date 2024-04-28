@@ -19,17 +19,20 @@ import { useGetTutorLocation } from './useGetTutorLocation';
 import { useGetTutorIndividualGroup } from './useGetTutorIndividualGroup';
 import { useGetTutorSessionMethod } from './useGetTutorSessionMethod';
 import { useSetTutorIndividualGroup } from './useSetTutorIndividualGroup';
+import { useSetTutorSessionMethod } from './useSetTutorSessionMethod';
 
 function InfoContainer() {
 	const { tutorPrice, isTutorPricePending } = useGetTutorPrice();
 	const { tutorLocation, isTutorLocationPending } = useGetTutorLocation();
 	const { tutorIndividualGroup, isTutorIndividualGroupPending } =
 		useGetTutorIndividualGroup();
-	const { tutorSessionMethod, isTutorSessionMethodPending } =
-		useGetTutorSessionMethod();
-
 	const { setTutorIndividualGroup, isTutorIndividualGroupSetPending } =
 		useSetTutorIndividualGroup();
+	const { tutorSessionMethod, isTutorSessionMethodPending } =
+		useGetTutorSessionMethod();
+	const { setTutorSessionMethod, isTutorSessionMethodSetPending } =
+		useSetTutorSessionMethod();
+
 	const [modal, setModal] = useState(null);
 
 	function handleSetIndividualGroup(type, isChecked) {
@@ -38,6 +41,12 @@ function InfoContainer() {
 		}
 		if (type === 'group') {
 			setTutorIndividualGroup({ groupSession: !isChecked });
+		}
+		if (type === 'stationary') {
+			setTutorSessionMethod({ stationarySession: !isChecked });
+		}
+		if (type === 'online') {
+			setTutorSessionMethod({ onlineSession: !isChecked });
 		}
 	}
 
@@ -69,6 +78,7 @@ function InfoContainer() {
 								tutorIndividualGroup?.individual_sessions
 							)
 						}
+						disabled={isTutorIndividualGroupSetPending}
 						title={<TitleElement title={'Indywidualne'} logo={<CiUser />} />}
 					>
 						{tutorIndividualGroup?.individual_sessions
@@ -82,11 +92,19 @@ function InfoContainer() {
 								tutorIndividualGroup?.group_sessions
 							)
 						}
+						disabled={isTutorIndividualGroupSetPending}
 						title={<TitleElement title={'Grupowe'} logo={<CiSignpostDuo1 />} />}
 					>
 						{tutorIndividualGroup?.group_sessions ? trueElement : falseElement}
 					</InfoElement>
 					<InfoElement
+						onClick={() =>
+							handleSetIndividualGroup(
+								'stationary',
+								tutorSessionMethod?.in_person_sessions_available
+							)
+						}
+						disabled={isTutorSessionMethodSetPending}
 						title={<TitleElement title={'Stacjonarne'} logo={<CiPen />} />}
 					>
 						{tutorSessionMethod?.in_person_sessions_available
@@ -94,6 +112,13 @@ function InfoContainer() {
 							: falseElement}
 					</InfoElement>
 					<InfoElement
+						onClick={() =>
+							handleSetIndividualGroup(
+								'online',
+								tutorSessionMethod?.online_sessions_available
+							)
+						}
+						disabled={isTutorSessionMethodSetPending}
 						title={<TitleElement title={'Online'} logo={<CiDesktop />} />}
 					>
 						{tutorSessionMethod?.online_sessions_available
