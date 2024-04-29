@@ -4,14 +4,13 @@ import { useGetDescription } from './useGetDescription';
 import Modal from '../../ui/Modal';
 import EditFormTutor from './EditFormTutor';
 import SkillsContainer from './SkillsContainer';
-import { CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
+import { CiBullhorn, CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
 import TutorInfoHeader from './TutorInfoHeader';
 import CalendarContainer from './CalendarContainer';
-import { useShowShedule } from './useShowShedule';
+import InfoContainer from './InfoContainer';
 
 function TutorInfo() {
 	const { data } = useGetDescription();
-	const { tutorShedule, refetchShedule } = useShowShedule();
 	const [showModal, setShowModal] = useState(null);
 	function handleModal(type) {
 		setShowModal(type);
@@ -28,12 +27,13 @@ function TutorInfo() {
 				<TutorInfoHeader icon={<CiMedal />} label={'Umiejętności'} />
 				<SkillsContainer />
 			</div>
+			<div className='mb-10'>
+				<TutorInfoHeader icon={<CiBullhorn />} label={'Informacje'} />
+				<InfoContainer />
+			</div>
 			<div>
 				<TutorInfoHeader icon={<CiCalendar />} label={'Wolne terminy'} />
-				<CalendarContainer
-					refetchShedule={refetchShedule}
-					tutorShedule={tutorShedule}
-				/>
+				<CalendarContainer />
 			</div>
 
 			{showModal && (

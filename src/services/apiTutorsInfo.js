@@ -74,3 +74,187 @@ export async function rateTutor({ rating, review, id }) {
 		throw new Error(`${bodyText}`);
 	}
 }
+
+export async function getTutorPrice() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + `/api/user/tutor/price/me/`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function setTutorPrice({ price }) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + `/api/user/tutor/price/me/`, {
+		method: 'PATCH',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			price: price,
+		}),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function getTutorLocation() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + `/api/user/tutor/location/me/`, {
+		method: 'GET',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function setTutorLocation({ tutorLocation }) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(API_KEY + `/api/user/tutor/location/me/`, {
+		method: 'PATCH',
+		headers: {
+			Authorization: `Bearer ${token}`,
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			tutoring_location: tutorLocation,
+		}),
+	});
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function getTutorIndividualGroup() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/individual_group/me/`,
+		{
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function setTutorIndividualGroup({
+	individualSession,
+	groupSession,
+}) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/individual_group/me/`,
+		{
+			method: 'PATCH',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				individual_sessions_available: individualSession,
+				group_sessions_available: groupSession,
+			}),
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function getTutorSessionMethod() {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/method_session_availability/me/`,
+		{
+			method: 'GET',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}
+
+export async function setTutorSessionMethod({
+	onlineSession,
+	stationarySession,
+}) {
+	const token = sessionStorage.getItem('auth_token');
+	if (!token) return null;
+	const response = await fetch(
+		API_KEY + `/api/user/tutor/method_session_availability/me/`,
+		{
+			method: 'PATCH',
+			headers: {
+				Authorization: `Bearer ${token}`,
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify({
+				online_sessions_available: onlineSession,
+				in_person_sessions_available: stationarySession,
+			}),
+		}
+	);
+	if (response.ok) {
+		const data = await response.json();
+		return data;
+	} else {
+		const bodyText = await response.text();
+		throw new Error(`${bodyText}`);
+	}
+}

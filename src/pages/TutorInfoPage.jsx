@@ -10,12 +10,14 @@ import CalendarContainer from '../features/Settings/CalendarContainer';
 import StarRating from '../ui/StarRating';
 import TutorRatings from '../features/TutorInfo/TutorRatings';
 import MakeTutorOpionion from '../features/TutorInfo/MakeTutorOpionion';
+import TutorInfoAboutSession from '../features/TutorInfo/TutorInfoAboutSession';
 import { useRateTutor } from '../features/TutorInfo/useRateTutor';
 import { FooterContext } from '../context/FooterContext';
 
+
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
-	const { rateTutor, isTutorRating, isTutorRated } = useRateTutor();
+
 	const { id: tutorId } = useParams();
 	const { changeColor } = useContext(FooterContext);
 
@@ -26,10 +28,6 @@ function TutorInfoPage() {
 	useEffect(() => {
 		getTutorInfo({ tutorId: tutorId });
 	}, [getTutorInfo, tutorId]);
-
-	useEffect(() => {
-		if (isTutorRated) getTutorInfo({ tutorId: tutorId });
-	}, [getTutorInfo, isTutorRated, tutorId]);
 
 	return !isTutorInfoPending ? (
 		<div className='py-10 max-w-7xl mx-auto w-full'>
@@ -42,6 +40,10 @@ function TutorInfoPage() {
 					<SettingsElement onlyRead={true} hoverDisabled={true}>
 						{tutorInfo?.description ? tutorInfo?.description : 'Brak'}
 					</SettingsElement>
+				</div>
+				<div className='flex flex-col gap-2'>
+					<TutorInfoHeader icon={<CiCircleInfo />} label={'Informacje'} />
+					<TutorInfoAboutSession tutorInfo={tutorInfo} />
 				</div>
 				<div>
 					<TutorInfoHeader icon={<CiCalendar />} label={'Wolne terminy'} />
@@ -62,11 +64,7 @@ function TutorInfoPage() {
 							/>
 						</div>
 					</div>
-					<MakeTutorOpionion
-						tutorId={tutorId}
-						rateTutor={rateTutor}
-						isTutorRating={isTutorRating}
-					/>
+					<MakeTutorOpionion tutorId={tutorId} getTutorInfo={getTutorInfo} />
 					<TutorRatings tutorInfo={tutorInfo} />
 				</div>
 			</div>
