@@ -9,26 +9,23 @@ import { ChatsContext } from '../../context/ChatsContext';
 
 function TutorInfoPageHeader({ tutorInfo }) {
 	const query = useQueryClient();
-	const { createChat, isChatSuccess } = useCreateChat();
+	const { conversation, createChat, isChatSuccess } = useCreateChat();
 	const { setIsChatOpen, setChoosenUser } = useContext(ChatsContext);
 
 	function messageHandler() {
 		if (query.getQueryData(['user']) === null) {
 			toast.error('Musisz się zalogować.');
 		} else {
-			if (tutorInfo?.user_id) {
-				createChat(tutorInfo?.user_id);
-			}
-
-			console.log(tutorInfo?.user_id);
+			createChat(tutorInfo?.user_id);
 		}
 	}
 
 	useEffect(() => {
 		if (isChatSuccess) {
 			setIsChatOpen(true);
+			setChoosenUser(conversation);
 		}
-	}, [setIsChatOpen, isChatSuccess]);
+	}, [setIsChatOpen, isChatSuccess, setChoosenUser, conversation]);
 
 	return (
 		<div className='flex flex-col items-center justify-center md:flex-row md:justify-between px-5 gap-5 max-w-5xl mx-auto'>

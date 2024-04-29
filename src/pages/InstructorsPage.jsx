@@ -11,7 +11,6 @@ function InstructorsPage() {
 	} = useGetAllTutors();
 	const [search, setSearch] = useState('');
 	const [skillsFilter, setSkillsFilter] = useState([]);
-	console.log(tutorList);
 
 	const searchTutors = useCallback(
 		(signal) => {

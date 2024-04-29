@@ -2,7 +2,6 @@ import {
 	CiCircleCheck,
 	CiCircleRemove,
 	CiEdit,
-	CiPlay1,
 	CiShuffle,
 } from 'react-icons/ci';
 
