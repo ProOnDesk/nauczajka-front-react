@@ -10,7 +10,7 @@ import CalendarContainer from '../features/Settings/CalendarContainer';
 import StarRating from '../ui/StarRating';
 import TutorRatings from '../features/TutorInfo/TutorRatings';
 import MakeTutorOpionion from '../features/TutorInfo/MakeTutorOpionion';
-
+import TutorInfoAboutSession from '../features/TutorInfo/TutorInfoAboutSession';
 
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
@@ -33,6 +33,10 @@ function TutorInfoPage() {
 						{tutorInfo?.description ? tutorInfo?.description : 'Brak'}
 					</SettingsElement>
 				</div>
+				<div className='flex flex-col gap-2'>
+					<TutorInfoHeader icon={<CiCircleInfo />} label={'Informacje'} />
+					<TutorInfoAboutSession tutorInfo={tutorInfo} />
+				</div>
 				<div>
 					<TutorInfoHeader icon={<CiCalendar />} label={'Wolne terminy'} />
 					<CalendarContainer
@@ -52,7 +56,7 @@ function TutorInfoPage() {
 							/>
 						</div>
 					</div>
-					<MakeTutorOpionion tutorId={tutorId} getTutorInfo={getTutorInfo}/>
+					<MakeTutorOpionion tutorId={tutorId} getTutorInfo={getTutorInfo} />
 					<TutorRatings tutorInfo={tutorInfo} />
 				</div>
 			</div>

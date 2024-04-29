@@ -1,9 +1,6 @@
-import {
-	CiCircleCheck,
-	CiCircleRemove,
-	CiEdit,
-	CiShuffle,
-} from 'react-icons/ci';
+import { CiEdit, CiShuffle } from 'react-icons/ci';
+import TrueElement from '../../ui/TrueElement';
+import FalseElement from '../../ui/FalseElement';
 
 function InfoElement({ title, children, onClick, disabled, currentBoolean }) {
 	return (
@@ -20,27 +17,19 @@ function InfoElement({ title, children, onClick, disabled, currentBoolean }) {
 						<p className='flex items-center text-white text-3xl'>
 							{currentBoolean ? (
 								<>
-									<span className='text-3xl text-teal-500'>
-										<CiCircleCheck />
-									</span>
+									<TrueElement />
 									<span className='text-xl'>
 										<CiShuffle />
 									</span>
-									<span className='text-3xl text-red-500'>
-										<CiCircleRemove />
-									</span>
+									<FalseElement />
 								</>
 							) : (
 								<>
-									<span className='text-3xl text-red-500'>
-										<CiCircleRemove />
-									</span>
+									<FalseElement />
 									<span className='text-xl'>
 										<CiShuffle />
 									</span>
-									<span className='text-3xl text-teal-500'>
-										<CiCircleCheck />
-									</span>
+									<TrueElement />
 								</>
 							)}
 						</p>

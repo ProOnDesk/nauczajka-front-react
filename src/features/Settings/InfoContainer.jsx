@@ -1,7 +1,5 @@
 import {
 	CiBadgeDollar,
-	CiCircleCheck,
-	CiCircleRemove,
 	CiDesktop,
 	CiLocationOn,
 	CiPen,
@@ -20,6 +18,8 @@ import { useGetTutorIndividualGroup } from './useGetTutorIndividualGroup';
 import { useGetTutorSessionMethod } from './useGetTutorSessionMethod';
 import { useSetTutorIndividualGroup } from './useSetTutorIndividualGroup';
 import { useSetTutorSessionMethod } from './useSetTutorSessionMethod';
+import TrueElement from '../../ui/TrueElement';
+import FalseElement from '../../ui/FalseElement';
 
 function InfoContainer() {
 	const { tutorPrice, isTutorPricePending } = useGetTutorPrice();
@@ -82,9 +82,11 @@ function InfoContainer() {
 						title={<TitleElement title={'Indywidualne'} logo={<CiUser />} />}
 						currentBoolean={tutorIndividualGroup?.individual_sessions}
 					>
-						{tutorIndividualGroup?.individual_sessions
-							? trueElement
-							: falseElement}
+						{tutorIndividualGroup?.individual_sessions ? (
+							<TrueElement />
+						) : (
+							<FalseElement />
+						)}
 					</InfoElement>
 					<InfoElement
 						onClick={() =>
@@ -97,7 +99,11 @@ function InfoContainer() {
 						title={<TitleElement title={'Grupowe'} logo={<CiSignpostDuo1 />} />}
 						currentBoolean={tutorIndividualGroup?.group_sessions}
 					>
-						{tutorIndividualGroup?.group_sessions ? trueElement : falseElement}
+						{tutorIndividualGroup?.group_sessions ? (
+							<TrueElement />
+						) : (
+							<FalseElement />
+						)}
 					</InfoElement>
 					<InfoElement
 						onClick={() =>
@@ -110,9 +116,11 @@ function InfoContainer() {
 						title={<TitleElement title={'Stacjonarne'} logo={<CiPen />} />}
 						currentBoolean={tutorSessionMethod?.in_person_sessions_available}
 					>
-						{tutorSessionMethod?.in_person_sessions_available
-							? trueElement
-							: falseElement}
+						{tutorSessionMethod?.in_person_sessions_available ? (
+							<TrueElement />
+						) : (
+							<FalseElement />
+						)}
 					</InfoElement>
 					<InfoElement
 						onClick={() =>
@@ -125,9 +133,11 @@ function InfoContainer() {
 						title={<TitleElement title={'Online'} logo={<CiDesktop />} />}
 						currentBoolean={tutorSessionMethod?.online_sessions_available}
 					>
-						{tutorSessionMethod?.online_sessions_available
-							? trueElement
-							: falseElement}
+						{tutorSessionMethod?.online_sessions_available ? (
+							<TrueElement />
+						) : (
+							<FalseElement />
+						)}
 					</InfoElement>
 				</div>
 			) : (
@@ -150,15 +160,3 @@ function InfoContainer() {
 }
 
 export default InfoContainer;
-
-const trueElement = (
-	<span className='text-3xl text-teal-500'>
-		<CiCircleCheck />
-	</span>
-);
-
-const falseElement = (
-	<span className='text-3xl text-red-500'>
-		<CiCircleRemove />
-	</span>
-);
