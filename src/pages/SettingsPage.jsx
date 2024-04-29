@@ -1,12 +1,18 @@
+import { FooterContext } from '../context/FooterContext';
 import { useUserData } from '../features/Auth/useUserData';
 import TutorInfo from '../features/Settings/TutorInfo';
 import UserInfo from '../features/Settings/UserInfo';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
 function SettingsPage() {
 	const { data: user } = useUserData();
 	const navigate = useNavigate();
+	const { changeColor } = useContext(FooterContext);
+
+	useEffect(() => {
+		changeColor('text-gray');
+	}, [changeColor]);
 
 	useEffect(() => {
 		if (user === null) {

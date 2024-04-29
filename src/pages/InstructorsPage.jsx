@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import SearchContainer from '../features/TutorSearch/SearchContainer';
 import ShowTutorsContainer from '../features/TutorSearch/ShowTutorsContainer';
 import { useGetAllTutors } from '../features/TutorSearch/useGetAllTutors';
+import { FooterContext } from '../context/FooterContext';
 
 function InstructorsPage() {
 	const {
@@ -11,6 +12,11 @@ function InstructorsPage() {
 	} = useGetAllTutors();
 	const [search, setSearch] = useState('');
 	const [skillsFilter, setSkillsFilter] = useState([]);
+	const { changeColor } = useContext(FooterContext);
+
+	useEffect(() => {
+		changeColor('text-gray');
+	}, [changeColor]);
 
 	const searchTutors = useCallback(
 		(signal) => {

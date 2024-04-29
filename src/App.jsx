@@ -16,6 +16,8 @@ import TutorInfoPage from './pages/TutorInfoPage';
 import Page404 from './pages/Page404';
 import ChatsContextProvider from './context/ChatsContext';
 import { useEffect } from 'react';
+import ColorProvider from './context/FooterContext';
+
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -58,7 +60,9 @@ function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<ChatsContextProvider>
+			<ColorProvider>
 				<RouterProvider router={router} />
+			</ColorProvider>
 				<ReactQueryDevtools initialIsOpen={false} />
 				<Toaster
 					position='top-center'
@@ -80,6 +84,7 @@ function App() {
 					}}
 				/>
 			</ChatsContextProvider>
+
 		</QueryClientProvider>
 	);
 }

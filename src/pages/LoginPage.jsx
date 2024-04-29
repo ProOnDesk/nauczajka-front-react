@@ -7,6 +7,8 @@ import Button from '../ui/Inputs/Button';
 import { validateEmail } from '../utils/isInputCorrect';
 import { useLoginUser } from '../features/Auth/useLoginUser';
 import { NavLink } from 'react-router-dom';
+import { useContext, useEffect } from 'react';
+import { FooterContext } from '../context/FooterContext';
 
 function LoginPage() {
 	const { loginUser, isLoginPending } = useLoginUser();
@@ -17,6 +19,11 @@ function LoginPage() {
 		formState: { errors },
 		getValues,
 	} = useForm();
+	const { changeColor } = useContext(FooterContext);
+
+	useEffect(() => {
+		changeColor('text-gray');
+	}, [changeColor]);
 
 	const onSubmit = (data) => {
 		loginUser({ email: data.email, password: data.password });

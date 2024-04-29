@@ -1,21 +1,12 @@
-import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useContext } from 'react';
+import { FooterContext } from '../context/FooterContext';
 
 function Footer() {
 	const currentYear = new Date().getFullYear();
-	const { pathname } = useLocation();
-	const [styles, setStyles] = useState('text-gray');
-
-	useEffect(() => {
-		if (pathname === '/') {
-			setStyles('text-white bg-mainPurple');
-		} else {
-			setStyles('text-gray');
-		}
-	}, [pathname]);
+	const colorContext = useContext(FooterContext);
 
 	return (
-		<footer className={`py-4 flex justify-center ${styles}`}>
+		<footer className={`py-4 flex justify-center ${colorContext.color}`}>
 			<p>{currentYear} &copy; Nauczajka</p>
 		</footer>
 	);

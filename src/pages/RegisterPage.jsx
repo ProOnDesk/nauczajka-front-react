@@ -10,15 +10,22 @@ import {
 
 import Button from '../ui/Inputs/Button';
 import SelectInput from '../features/Auth/SelectInput';
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useRegisterUser } from '../features/Auth/useRegisterUser';
 import Loader from '../ui/Loader';
+import { FooterContext } from '../context/FooterContext';
+
 
 function RegisterPage() {
 	const width = useUserWidth();
 	const [isTutor, setisTutor] = useState('false');
 	const { registerUser, isRegisterPending } = useRegisterUser();
+	const { changeColor } = useContext(FooterContext);
+
+	useEffect(() => {
+		changeColor('text-gray');
+	}, [changeColor]);
 
 	const {
 		register,

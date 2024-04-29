@@ -1,6 +1,6 @@
 import { useParams } from 'react-router';
 import { useTutorInfo } from '../features/TutorInfo/useTutorInfo';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { CiCalendar, CiCircleInfo, CiStar } from 'react-icons/ci';
 import Loader from '../ui/Loader';
 import TutorInfoHeader from '../features/Settings/TutorInfoHeader';
@@ -11,11 +11,19 @@ import StarRating from '../ui/StarRating';
 import TutorRatings from '../features/TutorInfo/TutorRatings';
 import MakeTutorOpionion from '../features/TutorInfo/MakeTutorOpionion';
 import TutorInfoAboutSession from '../features/TutorInfo/TutorInfoAboutSession';
+import { useRateTutor } from '../features/TutorInfo/useRateTutor';
+import { FooterContext } from '../context/FooterContext';
+
 
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
 
 	const { id: tutorId } = useParams();
+	const { changeColor } = useContext(FooterContext);
+
+	useEffect(() => {
+		changeColor('text-gray');
+	}, [changeColor]);
 
 	useEffect(() => {
 		getTutorInfo({ tutorId: tutorId });
