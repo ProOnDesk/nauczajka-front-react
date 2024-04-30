@@ -1,5 +1,8 @@
+import { API_KEY } from '../../services/apiAuth';
+
 function MessageComponent({ userData, message }) {
 	const createdBy = message?.created_by;
+
 	return (
 		<div
 			className={`p-2 flex gap-2  ${
@@ -10,7 +13,7 @@ function MessageComponent({ userData, message }) {
 		>
 			{createdBy?.id !== userData?.id && (
 				<img
-					src={createdBy?.profile_image}
+					src={`${API_KEY}${createdBy?.profile_image}`}
 					alt='Avatar'
 					className='w-10 h-10 rounded-full'
 				/>

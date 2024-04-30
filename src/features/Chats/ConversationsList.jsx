@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import { ChatsContext } from '../../context/ChatsContext';
 import { useAllConversations } from './useAllConversations';
 import { useUserData } from '../Auth/useUserData';
+import { API_KEY } from '../../services/apiAuth';
 
 function ConversationsList() {
 	const { setChoosenUser } = useContext(ChatsContext);
@@ -45,7 +46,7 @@ function ConversationsList() {
 							>
 								<div className='flex flex-row gap-2 items-center'>
 									<img
-										src={`${user?.profile_image}`}
+										src={`${API_KEY}${user?.profile_image}`}
 										alt='Avatar'
 										className='h-16 w-16 rounded-full border-whiteHover group-hover/tutorEl:border-mainPurpleHover shadow-md shadow-shadowBlack border-2 transition-colors duration-300'
 									/>

@@ -4,6 +4,7 @@ import { CiLogout } from 'react-icons/ci';
 import { useLogout } from '../../features/Auth/useLogout';
 import { useUserData } from '../../features/Auth/useUserData';
 import { NavLink } from 'react-router-dom';
+import { API_KEY } from '../../services/apiAuth';
 
 function UserLogo() {
 	const { data: user } = useUserData();
@@ -18,7 +19,7 @@ function UserLogo() {
 		>
 			<div className='h-20 flex justify-center flex-col items-center'>
 				<img
-					src={user?.profile_image}
+					src={`${API_KEY}${user?.profile_image}`}
 					alt='User Avatar'
 					className={`w-8 h-8 border-2  ${
 						userInfoShow ? ' border-mainPurple ' : ' border-white '

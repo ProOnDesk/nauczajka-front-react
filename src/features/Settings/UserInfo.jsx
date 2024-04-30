@@ -5,6 +5,7 @@ import Modal from '../../ui/Modal';
 import EditForm from './EditForm';
 import { useState } from 'react';
 import { IoTrashBinOutline } from 'react-icons/io5';
+import { API_KEY } from '../../services/apiAuth';
 
 function UserInfo({ user }) {
 	const [showModal, setShowModal] = useState(null);
@@ -18,7 +19,7 @@ function UserInfo({ user }) {
 				<div className='flex flex-col justify-center items-center gap-5'>
 					<div className='relative' onClick={() => handleModal('image')}>
 						<img
-							src={user?.profile_image}
+							src={`${API_KEY}${user?.profile_image}`}
 							alt='User Avatar'
 							className='min-w-20 w-20 h-20 border-2 border-white bg-white shadow-myShadow rounded-full'
 						/>
