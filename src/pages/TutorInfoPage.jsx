@@ -11,9 +11,7 @@ import StarRating from '../ui/StarRating';
 import TutorRatings from '../features/TutorInfo/TutorRatings';
 import MakeTutorOpionion from '../features/TutorInfo/MakeTutorOpionion';
 import TutorInfoAboutSession from '../features/TutorInfo/TutorInfoAboutSession';
-import { useRateTutor } from '../features/TutorInfo/useRateTutor';
 import { FooterContext } from '../context/FooterContext';
-
 
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
