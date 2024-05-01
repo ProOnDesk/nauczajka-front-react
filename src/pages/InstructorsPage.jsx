@@ -26,11 +26,16 @@ function InstructorsPage() {
 				avgRatingLt: '',
 				skills: skillsFilter,
 				signal: signal,
+				avgRating: 'desc',
 			});
 			return () => showTutors();
 		},
 		[showTutors, search, skillsFilter]
 	);
+
+	function btnSearchTutors() {
+		searchTutors();
+	}
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -43,7 +48,7 @@ function InstructorsPage() {
 			<SearchContainer
 				search={search}
 				onSearch={setSearch}
-				onClick={searchTutors}
+				onClick={btnSearchTutors}
 				setSkillsFilter={setSkillsFilter}
 				skillsFilter={skillsFilter}
 				searchTutors={searchTutors}

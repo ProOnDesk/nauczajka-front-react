@@ -3,8 +3,17 @@ import { API_KEY } from './apiAuth';
 export async function getAllTutors({
 	avgRatingGt,
 	avgRatingLt,
+	groupSession,
+	personSession,
+	individualSession,
+	onlineSession,
+	priceGt,
+	priceLt,
 	searchByFullName,
 	skills,
+	avgRating,
+	hourlyPrice,
+	location,
 	signal,
 }) {
 	let skillsList = '';
@@ -13,10 +22,15 @@ export async function getAllTutors({
 			return acc.concat('&skills=', skill);
 		}, '');
 	}
+	let additionalFilters = '';
+	if (avgRating)
+		additionalFilters.concat('&sorting_by_average_rating=', avgRating);
 
+	console.log(avgRating);
+	//&sorting_by_average_rating=${avgRating}&sorting_by_hourly_rate=${hourlyPrice}&group_sessions_available=${groupSession}&in_person_sessions_available=${personSession}&individual_sessions_available=${individualSession}&online_sessions_available=${onlineSession}&price__gt=${priceGt}&price__lt=${priceLt}&tutoring_location=${location}
 	const response = await fetch(
 		API_KEY +
-			`/api/user/tutor/search/?avg_rating__gt=${avgRatingGt}&avg_rating__lt=${avgRatingLt}&search_by_full_name=${searchByFullName}${skillsList}`,
+			`/api/user/tutor/search/?avg_rating__gt=${avgRatingGt}&avg_rating__lt=${avgRatingLt}&search_by_full_name=${searchByFullName}${additionalFilters}${skillsList}`,
 		{
 			method: 'GET',
 			headers: {
