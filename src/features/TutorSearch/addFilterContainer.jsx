@@ -1,17 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useAllAvailableSkills } from '../Settings/useAllAvailableSkills';
-import { useEffect } from 'react';
 import AvailableSkillElement from '../Settings/AvailableSkillElement';
 import { CiFileOff } from 'react-icons/ci';
 import EditFormBtn from '../Settings/EditFormBtn';
 import toast from 'react-hot-toast';
 
-function AddFilterContainer({
-	setModalVisible,
-	setSkillsFilter,
-	skillsFilter,
-	searchTutors,
-}) {
+function AddFilterContainer({ setModalVisible, setFilters, filters }) {
 	const { availableSkills } = useAllAvailableSkills();
 	const { register, handleSubmit } = useForm();
 
@@ -21,13 +15,14 @@ function AddFilterContainer({
 			if (value === true) choosenSkills.push(key);
 		}
 
-		setSkillsFilter(choosenSkills);
-		searchTutors();
-		toast.success('Ustawiono filtr przedmiotów');
-		setModalVisible(false);
-	}
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			skills: choosenSkills,
+		}));
 
-	useEffect(() => {}, []);
+		toast.success('Ustawiono filtr przedmiotów');
+		setModalVisible(null);
+	}
 
 	return (
 		<form
@@ -41,7 +36,7 @@ function AddFilterContainer({
 						<AvailableSkillElement
 							register={register}
 							key={skill.skill}
-							defaultChecked={skillsFilter?.find((el) => el === skill.skill)}
+							defaultChecked={filters.skills?.find((el) => el === skill.skill)}
 							label={skill.skill}
 						/>
 					))
@@ -55,7 +50,7 @@ function AddFilterContainer({
 				)}
 			</div>
 			<div className='mt-6 flex flex-row flex-wrap-reverse gap-5 justify-center w-full'>
-				<EditFormBtn onClick={() => setModalVisible(false)} type={'button'}>
+				<EditFormBtn onClick={() => setModalVisible(null)} type={'button'}>
 					Anuluj
 				</EditFormBtn>
 				<EditFormBtn type={'submit'}>Zatwierdź</EditFormBtn>
