@@ -11,18 +11,22 @@ function InstructorsPage() {
 		isShowingTutors,
 	} = useGetAllTutors();
 	const [filters, setFilters] = useState({
-		avgRatingGt: '',
-		avgRatingLt: '',
-		groupSession: '',
-		personSession: '',
-		individualSession: '',
-		onlineSession: '',
-		priceGt: '',
-		priceLt: '',
 		searchByFullName: '',
 		skills: [],
-		avgRating: '',
+		
+		individualSession: '',
+		groupSession: '',
+		personSession: '',
+		onlineSession: '',
+		
+		avgRatingGt: '',
+		avgRatingLt: '',
+		priceGt: '',
+		priceLt: '',
+		
 		hourlyPrice: '',
+		avgRating: '',
+		
 		location: '',
 	});
 	const { changeColor } = useContext(FooterContext);

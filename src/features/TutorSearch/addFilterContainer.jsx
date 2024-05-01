@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 import { useAllAvailableSkills } from '../Settings/useAllAvailableSkills';
-import AvailableSkillElement from '../Settings/AvailableSkillElement';
 import { CiFileOff } from 'react-icons/ci';
 import EditFormBtn from '../Settings/EditFormBtn';
 import toast from 'react-hot-toast';
+import Checkbox from '../../ui/Inputs/Checkbox';
 
 function AddFilterContainer({ setModalVisible, setFilters, filters }) {
 	const { availableSkills } = useAllAvailableSkills();
@@ -29,11 +29,11 @@ function AddFilterContainer({ setModalVisible, setFilters, filters }) {
 			onSubmit={handleSubmit(onSubmit)}
 			className='flex justify-center flex-col gap-10'
 		>
-			<p className='text-2xl text-center'>Dodaj filtr przedmiotów</p>
+			<p className='text-2xl text-center'>Wybierz przedmioty</p>
 			<div className='flex flex-wrap gap-2 md:mx-10'>
 				{availableSkills?.length > 0 ? (
 					availableSkills?.map((skill) => (
-						<AvailableSkillElement
+						<Checkbox
 							register={register}
 							key={skill.skill}
 							defaultChecked={filters.skills?.find((el) => el === skill.skill)}

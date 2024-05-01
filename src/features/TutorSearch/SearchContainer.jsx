@@ -5,10 +5,14 @@ import SearchButton from './SearchButton';
 
 import AddFilterContainer from './addFilterContainer';
 import Modal from '../../ui/Modal';
+import SessionMethods from './SessionMethods';
 
 function SearchContainer({ onClick, filters, setFilters }) {
 	const [modalVisible, setModalVisible] = useState(null);
-	const [isFilterActive, setIsFilterActive] = useState(false);
+	const [isFilterActive, setIsFilterActive] = useState({
+		skills: false,
+		sessionMethods: false,
+	});
 	function handleSearch(e) {
 		setFilters((prevFilters) => ({
 			...prevFilters,
@@ -17,8 +21,10 @@ function SearchContainer({ onClick, filters, setFilters }) {
 	}
 
 	useEffect(() => {
-		if (filters.skills.length > 0) setIsFilterActive(true);
-		else setIsFilterActive(false);
+		if (filters.skills.length > 0)
+			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: true }));
+		else
+			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: false }));
 	}, [filters, setIsFilterActive]);
 
 	return (
@@ -32,23 +38,30 @@ function SearchContainer({ onClick, filters, setFilters }) {
 			<div className='flex flex-row flex-wrap gap-2 text-sm'>
 				<SearchButton
 					icon={<CiFilter />}
-					isActive={isFilterActive}
+					isActive={isFilterActive.skills}
 					onClick={() => setModalVisible('skills')}
 				>
 					Przedmioty
 				</SearchButton>
 				<SearchButton
 					icon={<CiFilter />}
-					isActive={isFilterActive}
-					onClick={() => setModalVisible('skills')}
+					isActive={isFilterActive.sessionMethods}
+					onClick={() => setModalVisible('sessionMethods')}
 				>
-					Przedmioty
+					Metodyka
 				</SearchButton>
 			</div>
 			{modalVisible && (
 				<Modal>
 					{modalVisible === 'skills' && (
 						<AddFilterContainer
+							setModalVisible={setModalVisible}
+							filters={filters}
+							setFilters={setFilters}
+						/>
+					)}
+					{modalVisible === 'sessionMethods' && (
+						<SessionMethods
 							setModalVisible={setModalVisible}
 							filters={filters}
 							setFilters={setFilters}
