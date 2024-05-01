@@ -6,12 +6,14 @@ import SearchButton from './SearchButton';
 import AddFilterContainer from './addFilterContainer';
 import Modal from '../../ui/Modal';
 import SessionMethods from './SessionMethods';
+import PriceReview from './PriceReview';
 
 function SearchContainer({ onClick, filters, setFilters }) {
 	const [modalVisible, setModalVisible] = useState(null);
 	const [isFilterActive, setIsFilterActive] = useState({
 		skills: false,
 		sessionMethods: false,
+		price_review: false,
 	});
 	function handleSearch(e) {
 		setFilters((prevFilters) => ({
@@ -25,6 +27,7 @@ function SearchContainer({ onClick, filters, setFilters }) {
 			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: true }));
 		else
 			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: false }));
+
 		if (
 			filters.individualSession === true ||
 			filters.groupSession === true ||
@@ -40,6 +43,23 @@ function SearchContainer({ onClick, filters, setFilters }) {
 				...prevFilters,
 				sessionMethods: false,
 			}));
+
+		if (
+			filters.avgRatingGt !== '' ||
+			filters.avgRatingLt !== '' ||
+			filters.priceGt !== '' ||
+			filters.priceLt !== ''
+		) {
+			setIsFilterActive((prevFilters) => ({
+				...prevFilters,
+				price_review: true,
+			}));
+		} else {
+			setIsFilterActive((prevFilters) => ({
+				...prevFilters,
+				price_review: false,
+			}));
+		}
 	}, [filters, setIsFilterActive]);
 
 	return (
@@ -65,6 +85,13 @@ function SearchContainer({ onClick, filters, setFilters }) {
 				>
 					Metodyka
 				</SearchButton>
+				<SearchButton
+					icon={<CiFilter />}
+					isActive={isFilterActive.price_review}
+					onClick={() => setModalVisible('price_review')}
+				>
+					Opinia/Cena
+				</SearchButton>
 			</div>
 			{modalVisible && (
 				<Modal>
@@ -77,6 +104,13 @@ function SearchContainer({ onClick, filters, setFilters }) {
 					)}
 					{modalVisible === 'sessionMethods' && (
 						<SessionMethods
+							setModalVisible={setModalVisible}
+							filters={filters}
+							setFilters={setFilters}
+						/>
+					)}
+					{modalVisible === 'price_review' && (
+						<PriceReview
 							setModalVisible={setModalVisible}
 							filters={filters}
 							setFilters={setFilters}
