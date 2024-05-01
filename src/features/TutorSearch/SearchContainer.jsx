@@ -7,6 +7,7 @@ import AddFilterContainer from './addFilterContainer';
 import Modal from '../../ui/Modal';
 import SessionMethods from './SessionMethods';
 import PriceReview from './PriceReview';
+import SortComponent from './SortComponent';
 
 function SearchContainer({ onClick, filters, setFilters }) {
 	const [modalVisible, setModalVisible] = useState(null);
@@ -63,14 +64,14 @@ function SearchContainer({ onClick, filters, setFilters }) {
 	}, [filters, setIsFilterActive]);
 
 	return (
-		<div className='w-full sm400:w-3/4 md:w-1/2 px-2 mx-auto py-5 flex flex-col gap-2'>
+		<div className='w-full sm400:w-3/4 md800:max-w-[700px] px-2 mx-auto py-5 flex flex-col gap-2'>
 			<SearchInput
 				onChange={(e) => handleSearch(e)}
 				onClick={onClick}
 				placeholder={'Szukaj Korepetytora'}
 				value={filters?.searchByFullName}
 			/>
-			<div className='flex flex-row flex-wrap gap-2 text-sm'>
+			<div className='flex flex-col sm400:flex-row flex-wrap w-full sm400:w-auto gap-2 text-sm'>
 				<SearchButton
 					icon={<CiFilter />}
 					isActive={isFilterActive.skills}
@@ -92,6 +93,7 @@ function SearchContainer({ onClick, filters, setFilters }) {
 				>
 					Opinia/Cena
 				</SearchButton>
+				<SortComponent filters={filters} setFilters={setFilters} />
 			</div>
 			{modalVisible && (
 				<Modal>
