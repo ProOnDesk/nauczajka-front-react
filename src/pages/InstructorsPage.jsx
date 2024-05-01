@@ -13,17 +13,14 @@ function InstructorsPage() {
 	const [filters, setFilters] = useState({
 		searchByFullName: '',
 		skills: [],
-		
 		individualSession: '',
 		groupSession: '',
 		personSession: '',
 		onlineSession: '',
-		
 		avgRatingGt: '',
 		avgRatingLt: '',
 		priceGt: '',
 		priceLt: '',
-		
 		hourlyPrice: '',
 		avgRating: '',
 		

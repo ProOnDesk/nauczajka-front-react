@@ -1,14 +1,24 @@
 import { CiSquareChevDown, CiSquareChevUp } from 'react-icons/ci';
 import { BsSortAlphaDown } from 'react-icons/bs';
 import SortElement from './SortElement';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 function SortComponent({ filters, setFilters }) {
 	const [isOpen, setIsOpen] = useState(false);
+	const wrapperRef = useRef(null);
 
-	//avgRating
-	//hourlyPrice
-	// asc , desc
+	useEffect(() => {
+		const handleClickOutside = (event) => {
+			if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+				setIsOpen(false);
+			}
+		};
+
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [setIsOpen]);
 
 	function handleChooseSort(sortBy) {
 		if (sortBy === 'hourlyPriceDesc')
@@ -39,9 +49,10 @@ function SortComponent({ filters, setFilters }) {
 
 	return (
 		<div
+			ref={wrapperRef}
 			className={`group relative px-2 py-1 flex items-center gap-2 bg-white rounded-md ${
 				isOpen ? 'border-mainPurple' : 'border-whiteHover'
-			} border-2 text-gray hover:border-mainPurple hover:cursor-default transition-colors`}
+			} border-2 text-gray hover:border-mainPurple transition-colors`}
 			onClick={() => {
 				setIsOpen((currentState) => !currentState);
 			}}
