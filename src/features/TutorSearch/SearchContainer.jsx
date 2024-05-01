@@ -25,6 +25,21 @@ function SearchContainer({ onClick, filters, setFilters }) {
 			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: true }));
 		else
 			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: false }));
+		if (
+			filters.individualSession === true ||
+			filters.groupSession === true ||
+			filters.personSession === true ||
+			filters.onlineSession === true
+		)
+			setIsFilterActive((prevFilters) => ({
+				...prevFilters,
+				sessionMethods: true,
+			}));
+		else
+			setIsFilterActive((prevFilters) => ({
+				...prevFilters,
+				sessionMethods: false,
+			}));
 	}, [filters, setIsFilterActive]);
 
 	return (
