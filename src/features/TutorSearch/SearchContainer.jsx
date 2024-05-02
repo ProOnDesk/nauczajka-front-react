@@ -7,7 +7,10 @@ import AddFilterContainer from './addFilterContainer';
 import Modal from '../../ui/Modal';
 import SessionMethods from './SessionMethods';
 import PriceReview from './PriceReview';
-import SortComponent from './SortComponent';
+import SortList from './SortList';
+import ListComponent from './ListComponent';
+import { BsSortAlphaDown } from 'react-icons/bs';
+import LocationComponent from './LocationComponent';
 
 function SearchContainer({ onClick, filters, setFilters }) {
 	const [modalVisible, setModalVisible] = useState(null);
@@ -24,6 +27,7 @@ function SearchContainer({ onClick, filters, setFilters }) {
 	}
 
 	useEffect(() => {
+		console.log(filters.location);
 		if (filters.skills.length > 0)
 			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: true }));
 		else
@@ -93,7 +97,12 @@ function SearchContainer({ onClick, filters, setFilters }) {
 				>
 					Opinia/Cena
 				</SearchButton>
-				<SortComponent filters={filters} setFilters={setFilters} />
+				<ListComponent icon={<CiFilter />} title={'Miasto'}>
+					<LocationComponent filters={filters} setFilters={setFilters} />
+				</ListComponent>
+				<ListComponent title={'Sortuj'} icon={<BsSortAlphaDown />}>
+					<SortList filters={filters} setFilters={setFilters} />
+				</ListComponent>
 			</div>
 			{modalVisible && (
 				<Modal>

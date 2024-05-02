@@ -23,7 +23,6 @@ function InstructorsPage() {
 		priceLt: '',
 		hourlyPrice: '',
 		avgRating: '',
-		
 		location: '',
 	});
 	const { changeColor } = useContext(FooterContext);

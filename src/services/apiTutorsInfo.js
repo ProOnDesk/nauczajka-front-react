@@ -90,6 +90,7 @@ export async function getAllTutors({
 			location
 		);
 	}
+	console.log(additionalFilters);
 
 	const response = await fetch(
 		API_KEY + `/api/user/tutor/search/${additionalFilters}${skillsList}`,
