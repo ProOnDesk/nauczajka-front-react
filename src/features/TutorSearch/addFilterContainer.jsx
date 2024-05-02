@@ -1,17 +1,11 @@
 import { useForm } from 'react-hook-form';
 import { useAllAvailableSkills } from '../Settings/useAllAvailableSkills';
-import { useEffect } from 'react';
-import AvailableSkillElement from '../Settings/AvailableSkillElement';
 import { CiFileOff } from 'react-icons/ci';
 import EditFormBtn from '../Settings/EditFormBtn';
 import toast from 'react-hot-toast';
+import Checkbox from '../../ui/Inputs/Checkbox';
 
-function AddFilterContainer({
-	setModalVisible,
-	setSkillsFilter,
-	skillsFilter,
-	searchTutors,
-}) {
+function AddFilterContainer({ setModalVisible, setFilters, filters }) {
 	const { availableSkills } = useAllAvailableSkills();
 	const { register, handleSubmit } = useForm();
 
@@ -21,27 +15,28 @@ function AddFilterContainer({
 			if (value === true) choosenSkills.push(key);
 		}
 
-		setSkillsFilter(choosenSkills);
-		searchTutors();
-		toast.success('Ustawiono filtr przedmiotów');
-		setModalVisible(false);
-	}
+		setFilters((prevFilters) => ({
+			...prevFilters,
+			skills: choosenSkills,
+		}));
 
-	useEffect(() => {}, []);
+		toast.success('Ustawiono filtr przedmiotów');
+		setModalVisible(null);
+	}
 
 	return (
 		<form
 			onSubmit={handleSubmit(onSubmit)}
 			className='flex justify-center flex-col gap-10'
 		>
-			<p className='text-2xl text-center'>Dodaj filtr przedmiotów</p>
+			<p className='text-2xl text-center'>Wybierz przedmioty</p>
 			<div className='flex flex-wrap gap-2 md:mx-10'>
 				{availableSkills?.length > 0 ? (
 					availableSkills?.map((skill) => (
-						<AvailableSkillElement
+						<Checkbox
 							register={register}
 							key={skill.skill}
-							defaultChecked={skillsFilter?.find((el) => el === skill.skill)}
+							defaultChecked={filters.skills?.find((el) => el === skill.skill)}
 							label={skill.skill}
 						/>
 					))
@@ -55,7 +50,7 @@ function AddFilterContainer({
 				)}
 			</div>
 			<div className='mt-6 flex flex-row flex-wrap-reverse gap-5 justify-center w-full'>
-				<EditFormBtn onClick={() => setModalVisible(false)} type={'button'}>
+				<EditFormBtn onClick={() => setModalVisible(null)} type={'button'}>
 					Anuluj
 				</EditFormBtn>
 				<EditFormBtn type={'submit'}>Zatwierdź</EditFormBtn>

@@ -10,8 +10,21 @@ function InstructorsPage() {
 		allTutors: tutorList,
 		isShowingTutors,
 	} = useGetAllTutors();
-	const [search, setSearch] = useState('');
-	const [skillsFilter, setSkillsFilter] = useState([]);
+	const [filters, setFilters] = useState({
+		searchByFullName: '',
+		skills: [],
+		individualSession: '',
+		groupSession: '',
+		personSession: '',
+		onlineSession: '',
+		avgRatingGt: '',
+		avgRatingLt: '',
+		priceGt: '',
+		priceLt: '',
+		hourlyPrice: '',
+		avgRating: '',
+		location: '',
+	});
 	const { changeColor } = useContext(FooterContext);
 
 	useEffect(() => {
@@ -21,16 +34,17 @@ function InstructorsPage() {
 	const searchTutors = useCallback(
 		(signal) => {
 			showTutors({
-				searchByFullName: search,
-				avgRatingGt: '',
-				avgRatingLt: '',
-				skills: skillsFilter,
 				signal: signal,
+				...filters,
 			});
 			return () => showTutors();
 		},
-		[showTutors, search, skillsFilter]
+		[showTutors, filters]
 	);
+
+	function btnSearchTutors() {
+		searchTutors();
+	}
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -41,12 +55,9 @@ function InstructorsPage() {
 	return (
 		<div className='mx-auto md:pt-10 max-w-7xl w-full'>
 			<SearchContainer
-				search={search}
-				onSearch={setSearch}
-				onClick={searchTutors}
-				setSkillsFilter={setSkillsFilter}
-				skillsFilter={skillsFilter}
-				searchTutors={searchTutors}
+				onClick={btnSearchTutors}
+				filters={filters}
+				setFilters={setFilters}
 			/>
 			<ShowTutorsContainer
 				tutorList={tutorList}
