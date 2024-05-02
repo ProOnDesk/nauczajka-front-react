@@ -1,10 +1,6 @@
-import { useEffect, useState } from 'react';
-
 function LocationComponent({ filters, setFilters }) {
-	const [input, setInput] = useState(filters.location);
 	console.log(filters);
 
-	useEffect(() => {}, []);
 	return (
 		<div className='w-full '>
 			<input
