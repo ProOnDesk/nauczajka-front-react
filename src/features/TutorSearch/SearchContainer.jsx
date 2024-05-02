@@ -98,7 +98,7 @@ function SearchContainer({ onClick, filters, setFilters }) {
 					Opinia/Cena
 				</SearchButton>
 				<ListComponent icon={<CiFilter />} title={'Miasto'}>
-					<LocationComponent filters={filters} setFilters={setFilters} />
+					<LocationComponent setFilters={setFilters} />
 				</ListComponent>
 				<ListComponent title={'Sortuj'} icon={<BsSortAlphaDown />}>
 					<SortList filters={filters} setFilters={setFilters} />
