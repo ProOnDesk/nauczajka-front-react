@@ -3,8 +3,17 @@ import { API_KEY } from './apiAuth';
 export async function getAllTutors({
 	avgRatingGt,
 	avgRatingLt,
+	groupSession,
+	personSession,
+	individualSession,
+	onlineSession,
+	priceGt,
+	priceLt,
 	searchByFullName,
 	skills,
+	avgRating,
+	hourlyPrice,
+	location,
 	signal,
 }) {
 	let skillsList = '';
@@ -13,10 +22,78 @@ export async function getAllTutors({
 			return acc.concat('&skills=', skill);
 		}, '');
 	}
+	let additionalFilters = '?';
+
+	if (avgRatingGt) {
+		additionalFilters += additionalFilters.concat(
+			'&avg_rating__gt=',
+			avgRatingGt
+		);
+	}
+	if (avgRatingLt) {
+		additionalFilters += additionalFilters.concat(
+			'&avg_rating__lt=',
+			avgRatingLt
+		);
+	}
+	if (groupSession) {
+		additionalFilters += additionalFilters.concat(
+			'&group_sessions_available=',
+			groupSession
+		);
+	}
+	if (personSession) {
+		additionalFilters += additionalFilters.concat(
+			'&in_person_sessions_available=',
+			personSession
+		);
+	}
+	if (individualSession) {
+		additionalFilters += additionalFilters.concat(
+			'&individual_sessions_available=',
+			individualSession
+		);
+	}
+	if (onlineSession) {
+		additionalFilters += additionalFilters.concat(
+			'&online_sessions_available=',
+			onlineSession
+		);
+	}
+	if (priceGt) {
+		additionalFilters += additionalFilters.concat('&price__gt=', priceGt);
+	}
+	if (priceLt) {
+		additionalFilters += additionalFilters.concat('&price__lt=', priceLt);
+	}
+	if (searchByFullName) {
+		additionalFilters += additionalFilters.concat(
+			'&search_by_full_name=',
+			searchByFullName
+		);
+	}
+	if (avgRating) {
+		additionalFilters += additionalFilters.concat(
+			'&sorting_by_average_rating=',
+			avgRating
+		);
+	}
+	if (hourlyPrice) {
+		additionalFilters += additionalFilters.concat(
+			'&sorting_by_hourly_rate=',
+			hourlyPrice
+		);
+	}
+	if (location) {
+		additionalFilters += additionalFilters.concat(
+			'&tutoring_location=',
+			location
+		);
+	}
+	console.log(additionalFilters);
 
 	const response = await fetch(
-		API_KEY +
-			`/api/user/tutor/search/?avg_rating__gt=${avgRatingGt}&avg_rating__lt=${avgRatingLt}&search_by_full_name=${searchByFullName}${skillsList}`,
+		API_KEY + `/api/user/tutor/search/${additionalFilters}${skillsList}`,
 		{
 			method: 'GET',
 			headers: {

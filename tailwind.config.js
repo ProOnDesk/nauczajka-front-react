@@ -24,6 +24,7 @@ export default {
 			},
 			screens: {
 				sm400: "400px",
+				md800: '800px'
 			},
 			boxShadow: {
 				myShadow: "0 6px 12px 0px rgba(0,0,0,0.3)",

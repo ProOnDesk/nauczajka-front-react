@@ -7,11 +7,11 @@ import { useUserData } from '../Auth/useUserData';
 import { API_KEY } from '../../services/apiAuth';
 
 function ConversationsList() {
-	const { setChoosenUser } = useContext(ChatsContext);
+	const { setChoosenUser, isChatOpen } = useContext(ChatsContext);
 	const { conversationsList, isConversationsLoading, refetchAllConversations } =
 		useAllConversations();
 	const { data: userData } = useUserData();
-	refetchAllConversations();
+	if (isChatOpen) refetchAllConversations();
 
 	return isConversationsLoading ? (
 		<div className='absolute top-0 h-screen w-full flex justify-center items-center -z-10'>
