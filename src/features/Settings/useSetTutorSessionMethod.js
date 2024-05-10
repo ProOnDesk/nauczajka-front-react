@@ -17,7 +17,7 @@ export function useSetTutorSessionMethod() {
 		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
-			console.log(error);
+			toast.error('' + Object?.values(error)[0]);
 		},
 	});
 
