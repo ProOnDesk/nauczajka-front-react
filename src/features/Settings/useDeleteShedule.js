@@ -14,7 +14,6 @@ export function useDeleteShedule() {
 		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
-			console.log(err);
 			toast.error('' + Object?.values(error)[0]);
 		},
 	});

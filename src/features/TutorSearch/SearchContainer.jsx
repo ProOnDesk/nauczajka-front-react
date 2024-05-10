@@ -27,7 +27,6 @@ function SearchContainer({ onClick, filters, setFilters }) {
 	}
 
 	useEffect(() => {
-		console.log(filters.location);
 		if (filters.skills.length > 0)
 			setIsFilterActive((prevFilters) => ({ ...prevFilters, skills: true }));
 		else

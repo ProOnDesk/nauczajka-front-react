@@ -41,9 +41,8 @@ function EditForm({ setShowModal, showModal }) {
 				toast.error('Wybierz zdjęcie.');
 			}
 		}
-		if (showModal === 'email') {
-			console.log('zmien email');
-		}
+		// if (showModal === 'email') {
+		// }
 		if (showModal === 'password') {
 			updateUser({
 				fieldToUpdate: 'password',

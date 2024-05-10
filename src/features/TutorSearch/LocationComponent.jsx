@@ -1,6 +1,4 @@
-function LocationComponent({ filters, setFilters }) {
-	console.log(filters);
-
+function LocationComponent({ setFilters }) {
 	return (
 		<div className='w-full '>
 			<input
