@@ -7,7 +7,7 @@ function MessageAreaComponent({ conversationId, userData, setMessages }) {
 	const [message, setMessage] = useState('');
 	const token = sessionStorage.getItem('auth_token');
 	const { sendJsonMessage, lastJsonMessage } = useWebSocket(
-		`ws://${API_LINK}/ws/chat/${conversationId}/?token=${token}`
+		`wss://${API_LINK}/ws/chat/${conversationId}/?token=${token}`
 	);
 
 	const sendMessage = () => {
