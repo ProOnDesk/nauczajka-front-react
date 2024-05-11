@@ -1,9 +1,11 @@
 import StarRating from '../../ui/StarRating';
 
 function TutorRatings({ tutorInfo }) {
+	const tutorRatings = tutorInfo?.tutor_ratings.slice().reverse();
+
 	return (
 		<div className='divide-y-[1px] divide-mainPurple'>
-			{tutorInfo?.tutor_ratings.map((rate, id) => {
+			{tutorRatings?.map((rate, id) => {
 				const ratingDate = new Date(rate.created_at);
 
 				return (

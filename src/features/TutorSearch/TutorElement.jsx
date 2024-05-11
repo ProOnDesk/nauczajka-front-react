@@ -4,13 +4,14 @@ import TutorHeader from '../../ui/TutorHeader';
 import { CiBag1 } from 'react-icons/ci';
 
 function TutorElement({ tutorInfo }) {
+	console.log(tutorInfo?.tutoring_location);
 	return (
 		<NavLink
 			to={`${tutorInfo.id}`}
 			className='flex flex-col md:flex-row justify-center md:justify-between border-whiteHover border-2 rounded-md p-2 gap-3 md:px-8 sm400:w-3/4 w-full mx-auto md:w-4/5 hover:bg-whiteHover group/tutorEl hover:cursor-pointer transition-colors'
 		>
-			<TutorHeader tutorInfo={tutorInfo} />
-			<div className='flex flex-row items-center justify-center gap-10'>
+			<TutorHeader tutorInfo={tutorInfo} showLocation={true} />
+			<div className='flex flex-row items-center justify-center gap-10 '>
 				<p className='flex flex-col items-center text-gray'>
 					{tutorInfo.avg_rating}
 					<span className='text-2xl text-yellow-500 group-hover/tutorEl:text-mainSalmonHover transition-colors duration-300'>

@@ -20,6 +20,8 @@ export function useLoginUser() {
 			const decodedRefreshToken = jwtDecode(jwt_refresh);
 			cookies.set('jwt_refresh', jwt_refresh, {
 				expires: new Date(decodedRefreshToken.exp * 1000),
+				secure: true,
+				sameSite: 'strict',
 			});
 			sessionStorage.setItem('auth_token', data.access);
 			refetch();

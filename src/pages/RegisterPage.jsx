@@ -13,7 +13,6 @@ import SelectInput from '../features/Auth/SelectInput';
 import { useContext, useEffect, useState } from 'react';
 
 import { useRegisterUser } from '../features/Auth/useRegisterUser';
-import Loader from '../ui/Loader';
 import { FooterContext } from '../context/FooterContext';
 
 
