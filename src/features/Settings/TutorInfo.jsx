@@ -8,8 +8,10 @@ import { CiBullhorn, CiCalendar, CiCircleInfo, CiMedal } from 'react-icons/ci';
 import TutorInfoHeader from './TutorInfoHeader';
 import CalendarContainer from './CalendarContainer';
 import InfoContainer from './InfoContainer';
+import { useShowShedule } from './useShowShedule';
 
 function TutorInfo() {
+	const { tutorShedule, refetchShedule } = useShowShedule();
 	const { data } = useGetDescription();
 	const [showModal, setShowModal] = useState(null);
 	function handleModal(type) {
@@ -33,7 +35,10 @@ function TutorInfo() {
 			</div>
 			<div>
 				<TutorInfoHeader icon={<CiCalendar />} label={'Wolne terminy'} />
-				<CalendarContainer />
+				<CalendarContainer
+					tutorShedule={tutorShedule}
+					refetchShedule={refetchShedule}
+				/>
 			</div>
 
 			{showModal && (

@@ -11,7 +11,6 @@ import Modal from '../../ui/Modal';
 import TutorDateSettings from './TutorDateSettings';
 import 'dayjs/locale/pl';
 import pl from 'dayjs/locale/pl';
-import { useShowShedule } from './useShowShedule';
 
 const formatTime = (time) => String(time).padStart(2, '0');
 
@@ -100,8 +99,7 @@ const ServerDay = (props) => {
 	);
 };
 
-function CalendarContainer({ readOnly }) {
-	const { tutorShedule, refetchShedule } = useShowShedule();
+function CalendarContainer({ readOnly, tutorShedule, refetchShedule }) {
 	const [highlightedDays, setHighlightedDays] = useState();
 	const [choosenDate, setChoosenDate] = useState(null);
 	const [month, setMonth] = useState(new Date().getMonth());

@@ -15,7 +15,6 @@ import { FooterContext } from '../context/FooterContext';
 
 function TutorInfoPage() {
 	const { getTutorInfo, isTutorInfoPending, tutorInfo } = useTutorInfo();
-
 	const { id: tutorId } = useParams();
 	const { changeColor } = useContext(FooterContext);
 
