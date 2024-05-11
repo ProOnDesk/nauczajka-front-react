@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 import { useTutorInfo } from '../features/TutorInfo/useTutorInfo';
 import { useContext, useEffect } from 'react';
-import { CiCalendar, CiCircleInfo, CiStar } from 'react-icons/ci';
+import { CiBullhorn, CiCalendar, CiCircleInfo, CiStar } from 'react-icons/ci';
 import Loader from '../ui/Loader';
 import TutorInfoHeader from '../features/Settings/TutorInfoHeader';
 import SettingsElement from '../features/Settings/SettingsElement';
@@ -39,7 +39,7 @@ function TutorInfoPage() {
 					</SettingsElement>
 				</div>
 				<div className='flex flex-col gap-2'>
-					<TutorInfoHeader icon={<CiCircleInfo />} label={'Informacje'} />
+					<TutorInfoHeader icon={<CiBullhorn />} label={'Informacje'} />
 					<TutorInfoAboutSession tutorInfo={tutorInfo} />
 				</div>
 				<div>
