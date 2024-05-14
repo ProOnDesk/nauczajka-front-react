@@ -6,6 +6,7 @@ import { useUserData } from '../../features/Auth/useUserData';
 import { useLogout } from '../../features/Auth/useLogout';
 import { CiHome, CiLogin, CiLogout, CiUser } from 'react-icons/ci';
 import { NavLink } from 'react-router-dom';
+import { API_KEY } from '../../services/apiAuth';
 
 const navVariants = {
 	visible: { x: 0 },
@@ -101,7 +102,7 @@ function NavMobile({ appLayoutRef }) {
 						}}
 					>
 						<img
-							src={user?.profile_image}
+							src={`${API_KEY}${user?.profile_image}`}
 							alt='User Avatar'
 							className='w-16 h-16 border-2 rounded-full border-white shadow-myShadow group-[.icon]:group-hover:border-mainPurple transition-colors mx-5'
 						/>
