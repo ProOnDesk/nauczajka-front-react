@@ -11,6 +11,8 @@ import AboutUsButton from "../ui/homepage/AboutUsButton";
 import OfferImg from "../ui/homepage/OfferImg";
 import OfferText from "../ui/homepage/OfferText";
 import HowItWorksList from "../ui/homepage/HowItWorksList";
+// import Carousel from "../ui/homepage/Carousel";
+import Contact from "../ui/homepage/Contact";
 
 function HomePage() {
 	const { changeColor } = useContext(FooterContext);
@@ -37,6 +39,8 @@ function HomePage() {
 					<OfferImg />
 					<OfferText />
 				</div>
+				{/* <Carousel /> */}
+				<Contact />
 			</div>
 		</div>
 	);

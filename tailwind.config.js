@@ -25,6 +25,7 @@ export default {
 			screens: {
 				sm400: "400px",
 				sm500: "500px",
+				sm600: "600px",
 				sm700: "700px",
 				sm840: "840px",
 				md960: "960px",
