@@ -4,7 +4,6 @@ import TutorHeader from '../../ui/TutorHeader';
 import { CiBag1 } from 'react-icons/ci';
 
 function TutorElement({ tutorInfo }) {
-	console.log(tutorInfo?.tutoring_location);
 	return (
 		<NavLink
 			to={`${tutorInfo.id}`}
