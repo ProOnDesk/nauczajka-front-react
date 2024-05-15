@@ -1,6 +1,7 @@
+import { CiLocationOn } from 'react-icons/ci';
 import { API_KEY } from '../services/apiAuth';
 
-function TutorHeader({ tutorInfo }) {
+function TutorHeader({ tutorInfo, showLocation }) {
 	return (
 		<div className='flex flex-col md:flex-row justify-center items-center gap-2 md:gap-5'>
 			<img
@@ -8,7 +9,15 @@ function TutorHeader({ tutorInfo }) {
 				alt='dsa'
 				className='h-24 w-24 rounded-full border-whiteHover group-hover/tutorEl:border-mainPurpleHover shadow-md shadow-shadowBlack border-2 transition-colors duration-300'
 			/>
-			<div className='flex flex-col'>
+			<div className='flex flex-col items-center md:items-baseline'>
+				{showLocation && (
+					<p className='text-sm gap-2 flex justify-center items-center text-gray text-center w-fit'>
+						<span className='text-lg text-black'>
+							<CiLocationOn />
+						</span>
+						{tutorInfo?.tutoring_location}
+					</p>
+				)}
 				<div className='flex flex-row gap-2 flex-wrap justify-center md:justify-start'>
 					<p className='text-2xl'>{tutorInfo?.first_name}</p>
 					<p className='text-2xl'>{tutorInfo?.last_name}</p>

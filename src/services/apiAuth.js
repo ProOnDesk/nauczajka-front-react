@@ -1,6 +1,9 @@
 import toast from 'react-hot-toast';
 
-export const API_KEY = 'http://localhost:8000';
+export const API_KEY = 'https://nauczajka.online';
+export const API_LINK = 'nauczajka.online';
+// export const API_KEY = 'http://localhost:8000';
+// export const API_LINK = 'localhost';
 
 export async function registerUser({
 	email,

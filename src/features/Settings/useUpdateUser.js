@@ -16,7 +16,6 @@ export function useUpdateUser() {
 		},
 		onError: (err) => {
 			const error = JSON.parse(err.message);
-			console.log(err);
 			toast.error('' + Object?.values(error)[0]);
 		},
 	});

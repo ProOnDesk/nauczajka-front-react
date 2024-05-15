@@ -17,7 +17,6 @@ export function useUpdateAvatar() {
 			refetch();
 		},
 		onError: (err) => {
-			console.log(err);
 			const error = JSON.parse(err.message);
 			toast.error('' + Object?.values(error)[0]);
 		},

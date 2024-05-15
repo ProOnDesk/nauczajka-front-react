@@ -8,6 +8,8 @@ function TextInput({
 	type,
 	validateFunction,
 	info,
+	initialValue,
+	placeholder
 }) {
 	const [isFocused, setIsFocused] = useState(false);
 
@@ -44,6 +46,8 @@ function TextInput({
 				} `}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
+				defaultValue={initialValue}
+				placeholder={placeholder}
 			/>
 			<div className='absolute -bottom-6 text-sm left-2 text-mainSalmon'>
 				{error && <span>{error.toString()}</span>}

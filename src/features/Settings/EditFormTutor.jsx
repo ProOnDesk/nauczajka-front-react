@@ -40,11 +40,16 @@ function EditFormTutor({ setShowModal, showModal, description }) {
 									{...register('description', {
 										required: 'Wprowadź Opis',
 									})}
-									className='w-full p-2 border-2 border-gray/20 rounded-md min-h-48 focus:border-mainPurple active::border-mainPurple ring-0 outline-none'
-								>
-									{description}
-								</textarea>
-								<p className='text-red-400'>{errors?.description?.message}</p>
+									className='w-full p-2 border-2 border-gray/20 rounded-md min-h-48 focus:border-mainPurple active::border-mainPurple ring-0 outline-none max-h-80'
+									defaultValue={description}
+								/>
+								<p className='text-red-400 ml-2'>
+									{errors?.description?.message}
+								</p>
+								<p className='text-gray mt-2 text-sm text-center'>
+									W opisie zalecamy podkreślenie swojego doświadczenia i
+									umiejętności w sposób przekonujący dla potencjalnych klientów.
+								</p>
 							</>
 						)}
 					</div>

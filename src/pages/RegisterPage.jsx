@@ -15,6 +15,7 @@ import { useContext, useEffect, useState } from 'react';
 import { useRegisterUser } from '../features/Auth/useRegisterUser';
 import { FooterContext } from '../context/FooterContext';
 
+
 function RegisterPage() {
 	const width = useUserWidth();
 	const [isTutor, setisTutor] = useState('false');
@@ -137,7 +138,7 @@ function RegisterPage() {
 
 					<div className='mt-5'>
 						<Button disabled={isRegisterPending} type='submit'>
-							Zarejestruj się
+							{isRegisterPending ? 'Rejestrowanie...' : 'Zarejestruj się'}
 						</Button>
 					</div>
 				</div>

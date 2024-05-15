@@ -99,7 +99,7 @@ const ServerDay = (props) => {
 	);
 };
 
-function CalendarContainer({ tutorShedule, refetchShedule, readOnly }) {
+function CalendarContainer({ readOnly, tutorShedule, refetchShedule }) {
 	const [highlightedDays, setHighlightedDays] = useState();
 	const [choosenDate, setChoosenDate] = useState(null);
 	const [month, setMonth] = useState(new Date().getMonth());

@@ -30,6 +30,7 @@ export default {
 				sm840: "840px",
 				md960: "960px",
 				lg1150: "1150px",
+				md800: '800px'
 			},
 			boxShadow: {
 				myShadow: "0 6px 12px 0px rgba(0,0,0,0.3)",

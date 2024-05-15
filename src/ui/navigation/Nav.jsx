@@ -14,7 +14,7 @@ function Nav({ appLayoutRef }) {
 		refreshToken();
 		setInterval(() => {
 			refreshToken();
-		}, 1000 * 60 * 4);
+		}, 1000 * 60 * 5);
 		return () => {
 			clearInterval(refreshToken);
 		};

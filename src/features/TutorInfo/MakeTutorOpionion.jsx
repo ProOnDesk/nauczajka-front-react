@@ -1,15 +1,16 @@
 import { useForm } from 'react-hook-form';
 import StarRating from '../../ui/StarRating';
 import EditFormBtn from '../Settings/EditFormBtn';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import toast from 'react-hot-toast';
 import { useRateTutor } from './useRateTutor';
 
-function MakeTutorOpionion({ tutorId, rateTutor, isTutorRating }) {
+function MakeTutorOpionion({ tutorId, getTutorInfo }) {
 	const query = useQueryClient();
 	const [rating, setRating] = useState(null);
 	const [review, setReview] = useState('');
+	const { rateTutor, isTutorRating, isTutorRated } = useRateTutor();
 	const {
 		register,
 		handleSubmit,
@@ -25,6 +26,9 @@ function MakeTutorOpionion({ tutorId, rateTutor, isTutorRating }) {
 		setRating(null);
 		setReview('');
 	}
+	useEffect(() => {
+		if (isTutorRated) getTutorInfo({ tutorId: tutorId });
+	}, [getTutorInfo, isTutorRated, tutorId]);
 
 	return (
 		<form
