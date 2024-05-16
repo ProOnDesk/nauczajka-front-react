@@ -26,13 +26,13 @@ export async function getAllTutors({
 
 	if (avgRatingGt) {
 		additionalFilters += additionalFilters.concat(
-			'&avg_rating__gt=',
+			'&avg_rating__gte=',
 			avgRatingGt
 		);
 	}
 	if (avgRatingLt) {
 		additionalFilters += additionalFilters.concat(
-			'&avg_rating__lt=',
+			'&avg_rating__lte=',
 			avgRatingLt
 		);
 	}
@@ -61,10 +61,10 @@ export async function getAllTutors({
 		);
 	}
 	if (priceGt) {
-		additionalFilters += additionalFilters.concat('&price__gt=', priceGt);
+		additionalFilters += additionalFilters.concat('&price__gte=', priceGt);
 	}
 	if (priceLt) {
-		additionalFilters += additionalFilters.concat('&price__lt=', priceLt);
+		additionalFilters += additionalFilters.concat('&price__lte=', priceLt);
 	}
 	if (searchByFullName) {
 		additionalFilters += additionalFilters.concat(
